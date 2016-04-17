@@ -1,0 +1,207 @@
+
+.row
+  .span12
+    Work Queue
+
+    #order_info
+
+    %table#work_queue_items.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th.hidden.exportable Disclosure Status
+          %th Disclosure Status
+          %th.hidden.exportable Assigned to
+          %th Assigned to
+          %th.exportable Disclosure Request Complete
+          %th.exportable Time Completed
+          %th.exportable Age from Application Date
+          %th.exportable Age from Interview Date
+          %th.exportable Application Date
+          %th.exportable Interview Date
+          %th.exportable Loan Number
+          %th.exportable Borrower Last Name
+          %th.exportable Initial Title Quote Received
+          %th.exportable Duplicate SSN
+          %th.exportable Loan Product Code
+          %th.exportable Loan Locked
+          %th.exportable FRP
+          %th.exportable Property State
+          %th.exportable LO/Broker Email Address
+          %th.exportable Institution ID
+          %th.exportable Institution Name
+          %th.exportable Area Manager
+          %th.exportable Channel
+          %th.exportable Loan Purpose
+          %th.exportable Title Vendor
+
+        %tr
+          %th.hidden
+          -# Disclosure Status
+          %td
+            %select.select-filter.input-medium
+              %option{value: ""}
+              - InitialDisclosureTracking::STATUS_VALUES.each do |status|
+                %option{value: status}= status
+
+          %th.hidden
+          -# Assigned To
+          %td
+            %input.text-filter.input-medium{type: 'text'}
+
+          -# Disclosure Request Complete
+          %td
+            %select.select-filter.input-mini
+              %option{value: ""}
+              %option{value: "Y"} Y
+              %option{value: "N"} N
+
+          -# Time Completed
+          %td
+            %select.select-filter.input-small.populate-me
+
+          -# Age from Application Date
+          %td
+            %select.select-filter.input-small.populate-me
+
+          -# Age from Interview Date
+          %td
+            %select.select-filter.input-small.populate-me
+
+          -# Application Date
+          %td
+            %select.select-filter.input-small.populate-me
+
+          -# Interview Date
+          %td
+            %select.select-filter.input-small.populate-me
+
+          -# Loan Number
+          %td
+            %input.text-filter.input-small{type: 'text'}
+
+          -# Borrower Last Name
+          %td
+            %input.text-filter.input-medium{type: 'text'}
+
+          -# Initial Title Quote Received
+          %td
+            %select.checkbox-filter.input-mini
+              %option{value: ""}
+              %option{value: "true"} Received
+              %option{value: "false"} Not Received
+
+          -# Duplicate SSN
+          %td
+            %select.select-filter.input-mini.populate-me
+
+          -# Loan Product Code
+          %td
+            %select.select-filter.input-small.populate-me
+
+          -# Loan Locked
+          %td
+            %select.select-filter.input-mini.populate-me
+
+          -# FRP
+          %td
+            %select.select-filter.input-mini.populate-me
+
+          -# Property State
+          %td
+            %input.text-filter.input-mini{type: 'text'}
+
+          -# LO/Broker Email Address
+          %td
+            %input.text-filter.input-medium{type: 'text'}
+
+          -# Institution ID
+          %td
+            %input.text-filter.input-small{type: 'text'}
+
+          -# Institution Name
+          %td
+            %input.text-filter.input-medium{type: 'text'}
+
+          -# Area Manager
+          %td
+            %input.text-filter.input-medium{type: 'text'}
+
+          -# Channel
+          %td
+            %select.select-filter.input-medium.populate-me
+
+          -# Loan Purpose
+          %td
+            %select.select-filter.input-medium.populate-me
+
+          -# Title Vendor
+          %td
+            %input.text-filter.input-medium{type: 'text'}
+
+
+      %tbody
+        - @loans.each do |loan|
+          - l = loan.initial_disclosure_tracking
+          %tr
+            %td.hidden.exportable.status
+              = l.try(:wq_loan_status) ? l.wq_loan_status : ''
+            %td.control-td{'data-search' => l.try(:wq_loan_status) ? l.wq_loan_status : ''}
+              = select_tag :wq_status,
+                  options_for_select(InitialDisclosureTracking::STATUS_VALUES, l.try(:wq_loan_status)),
+                  include_blank: '', 'class' => 'status-select input-medium', 'data-loannum' => loan.loan_num
+              %span.spinner
+            %td.hidden.exportable.assignee
+              = l.try(:assign_to).present? ? l.assign_to : 'Unassigned'
+            %td{'data-search' => l.try(:assign_to).present? ? l.assign_to : 'Unassigned'}
+              - if work_queue_assign_other?
+                = work_queue_assign_dropdown loan
+              - elsif work_queue_self_assign?
+                - if l.try(:assign_to).present?
+                  = l.assign_to
+                - else
+                  %a.work-queue-assign-to-me{'href' => '#', 'data-loannum' => loan.loan_num}
+                    Assign to me
+              - else
+                = l.try(:assign_to)
+              %span.spinner
+            %td.exportable= loan.initial_disclosure_requested_value
+            %td.exportable= disclosure_requested_at loan
+            %td.exportable= "#{age_from_date(loan.application_date)} days"
+            %td.exportable= "#{age_from_date(loan.interviewer_application_signed_at)} days"
+            %td.exportable= app_date_display loan
+            %td.exportable= loan.interviewer_application_signed_at.try(:strftime, '%m/%d/%Y')
+            %td.exportable= loan.loan_num
+            %td.exportable= loan.primary_borrower.try(:last_name)
+            %td.exportable{'data-search' => l.try(:initial_title_quote_received) ? "true" : "false", 'data-sort' => l.try(:initial_title_quote_received) ? 0 : 1}
+              = check_box_tag :initial_title_quote_received, l.try(:initial_title_quote_received) ? false : true, l.try(:initial_title_quote_received) ? true : false, class: 'initial_title_quote_received', 'data-loannum' => loan.loan_num
+              %span.spinner
+            %td.exportable= loan.primary_borrower.try(:dup_ssn?) ? "Yes" : "No"
+            %td.exportable= loan.product_code_translated
+            %td.exportable= loan.is_locked? ? 'Yes' : 'No'
+            %td.exportable= is_frp?(loan) ? 'Yes' : ''
+            %td.exportable= loan.property_state_translated
+            %td.exportable= loan.broker_email_address
+            %td.exportable= loan.branch.try(:id)
+            %td.exportable= loan.branch.try(:branch_name)
+            %td.exportable= loan.branch.try(:area_manager).try(:name)
+            %td.exportable= loan.channel
+            %td.exportable= loan.purpose_type
+            %td.exportable= title_vendor_for(loan)
+
+
+
+#errors.modal.hide
+  .modal-header
+    %h3 An error occurred:
+  .modal-body
+    %p#error_area
+      error goes here
+  .modal-footer
+    %a.btn{href: "#", "data-dismiss" => "modal"} Close
+
+:javascript
+  $(document).ready(function() {
+    InitialDisclosureWorkQueue.initialize({
+      assignSortType: "#{assignSortType}"
+    });
+  });

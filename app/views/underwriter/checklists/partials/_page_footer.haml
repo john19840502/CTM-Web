@@ -1,0 +1,9 @@
+%table.table.table-striped
+  %tr
+    %td.strong.percent_80
+      = "LOAN #: #{@loan.loan_num} / #{@loan.channel} / #{@loan.loan_purpose}"
+    %td.strong.percent_80.right
+      Printed at 
+      = l Time.now, :format => :full_american
+      by
+      = current_user.display_name

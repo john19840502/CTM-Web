@@ -1,0 +1,87 @@
+= form_tag(fredd_submit_closing_loan_modelers_path, {remote: true, class: 'form-horizontal fredd_calc modeler_validate', id: 'fredd'}) do
+  .lead
+    Freddie Relief Modeler
+  .errors
+    %div
+  .success
+    %div
+
+  .fields-invalid
+  .fields-valid
+
+
+  
+  .pull-right
+    %a.modeler_toggle_class{:style => "text-decoration:none"}
+      %span.btn.btn-warning Lock
+      %span.btn.btn-danger{:style => "display:none"} Unlock
+    = hidden_field_tag :fredd_lock, @loan.fredd_lock_modeler, class: 'modeler_lock'
+    = hidden_field_tag :fredd_toggle_lock, false, class: 'modeler_toggle_lock'  
+    %a.btn.btn-primary{id: 'fredd_submit', class: 'modeler_frm_submit'} Save
+    %a.btn.btn-success.disabled{'data-format' => "pdf", id: 'fredd_pdf', class: 'modeler_pdf_submit', href: closing_loan_modeler_path(:format => :pdf, :btn => 'fredd')} Download PDF
+    .user_comment_label{:style => "padding-top:15px"}
+      =label_tag :user_comments, 'Comments:'
+      .user_comment_text{:style => "padding-top:5px"}
+        =text_area_tag :user_comments, @loan.user_comments_freddie, class: 'span3 user_comments editable', :rows => '3'
+      .modeler_user
+        =label_tag :modeler_user, @loan.current_modeler_user_freddie
+      .modeler_time_stamp
+        =label_tag :modeler_time, @loan.modeler_date_time_freddie
+
+  .span8
+    .row  
+      .span6  
+        
+        = hidden_field_tag :loan_id, @loan.loan_num    
+
+        .control-group
+          =label_tag :upb, '1. Unpaid Balance', class: 'control-label'
+          .controls
+            =text_field_tag :upb, @loan.upb_modeler, class: 'upb text_field input-small add editable' 
+        .control-group
+          =label_tag :accrued_interest, '2. Accrued Interest', class: 'control-label'
+          .controls
+            =text_field_tag :accrued_interest, @loan.accrued_interest_modeler, class: 'text_field add input-small editable' 
+        .control-group
+          =label_tag :payoff_amount, 'Payoff Amount Including Interest', class: 'control-label small'
+          .controls
+            =text_field_tag :payoff_amount, nil, readonly: "readonly", class: 'control-label text_field payoff_amount'          
+        .control-group
+          =label_tag :fredd_closing_cost, '3. Closing Costs', class: 'control-label'
+          .controls
+            =text_field_tag :fredd_closing_cost, @loan.fredd_closing_cost_modeler, class: 'text_field  input-small fredd_closing_cost frd_calc editable' 
+            %br
+            %span{style:'font-size: 10px'} (Actual Closing Costs cannot exceed $5,000)
+        .control-group
+          =label_tag :step_three, 'Step 3 Results', class: 'control-label small'
+          .controls
+            =text_field_tag :step_three, nil, readonly: "readonly", class: 'control-label text_field step_three'          
+        .control-group
+          =label_tag :max_loan_amount, '4. Maximum Loan Amount', class: 'control-label'
+          .controls
+            =text_field_tag :max_loan_amount, nil, readonly: "readonly", class: 'control-label text_field max_loan_amount'
+        .control-group
+          =label_tag :actual_loan_amount, '5. Actual Loan Amount', class: 'control-label'
+          .controls
+            =text_field_tag :actual_loan_amount, @loan.actual_loan_amount_modeler, class: 'text_field input-small actual_loan_amount frd_calc editable' 
+        .control-group
+          =label_tag :max_actual_amount, 'Maximum Loan Amount - Actual Loan Amount', class: 'control-label small'
+          .controls.max_actual_ln_amt
+            =text_field_tag :max_actual_amount, nil, readonly: "readonly", class: 'control-label text_field max_actual_amount'
+            =text_field_tag :modeler_pass_or_fail, @loan.modeler_pass_or_fail, readonly: "readonly", class: 'modeler_pass_or_fail text_field input-small'
+        .control-group
+          =label_tag :princ_curt, '6. Principal Curtailment', class: 'control-label'
+          .controls
+            =text_field_tag :princ_curt, @loan.princ_curt_modeler, class: 'text_field input-small princ_curt frd_calc editable'
+            =text_field_tag :princ_curt_fail, @loan.princ_curt_fail, readonly: "readonly", class: 'princ_curt_fail text_field input-small'
+        .control-group
+          =label_tag :actual_amount_princ, 'Actual Loan Amount - Principal', class: 'control-label small'
+          .controls
+            =text_field_tag :actual_amount_princ, nil, readonly: "readonly", class: 'control-label text_field actual_amount_princ'
+            =text_field_tag :actual_amount_princ_fail, @loan.actual_amout_prin_fail, readonly: "readonly", class: 'actual_amount_princ_fail text_field input-small'
+        .control-group
+          =label_tag :cash_to_borrower, '7. Cash Out to Borrower', class: 'control-label'
+          .controls
+            =text_field_tag :cash_to_borrower, @loan.cash_to_borrower_modeler, class: 'text_field input-small editable cash_to_borrower frd_calc' 
+            =text_field_tag :cash_to_borrower_fail, @loan.cash_to_borrower_fail, readonly: "readonly", class: 'cash_to_borrower_fail text_field input-small'
+          

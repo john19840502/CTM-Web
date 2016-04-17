@@ -1,0 +1,29 @@
+development:
+  docmagic_url: https://stage-www.docmagic.com/
+  docmagic_acct_id: 534672
+  docmagic_acct_un: docmagapiserviceaccount@mbmortgage.com
+  docmagic_acct_pw: clicksign1
+
+qa:
+  docmagic_url: https://stage-www.docmagic.com/
+  docmagic_acct_id: 534672
+  docmagic_acct_un: docmagapiserviceaccount@mbmortgage.com
+  docmagic_acct_pw: clicksign1
+
+trid_uat:
+  docmagic_url: https://stage-www.docmagic.com/
+  docmagic_acct_id: 534672
+  docmagic_acct_un: docmagapiserviceaccount@mbmortgage.com
+  docmagic_acct_pw: clicksign1
+
+test:
+  docmagic_url: https://stage-www.docmagic.com/
+  docmagic_acct_id: "test-account-id"
+  docmagic_acct_un: "test-account-un"
+  docmagic_acct_pw: "test-account-pw"
+
+production:
+  docmagic_url: https://www.docmagic.com/
+  docmagic_acct_id: 534672
+  docmagic_acct_un: docmagapiserviceaccount_prod@mbmortgage.com
+  docmagic_acct_pw: r7mufevU

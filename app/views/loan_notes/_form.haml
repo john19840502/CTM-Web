@@ -1,0 +1,8 @@
+= form_for @loan_note, remote: true do |form|
+  = form.hidden_field :loan_id
+  = form.hidden_field :note_type
+  = form.hidden_field :create_user
+  = form.hidden_field :ctm_user_id
+  = form.text_area :text
+  %br
+  = form.submit

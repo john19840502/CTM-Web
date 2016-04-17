@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+   <WindowHeight>15360</WindowHeight>
+   <WindowWidth>30940</WindowWidth>
+   <WindowTopX>160</WindowTopX>
+   <WindowTopY>0</WindowTopY>
+   <TabRatio>229</TabRatio>
+   <ProtectStructure>False</ProtectStructure>
+   <ProtectWindows>False</ProtectWindows>
+  </ExcelWorkbook>
+  <Styles>
+   <Style ss:ID="Default" ss:Name="Normal">
+    <Alignment ss:Vertical="Bottom"/>
+    <Font x:Family="Swiss"/>
+    <Interior/>
+    <NumberFormat/>
+    <Protection ss:Protected="0"/>
+   </Style>
+   <Style ss:ID="s15">
+    <Borders/>
+   </Style>
+   <Style ss:ID="s16">
+    <Borders/>
+    <Font x:Family="Swiss" ss:Size="14" ss:Color="#000000" ss:Bold="1"/>
+   </Style>
+   <Style ss:ID="s17">
+    <Borders/>
+    <Font x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+   </Style>
+  </Styles>
+  <Worksheet ss:Name="Commission Plan Details">
+    <Table>
+      <Row ss:Height="17" ss:StyleID="s16">
+        <Cell><Data ss:Type="String">Branch</Data></Cell>
+        <Cell><Data ss:Type="String">Institution #</Data></Cell>
+        <Cell><Data ss:Type="String">Active?</Data></Cell>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
+        <Cell><Data ss:Type="String">UltiPro Emp. Id</Data></Cell>
+        <Cell><Data ss:Type="String">Title</Data></Cell>
+        <Cell><Data ss:Type="String">Pref. First Name</Data></Cell>
+        <Cell><Data ss:Type="String">Legal First Name</Data></Cell>
+        <Cell><Data ss:Type="String">Last Name</Data></Cell>
+        <!-- <Cell><Data ss:Type="String">Supervisor</Data></Cell> -->
+        <Cell><Data ss:Type="String">Location</Data></Cell>
+        <Cell><Data ss:Type="String">Lo Trad. Split %</Data></Cell>
+        <Cell><Data ss:Type="String">Tiered Split % (Low)</Data></Cell>
+        <Cell><Data ss:Type="String">Tiered Split % (High)</Data></Cell>
+        <Cell><Data ss:Type="String">Tiered Split Loan Up To Amt</Data></Cell>
+        <Cell><Data ss:Type="String">Lo Min</Data></Cell>
+        <Cell><Data ss:Type="String">Lo Max</Data></Cell>
+        <Cell><Data ss:Type="String">$ Per Loan Ind.</Data></Cell>
+        <Cell><Data ss:Type="String">$ Per Loan Branch</Data></Cell>
+        <Cell><Data ss:Type="String">BSM Override</Data></Cell>
+        <Cell><Data ss:Type="String">BMSF Override</Data></Cell>
+      </Row>
+
+      <% @records.each do |record| -%>
+        <Row ss:Height="15" ss:StyleID="s17">
+          <Cell><Data ss:Type="String"><%= record.branch_name(record["branch_id"]) %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= record.institution_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= record.is_active ? 'Yes' : "No #{date_formatted record.terminated_at}" %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= Date.parse(record.commission_plan_date).strftime('%m/%d/%Y') unless record.commission_plan_date.blank? %></Data></Cell>
+
+          <%= raw profile_cells record, true %>
+
+          <Cell><Data ss:Type="String"><%= record.fixed_first_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= record.last_name %></Data></Cell>
+          <!-- Cell><Data ss:Type="String">< % = record.location % ></Data></Cell -->
+          <Cell><Data ss:Type="String"><%= record.location %></Data></Cell>
+
+          <%= raw comp_plan_cells record, true %>
+
+          <%= raw non_plan_comp_cells record, true %>
+
+        </Row>
+      <% end -%>
+
+    </Table>
+  </Worksheet>
+</Workbook>

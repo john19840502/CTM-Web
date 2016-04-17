@@ -1,0 +1,8 @@
+- content_for(:page_title) do
+  = "Daily ARM Report"
+
+- content_for(:functions) do
+  .button-functions
+    = render 'shared/spreadsheet_button'
+  
+= render :file => 'shared/base'

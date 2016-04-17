@@ -1,0 +1,31 @@
+%h2.lead HMDA Investor Codes
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Investor Name
+      %th Investor Code
+      %th 
+    %tbody
+    - @investor_names.sort.each do |investor|
+      = form_tag( {action: :update_investor}, method: :get, id: "update_investor_#{investor}") do
+        = hidden_field_tag :investor_name, investor
+        
+        %tr
+          %td.span6= label_tag :investor, investor
+          %td= select_tag :investor_code, options_for_select((0..9).to_a)
+          %td= submit_tag "Update", class: "btn" 
+
+%h2.lead Saved Investor Codes
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Investor Code
+      %th Investor Name
+    %tbody
+    -@hmda_investors.each do |i|
+      %tr
+        %td.span6= label_tag :investor_code, i.investor_code
+        %td.span6
+          - i.investor_name.each do |n|
+            = label_tag  :investor, n

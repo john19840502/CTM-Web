@@ -1,0 +1,290 @@
+%form{:name => "audit_form"}
+  %table.table.table-bordered
+    %tr
+      %th 
+        Issues with HUD: Count - 
+        {{audit.hud_review | number}}
+      %th 
+      %th Occurrence
+    %tr
+      %th 1. Page 1 of the HUD
+      %th 
+      %th
+    %tr
+      %td
+        %span.add_tab 1.1 Are all addresses fully completed and accurate for the transaction?
+      %td   
+        %select{"ng-model" => "audit.address_completed", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.address_completed_occurance || 0}}
+    %tr
+      %td
+        %span.add_tab 1.2 Are all Borrower, Seller, Lender, and Settlement Agent boxes completed?
+      %td   
+        %select{"ng-model" => "audit.all_boxes_completed", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.all_boxes_completed_occurance || 0}}
+    %tr
+      %td 
+        %span.add_tab 1.3 Are all sections of "B" on Page 1 of HUD "type of Loan" completed and accurate?
+      %td   
+        %select{"ng-model" => "audit.sectionb_page1_completed", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td 
+        {{audit.sectionb_page1_completed_occurance || 0}}
+    %tr
+      %td 
+        %span.add_tab 1.4 Is the tolerance cure necessary and showing on Line 208?
+      %td   
+        %select{"ng-model" => "audit.tolerance_cure_necessary", "ng-options" => "item as item for item in multi_items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td 
+        {{audit.tolerance_cure_necessary_occurance || 0}}
+    %tr
+      %td 
+        %span.add_tab 1.5 Does seller concession appear in the 200 section?
+      %td   
+        %select{"ng-model" => "audit.seller_concession_appear", "ng-options" => "item as item for item in multi_items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.seller_concession_appear_occurance || 0}}
+    %tr
+      %td 
+        %span.add_tab 1.6 Does the cash from/to borrower meet our conditions?
+      %td   
+        %select{"ng-model" => "audit.cash_from_borrower_match", "ng-options" => "item as item for item in multi_items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.cash_from_borrower_match_occurance || 0}}
+    %tr
+      %th 2. Page 2 of the HUD
+      %th 
+      %th 
+    %tr
+      %td 
+        %span.add_tab 2.1 Are all the correct fees showing the 800 Section and credits Correct?
+      %td
+        %select{"ng-model" => "audit.correct_fees_800section_credits", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.correct_fees_800section_credits_occurance || 0}}
+    %tr
+      %td 
+        %span.add_tab 2.2 Are all the correct fees showing in the 900 section correct?
+      %td
+        %select{"ng-model" => "audit.correct_fees_900section", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.correct_fees_900section_occurance || 0}}
+    %tr
+      %td 
+        %span.add_tab 2.3 Do the Settlement Agent charges match the Closer Approved?
+      %td
+        %select{"ng-model" => "audit.agent_charges_match_approved", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.agent_charges_match_approved_occurance || 0}}
+    %tr
+      %td 
+        %span.add_tab 2.4 Did the Settement agent show the correct MB fees on Line 1302 and 1303?  If Applicable
+      %td
+        %select{"ng-model" => "audit.agent_show_correct_mbfees", "ng-options" => "item as item for item in multi_items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.agent_show_correct_mbfees_occurance || 0}}
+    %tr
+      %td 
+        %span.add_tab 2.5 Did the Settlement Agent change any fees on Page 2 of the HUD without the approval of MB?
+      %td
+        %select{"ng-model" => "audit.agent_changes_page2_hud_fees", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.agent_changes_page2_hud_fees_occurance || 0}}
+    %tr
+      %th 3. Page 3 of the HUD
+      %th 
+      %th
+    %tr 
+      %td 
+        %span.add_tab 3.1 Does the GFE Side match the final GFE?
+      %td
+        %select{"ng-model" => "audit.gfe_match_final_gfe", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.gfe_match_final_gfe_occurance || 0}}
+    %tr 
+      %td 
+        %span.add_tab 3.2 Does the HUD-1 side match page 2 of the HUD?
+      %td
+        %select{"ng-model" => "audit.hud1_side_match_page2_hud", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.hud1_side_match_page2_hud_occurance || 0}}
+    %tr 
+      %td 
+        %span.add_tab 3.3 Are the loan terms section completed and accurate?
+      %td
+        %select{"ng-model" => "audit.loan_terms_section_completed_acc", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.loan_terms_section_completed_acc_occurance || 0}}
+    %tr 
+      %td 
+        %span.add_tab 3.4 Are there new costs to cures due to Settlement Agent completion of the form?
+      %td
+        %select{"ng-model" => "audit.new_costs_cure_for_agent_completion", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.new_costs_cure_for_agent_completion_occurance || 0}}
+    %tr
+      %td 4. Were Seller credits changed without approval?
+      %td
+        %select{"ng-model" => "audit.seller_credit_changed", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.seller_credit_changed_occurance}}
+    %tr
+      %td 5. Were Realtor credits changed without approval?
+      %td
+        %select{"ng-model" => "audit.realtor_credit_changed", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.realtor_credit_changed_occurance}}
+    %tr
+      %td 6. Were Lender credits changed without approval?
+      %td
+        %select{"ng-model" => "audit.lender_credit_changed", "ng-options" => "item as item for item in items", :required => ""}
+          %option{:value => "", disabled: 'disabled'} Please Select
+      %td
+        {{audit.lender_credit_changed_occurance}}
+    %tr
+      %td 7. Did any fee increase after HUD approval?
+      %td
+        %select{"ng-model" => "audit.fee_increase", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.fee_increase_occurance}}
+    %tr
+      %td 8. Did any fee decrease after HUD approval?
+      %td
+        %select{"ng-model" => "audit.fee_decrease", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.fee_decrease_occurance}}
+    %tr
+      %th Other Settlement Agent Errors:
+      %th
+      %th
+    %tr
+      %td 9. Did the agent add APR fees after HUD approval? (TIL Violation for Changing HUD)    
+      %td
+        %select{"ng-model" => "audit.added_apr_fees", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.added_apr_fees_occurance}}
+    %tr
+      %td 10. Did the agent change the closing documents without approval? (not including Closing dates)
+      %td
+        %select{"ng-model" => "audit.changed_closing_docs", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.changed_closing_docs_occurance}}
+    %tr
+      %td 11. Did the agent add individuals to legal(collateral) documents without approval? 
+      %td
+        %select{"ng-model" => "audit.changed_legal_docs", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.changed_legal_docs_occurance}}  
+    %tr
+      %td 12. Did the agent amend documents to use Power of Attorney without approval?
+      %td
+        %select{"ng-model" => "audit.changed_power_of_attorney", "ng-options" => "item as item for item in items"}
+      %td 
+        {{audit.changed_power_of_attorney_occurance}}
+    %tr
+      %td 13. Did the agent amend documents for a trust without approval?
+      %td
+        %select{"ng-model" => "audit.changed_doc_for_trust", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.changed_doc_for_trust_occurance}}
+    %tr
+      %td 14. Did the agent incorrectly Date Documents?
+      %td
+        %select{"ng-model" => "audit.incorrectly_date_docs", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.incorrectly_date_docs_occurance}}
+    %tr
+      %td 15. Did the agent change Closing dates without new docs or approval?
+      %td
+        %select{"ng-model" => "audit.changed_closing_dates", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.changed_closing_dates_occurance}}
+    %tr
+      %td 16. Did the settlement agent have the documents executed correctly?
+      %td
+        %select{"ng-model" => "audit.agent_executed_documents_correctly", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.agent_executed_documents_correctly_occurance || 0}}
+    %tr
+      %td 17. Did the agent follow our specific Closing instructions?
+      %td
+        %select{"ng-model" => "audit.followed_closing_instructions", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.followed_closing_instructions_occurance}}
+    %tr
+      %td 18. Did the agent change the NORTC correctly?
+      %td
+        %select{"ng-model" => "audit.changed_nortc_correctly", "ng-options" => "item as item for item in nortc_items"}
+      %td
+        {{audit.changed_nortc_correctly_occurance}}
+    %tr
+      %td 19. Have all the closing conditions been met?
+      %td
+        %select{"ng-model" => "audit.closing_conditions_been_met", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.closing_conditions_been_met_occurance || 0}}
+    %tr
+      %td 20. Did the Settlement Agent send proper documents to Funding Auth. Team?
+      %td
+        %select{"ng-model" => "audit.agent_sent_proper_doc_fundingauth", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.agent_sent_proper_doc_fundingauth_occurance || 0}}
+    %tr
+      %td 21. Did the Settlement Agent disburse the loan on the proper date?
+      %td
+        %select{"ng-model" => "audit.agent_disburse_loan_properdate", "ng-options" => "item as item for item in items"}
+      %td
+        {{audit.agent_disburse_loan_properdate_occurance || 0}}
+    %tr
+      %th Legal Issues after Closing: (Team Lead only)
+      %th
+      %th
+    %tr
+      %td 22. Have we received a written notification of pending litigation against the agent?
+      %td
+        %select{"ng-model" => "audit.notification_pending_litigation", "ng-options" => "item as item for item in items", "ng-disabled" => "!team_lead"}
+      %td
+        {{audit.notification_pending_litigation_occurance}}
+    %tr
+      %td 23. Did the agent Pay-off the Liens correctly?
+      %td
+        %select{"ng-model" => "audit.pay_off_liens", "ng-options" => "item as item for item in items", "ng-disabled" => "!team_lead"}
+      %td
+        {{audit.pay_off_liens_occurance}}
+    %tr
+      %th Comments Section:
+      %th
+      %th
+    %tr
+      %td Comments
+      %td
+        %textarea{"ng-model" => "audit.comments", :placeholder => "Comments section", :cols => "30", :rows => "5"}
+      %td 
+  .alert.alert-block.alert-error{:"ng-show" => "submitted && audit_form.$invalid"}
+    Please complete questions 1 through 6 to complete the audit.
+    {{audit_form.$invalid}}
+  .alert.alert-block.alert-error{:"ng-if" => "error_panel", style: ""}
+    {{error_msg}}
+    %ul{"ng-repeat" =>  "error in errors"}
+      %li
+        {{error}}      
+  %input.btn.btn-inverse{:type => 'submit', :value => 'Save Audit', :"ng-click" => 'submitted = true; ctrl.saveAudit()', "ng-disabled" => "audit_form.$invalid"}
+  %input.btn.btn-inverse{:type => 'submit', :value => 'Cancel', :"ng-click" => 'ctrl.closeAudit()'}

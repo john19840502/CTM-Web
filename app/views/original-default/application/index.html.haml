@@ -1,0 +1,21 @@
+.row
+  .span12
+    %h2.inline
+      = data.label
+    %table.table.table-striped.table-bordered.table-condensed.datatable
+      = render 'captions'
+      / Builds out report headers etc.
+      %thead
+        %tr
+          - data.column_list.each do |column|
+            %th
+              .header-text
+                = data.model.human_attribute_name(column.to_s).titleize
+      %tbody
+        /= format_data(data)
+        %br/
+        %br/
+        %br/
+        %br/
+        %h2
+          = "CONVERT ME"

@@ -1,0 +1,9 @@
+%input.btn.btn-inverse{:type => 'submit', :value => 'Start Audit', :"ng-click" => 'ctrl.loadAudit()'}
+%span{:"ng-if" => "load_audit"}
+  %ng-include{:src => "'escrow_agent_details.html'"}
+  %span{:"ng-if" => "!trid_loan"}
+    %ng-include{:src => "'settlement_audit_questions.html'"}
+  %span{:"ng-if" => "trid_loan"}
+    %ng-include{:src => "'trid_settlement_audit_questions.html'"}
+.alert.alert-block{:"ng-if" => "done_audit"}  
+  Your audit has been submitted.

@@ -1,0 +1,6 @@
+.page-header
+  %h2 FHLMC Individuals
+
+= form_tag controller.filter_by_loan_path, method: 'get', class: 'well form-search' do
+  = text_field_tag :loan_number
+  = submit_tag "Search by loan number", class: 'btn btn-inverse'

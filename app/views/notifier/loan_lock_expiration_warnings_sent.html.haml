@@ -1,0 +1,15 @@
+%h4{style: "color:#FF0000; font-size:23px; font-weight:500;"} Courtesy Loan Lock Reminders
+%br/
+%p MB Lock Desk had successfully sent out COURTESY #{@subj_suffix}.
+%p
+  %b Total emails sent: #{@total} 
+
+- content_for :signature do
+  %h5{style: "font-size:18px; color:#FF0000;"}
+    MB Lock Desk
+  %p
+    Email:
+    = mail_to "MBlockdesk@mbmortgage.com", 'MBlockdesk@mbmortgage.com'
+    %br/
+    Phone:
+    %strong 855.926.2400, Option 3

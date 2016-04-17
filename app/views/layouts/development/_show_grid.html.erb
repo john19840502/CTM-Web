@@ -1,0 +1,42 @@
+<style title="grid" type="text/css">
+		.container { }
+</style>
+<script type="text/javascript">
+	function toggleGrid() {
+		if (!document.styleSheets) return;
+	
+		var cssTitle  	 = "grid"
+		var selectorName = ".container";
+		var cssText   	 = "background: url('images/grid.png');";
+		var css = new Array();
+	
+		// Find the stylesheet
+		for(i = 0; i < document.styleSheets.length; i++)
+		{
+			var styleSheet = document.styleSheets[i];
+			
+			if(styleSheet.title == cssTitle) {
+				if (document.styleSheets[i].cssRules)
+					css = document.styleSheets[i].cssRules;
+				else if (document.styleSheets[i].rules)
+					css = document.styleSheets[i].rules;
+				else return;
+				
+				break;
+			}
+		}
+
+		// Find the selector
+		for (i = 0; i < css.length; i++) {
+		
+			if ((css[i].selectorText.toLowerCase() == selectorName)) {
+				if(css[i].style.cssText == "") {
+					css[i].style.cssText = cssText;
+				}
+				else {
+					css[i].style.cssText = "";
+				}
+			}
+		}
+	}
+</script>

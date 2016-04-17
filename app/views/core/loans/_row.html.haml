@@ -1,0 +1,9 @@
+%tr
+  %td= link_to_if (loan.branch && can?(:read, Institution)), loan.branch.try(:branch_name), core_institution_path(loan.branch)
+  %td= link_to_if (loan.originator && can?(:read, BranchEmployee)), loan.originator.try(:name), core_originator_path(loan.originator)
+  %td= link_to_if can?(:read, Master::Loan), loan.loan_num, core_loan_path(loan.loan_num)
+  %td= number_to_currency loan.base_loan_amount rescue nil
+  %td= date_formatted loan.funded_at rescue nil
+  %td= loan.borrowers[0].full_name rescue nil
+  %td= loan.product_code rescue nil
+  %td= loan.purpose_type rescue nil

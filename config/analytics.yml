@@ -1,0 +1,25 @@
+analytics: &base
+  hostname: analytics
+  path: /piwik.php
+
+development:
+  <<: *base
+  path: /piwik/piwik.php
+  siteid: 6
+
+test:
+  <<: *base
+  siteid:
+
+qa: &qa
+  <<: *base
+  siteid: 2
+
+trid_uat:
+  <<: *qa
+  hostname: analytics.trid.ctmtg.com
+  siteid: 7
+
+production:
+  <<: *base
+  siteid: 1

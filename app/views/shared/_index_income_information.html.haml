@@ -1,0 +1,13 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th.percent_70 Borrower
+      %th.percent_70 Employer
+      %th.percent_70 Self?
+
+  %tbody{'ng-repeat' => 'borrower in loan.borrowers', 'ng-init' => 'borrowerIndex = $index'}
+    %tr{'ng-repeat' => 'employer in borrower.current_employments'}
+      %td
+        %span{'ng-show' => '$index == 0'} {{borrowerIndex + 1}}: {{ borrower.first_name }} {{ borrower.last_name }}
+      %td {{ employer.name }}
+      %td {{ employer.is_self_employed === true ? 'Yes' : ''  }}

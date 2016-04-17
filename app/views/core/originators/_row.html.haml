@@ -1,0 +1,12 @@
+%tr
+  %td{ style: 'width: 80px;' }
+    - if orig.is_active? 
+      %i.icon-ok-sign
+    - else
+      %i.icon-remove
+      %small= date_formatted orig.terminated_at
+  %td= orig.username
+  %td= ulti_pro_num orig
+  %td= link_to_if can?(:read, BranchEmployee), orig.name_last_first, core_originator_path(orig)
+  %td= raw branch_names(orig)
+  %td= link_to_if can?(:read, Master::Loan), "Loans", core_loans_path(parent: "lo", pid: orig.username)

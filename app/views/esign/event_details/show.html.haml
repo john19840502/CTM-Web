@@ -1,0 +1,82 @@
+.event_detail{:"ng-controller" => 'EsignCtrl'}
+  %base{href: esign_event_details_path}
+  .page-header
+    %h2 Event Details
+
+  .package-info
+    .left
+      %p Loan Number: #{@package_info.loan_number}
+      - if @package_info.signature_enabled
+        %p ESign has been enabled
+    .middle
+      %p 
+        Status: {{separateWords('#{@package_info.package_status_type}')}}
+      %p 
+        RESPA Status: {{separateWords('#{@package_info.respa_status_type}')}}
+    .right
+      %p Creation Date: #{date_time @package_info.create_date}
+      %p Application Date: #{date_time @package_info.application_date}
+      %p Documents: #{@document_listings.size}
+            
+  .signers
+    %h4 Signers
+
+    %table.table.table-striped.table-bordered
+      %thead
+        %th Signer Name
+        %th Email
+        %th Consent Date
+      %tbody
+        -@signers.each do |s|
+          %tr
+            %td #{s.full_name}
+            %td #{s.email}
+            %td
+              - actions_for_signer(s.signer_id).each do |sa|
+                #{date_time(sa.consent_approved_date)}
+
+  .events
+    %h4 Events
+
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th Event Date
+          %th Event Type
+          %th User
+          %th Notes
+      %tbody
+        -@events.each do |e|
+          %tr
+            %td
+              =date_time e.event_date
+            %td
+              =e.event_type
+            %td
+              =e.user_full_name
+            %td
+              =e.note_description
+
+  .versions
+    %h4 Versions
+
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th Version
+          %th Date
+          %th Status
+          %th RESPA
+          %th Package Type
+          %th Active
+      %tbody
+        -@version_listings.each do |v|
+          %tr
+            %td #{v.version_number}
+            %td #{date_time(v.create_date)}
+            %td {{separateWords('#{v.package_status_type}')}}
+            %td {{separateWords('#{v.respa_status_type}')}}
+            %td {{separateWords('#{v.package_type}')}}
+            %td #{v.active}
+
+  = render "shared/esign/documents"

@@ -1,0 +1,26 @@
+- content_for(:page_title) do
+  = "Reportable Events"
+
+= render :partial => "/compliance/hmda/loan_compliance_events/report_type_form" 
+= render :partial => "/compliance/hmda/loan_compliance_events/edit_loan"
+ 
+- content_for(:functions) do
+  .button-functions
+    = link_to import_form_compliance_hmda_loan_compliance_events_path, :class => "btn", :id => "avista_import" do
+      %i.icon-upload
+      Import from MortgageBot
+    = link_to "Mass Update", update_form_compliance_hmda_loan_compliance_events_path, :class => "btn"
+    = link_to "Export CSV", export_form_compliance_hmda_loan_compliance_events_path, :class => "btn"
+    = link_to "Undo Export", undo_export_form_compliance_hmda_loan_compliance_events_path, :class => "btn"
+    = transform_button
+    = render 'shared/spreadsheet_button'
+
+  
+= render :file => 'shared/base'
+
+/ :javascript
+/   $(document).ready(function(){
+/     $('#DataTables_Table_0').on('mouseover', function(){
+/       alert('asd');
+/     });
+/   });

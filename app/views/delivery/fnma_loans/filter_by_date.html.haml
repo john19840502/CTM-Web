@@ -1,0 +1,19 @@
+- content_for(:functions) do
+  .button-functions
+    .row
+      .btn-group#uldd_version{"data-toggle" => "buttons-radio"}
+        %button.btn.btn-default.active{"data-version" => "v1"}
+          ULDD v1
+        %button.btn.btn-default{"data-version" => "v2"}
+          ULDD v2 (experimental)
+      = render 'shared/print_button'
+      = render 'shared/spreadsheet_button'
+    .row
+      %span#ulddv2_description{"style" => "margin-right: 200px;"}
+        Pools will be exported using ULDD version 2 (experimental)
+
+
+= render template: 'delivery/filter_by_date'
+
+:javascript
+  $(document).ready(function() { ULDDv2Buttons.initialize(); });

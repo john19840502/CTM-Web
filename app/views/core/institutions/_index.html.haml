@@ -1,0 +1,20 @@
+= paginate branches, remote: true, theme: "bootstrap"
+= page_entries_info branches
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Active?
+      %th Branch Name
+      %th Institution #
+      %th Address
+      %th Phone / Email
+      %th Employees
+      %th Compensation Plans
+      %th Loans
+  %tbody
+    - branches.each do |branch|
+      = render 'core/institutions/row', branch: branch
+
+= page_entries_info branches
+= paginate branches, remote: true, theme: "bootstrap"

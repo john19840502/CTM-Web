@@ -1,0 +1,3 @@
+class ClosingChecklist < Checklist
+	
+end

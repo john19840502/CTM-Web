@@ -1,0 +1,21 @@
+.channels
+
+  %h1 Find a Loan By Channel
+
+  = form_tag search_qa_loan_finder_index_path, :method => :get do
+    %span
+      %select{:name => "channel"}
+        %optgroup{:label => 'Retail Channels'}
+          - Channel.retail_all_ids.each do |channel|
+            %option{:value => channel} #{channel}
+        %optgroup{:label => 'Non Retail'}
+          - Channel.non_retail_ids.each do |channel|
+            %option{:value => channel} #{channel}
+    = submit_tag "Search"
+
+  %h1 Loans:
+
+  %ul
+  - unless @loans.nil?
+    - @loans.each do |loan|
+      %li #{loan}

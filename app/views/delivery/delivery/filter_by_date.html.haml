@@ -1,0 +1,13 @@
+- content_for(:page_title) do
+  =  controller.delivery_name
+
+- content_for(:column_headers) do
+  - data.column_list.each do |column|
+    %th.header-text= data.model.human_attribute_name(column.to_s)
+  %th.header-text Actions
+
+
+- content_for(:column_data) do
+  = render :partial => 'delivery/xml_row', :collection => data.record_list, :as => :record, locals: {start_date: @start_date, end_date: @end_date}
+
+= render :file => 'shared/base'

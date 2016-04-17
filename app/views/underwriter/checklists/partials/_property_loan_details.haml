@@ -1,0 +1,17 @@
+%table.table.table-condensed.table-bordered.table-striped.small-header
+  %tr
+    %th Program
+    %th Purpose
+    %th Loan Amount
+    %th Appraised Value
+    %th Appraisal Date
+    %th Occupancy
+    %th Property Type
+  %tr
+    %td= @loan.product_code
+    %td= @loan.loan_purpose
+    %td= number_to_currency @loan.loan_amount
+    %td= number_to_currency @loan.appraised_value
+    %td
+    %td= @loan.occupancy
+    %td= @loan.gse_property_type

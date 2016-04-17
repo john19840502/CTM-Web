@@ -1,0 +1,9 @@
+.row
+  .span12
+    .lead 
+      Edit Compliance :: Loan # #{@lce.aplnno}
+      / = link_to_if can?(:read, Institution), "#{@lce.branch.branch_name} :: #{@lce.branch.institution_number}", core_institution_path(@lce.branch)
+
+    - if can?(:manage, LoanComplianceEvent)
+      = form_for @lce, url: {controller: :loan_compliance_events, action: :update, id: @lce.id}, method: :put, html: { class: 'form-horizontal' } do |f|
+        = render 'compliance/hmda/loan_compliance_events/form', f: f

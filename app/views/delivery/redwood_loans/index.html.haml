@@ -1,0 +1,12 @@
+- content_for(:page_title) do
+  = "Redwood Loans"
+
+- content_for(:functions) do
+  .button-functions
+    = render 'shared/print_button'
+    = "&nbsp;".html_safe
+    = render 'shared/spreadsheet_button'
+    = "&nbsp;".html_safe
+    = render 'export_xml_link'
+
+= render :file => 'shared/base'

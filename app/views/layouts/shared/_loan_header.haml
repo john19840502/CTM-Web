@@ -1,0 +1,4 @@
+.lead{style: 'margin-bottom: 0;'}= "LOAN #: #{@loan.loan_num} / #{@loan.channel} / #{@loan.loan_purpose}"
+.lead{style: 'margin-bottom: 0;font-size: 16px;'}= "#{loan_status_header_field(@loan)}"
+.lead{style: 'margin-bottom: 0;font-size: 16px;'}= "#{loan_lock_header_field(@loan)}"
+.lead{style: 'margin-bottom: 0;font-size: 16px;'}= "Primary Borrower: #{@loan.borrower_full_name}"

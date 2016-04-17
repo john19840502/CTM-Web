@@ -1,0 +1,22 @@
+= javascript_include_tag 'manual_boarding'
+.row
+  .span12
+    %h4 Find loan(s) to add to tonights boarding file. (Click 'Board Loans' to Save)
+  .span12
+    = form_tag('/servicing/manual_boarding/find_loans', remote: true) do
+      = text_field_tag :search_for, '', class: 'input-medium search-query', placeholder: 'Loan Number'
+      = submit_tag 'Find Loan(s)', class: 'btn'
+      = link_to 'Board Loans', '#', class: 'btn btn-warning finalize', disabled: 'disabled'
+
+.row
+  .span9
+    #results
+      Search above to find loans.
+
+  .span3
+    .existing
+      %table.table.table-striped
+        %tr
+          %th{colspan: '2'} Additional Loans
+        %tbody.loan_list
+              

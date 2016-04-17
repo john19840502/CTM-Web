@@ -1,0 +1,15 @@
+/ Footer Content
+/ ==================================================
+#footer
+  .container
+    .row
+      .right_align
+        .copyright
+          = "© #{Time.now.year} - #{ORGANIZATION_NAME}"
+          %br
+          Proprietary and Confidential - All Rights Reserved
+  
+        .timestamp
+          .page_load_time= date_formatted(Time.now.to_s)
+
+=render(:partial => '/layouts/debug_footer') if Rails.env == 'development' and DEBUG

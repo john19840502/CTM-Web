@@ -1,0 +1,14 @@
+%tr
+  %td{ style: 'width: 80px;' }
+    - if branch.is_active? 
+      %i.icon-ok-sign
+    - else
+      %i.icon-remove
+      %small= date_formatted branch.terminated_date
+  %td= link_to_if can?(:read, Institution), branch.branch_name, core_institution_path(branch)
+  %td= branch.institution_number
+  %td= branch_address branch
+  %td= raw "#{number_to_phone branch.phone}<br>#{mail_to branch.contact_email}"
+  %td= link_to_if can?(:read, BranchEmployee), "Total: #{branch.employees.retail.count}", core_originators_path(parent: 'branch', pid: branch.id)
+  %td= raw compensation_plans(branch)
+  %td= link_to_if can?(:read, Master::Loan), "Loans", core_loans_path(parent: 'branch', pid: branch.institution_number)

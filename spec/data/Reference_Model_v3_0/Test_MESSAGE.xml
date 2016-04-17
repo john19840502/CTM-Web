@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<MESSAGE xmlns="http://www.mismo.org/residential/2009/schemas" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mismo.org/residential/2009/schemas MISMO_3_0.xsd">
+	<ABOUT_VERSIONS xlink:label="AVS" xlink:type="resource">
+		<ABOUT_VERSION xlink:label="AV01" xlink:type="resource">
+			<AboutVersionIdentifier IdentifierEffectiveDate="2010-05-27" IdentifierOwnerURI="urn:org:mismo:residential:2010">CR_2010-05_B263-12</AboutVersionIdentifier>
+		</ABOUT_VERSION>
+	</ABOUT_VERSIONS>
+</MESSAGE>

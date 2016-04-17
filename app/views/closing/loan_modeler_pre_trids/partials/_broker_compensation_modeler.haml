@@ -1,0 +1,51 @@
+= form_tag(broker_submit_closing_loan_modeler_pre_trids_path, {remote: true, class: 'form-horizontal broker_validate modeler_validate', id: 'broker_comp'}) do
+  .lead
+    Maximum Broker Compensation
+  .errors
+    %div
+  .success
+    %div
+  .fields-invalid
+  .fields-valid
+
+  .pull-right
+    %a.btn.btn-primary{id: 'broker_submit', class: 'modeler_frm_submit'} Save
+    %a.btn.btn-success{'data-format' => "pdf", id: 'broker_comp_pdf', class: 'modeler_pdf_submit', href: closing_loan_modeler_pre_trid_path(:format => :pdf, :btn => 'broker_comp', total_comp: '')} Download PDF
+    .user_comment_label{:style => "padding-top:15px"}
+      =label_tag :user_comments, 'Comments:'
+      .user_comment_text{:style => "padding-top:5px"}
+        =text_area_tag :user_comments, @loan.user_comments_broker_comp, class: 'span3 user_comments editable', :rows => '3'
+      .modeler_user
+        =label_tag :modeler_user, @loan.current_modeler_user_broker_comp
+      .modeler_time_stamp
+        =label_tag :modeler_time, @loan.modeler_date_time_broker_comp
+  .span8
+    .row
+      .span6
+        .control-group
+          %h5.muted.control-label Broker Name
+          .controls{:style => "padding-top:10px"}
+            =text_field_tag :broker_name_modeler, @loan.broker_name_modeler, readonly: "readonly", class: 'broker_name_modeler text_field input-medium'
+
+
+        = hidden_field_tag :loan_id, @loan.loan_num
+        .control-group 
+          =label_tag :broker_comp_tier_perc, 'CTM Broker Compensation Tier Percentage', class: 'control-label'
+          .controls
+            =text_field_tag :broker_comp_tier_perc, @loan.broker_comp_tier_rate, class: 'broker_comp_tier_perc text_field input-medium', disabled: true
+        .control-group 
+          =label_tag :broker_comp_ln_amt, 'Loan Amount', class: 'control-label'
+          .controls
+            =text_field_tag :broker_comp_ln_amt, @loan.total_ln_amt_modeler, class: 'broker_comp_ln_amt text_field input-medium', disabled: true
+        .control-group 
+          =label_tag :max_broker_comp, 'Maximum Broker Compensation', class: 'control-label'
+          .controls
+            =text_field_tag :max_broker_comp, @loan.max_broker_comp_modeler, class: 'max_broker_comp text_field input-medium', disabled: true
+        .control-group
+          =label_tag :total_gfe_broker_comp, 'Total Broker Compensation from GFE', class: 'control-label'
+          .controls.alert{:style => "padding-top:10px;width:300px"}
+            =text_field_tag :total_gfe_broker_comp, @loan.total_broker_comp_gfe, class: 'total_gfe_broker_comp text_field brkr_valid input-medium'
+            =text_field_tag :pass_fail_msg, 'pass_fail_msg', readonly: "readonly", class: 'pass_fail_msg text_field input-small'
+    %em 
+      Broker compensation may not exceed maximum lender paid percentage or CT maximum of $12,000
+        

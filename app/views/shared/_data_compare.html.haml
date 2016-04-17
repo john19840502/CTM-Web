@@ -1,0 +1,12 @@
+%table.table.table-bordered.data-compare{"ng-show" => "data_compare"}
+  %thead
+    %tr
+      %th.percent_70 Field
+      %th.percent_70 Lock
+      %th.percent_70 1003
+
+  %tbody
+    %tr{"ng-repeat" => "field in data_compare.fields", "ng-class" => "field.match ? 'field-match' : 'field-mismatch'"}
+      %td {{field.name}}
+      %td {{ field.lock_value }}
+      %td {{ field.form_1003_value }}

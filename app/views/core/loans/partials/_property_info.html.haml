@@ -1,0 +1,23 @@
+.lead 3. Property Information
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Property Address
+      %th Property Type
+      %th Number of Units
+      %th Sales Price
+      %th Appraised Value
+      %th Project Name
+      %th Project Classification
+      %th Condo/PUD Project Code
+  %tbody
+    %tr
+      %td= property_address_field(@loan)
+      %td= @loan.gse_property_type
+      %td= @loan.property.num_of_units
+      %td= number_to_currency @loan.loan_general.transaction_detail.purchase_price_amount rescue nil
+      %td= number_to_currency @loan.appraised_value
+      %td= @loan.loan_general.try(:detail).try(:project_name)
+      %td= project_classification @loan
+      %td= @loan.loan_general.loan_feature.gse_project_classification_type rescue nil

@@ -1,0 +1,15 @@
+- content_for(:column_data) do
+  - data.record_list.each do |record|
+    %tr
+      %td= record.channel[0..1]
+      %td= record.purpose
+      %td= record.loan_num
+      %td= record.borrower_last_name
+      %td= record.state
+      %td= record.underwriter_name
+      %td= record.pac_condition
+      %td= record.mortgage_type
+      %td= record.product_code
+      %td= record.product_desc
+      %td= record.uw_submitted_at.strftime('%m/%d/%Y') unless record.uw_submitted_at.blank?
+= render :file => 'shared/base'

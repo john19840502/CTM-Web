@@ -1,0 +1,4 @@
+%tr
+  %td= link_to_if can?(:read, BranchCompensation), plan.name, accounting_branch_compensation_path(plan)
+  = render 'accounting/branch_compensation_details/row', det: plan.current_package, pid: plan.id
+  %td= plan.termination_date.present? ? date_formatted(plan.termination_date)  : 'None'

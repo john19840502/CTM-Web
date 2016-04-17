@@ -1,0 +1,10 @@
+#navigation_tabs= render_navigation
+
+%h1 Find me in /views/dashboard/index.html.haml
+
+%h3= "Logged in as #{current_user.display_name}"
+
+%h3 Roles
+%ul
+  - for role in user_roles
+    %li= role

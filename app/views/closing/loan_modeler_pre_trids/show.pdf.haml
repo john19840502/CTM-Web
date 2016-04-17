@@ -1,0 +1,31 @@
+%table{style: 'width: 100%'}
+  %tr
+    %td{style: 'width: 350px;'}
+      = render 'closing/loan_modelers/logo'
+
+    %td{style: 'text-align:right'}
+      .h4{style: 'margin-bottom: 0;'}= "LOAN #: #{@loan.loan_num} / #{@loan.mortgage_term.mortgage_type} /#{@loan.channel} / #{@loan.loan_purpose}"
+      .h4{style: 'margin-bottom: 0;font-size: 10px;'}= "#{loan_status_header_field(@loan)}"
+      .h4{style: 'margin-bottom: 0;font-size: 10px;'}= "#{loan_lock_header_field(@loan)}"
+      %h5= "Borrower: #{@loan.borrower_first_name} #{@loan.borrower_last_name}"
+
+  %tr
+    %td &nbsp;
+    %td &nbsp;
+- case params[:btn]
+  - when 'dodd'
+    = render 'closing/loan_modeler_pre_trids/dodd_frank_modeler'
+  - when 'fund'
+    = render 'closing/loan_modeler_pre_trids/funding_modeler'
+  - when 'fredd'
+    = render 'closing/loan_modeler_pre_trids/freddie_relief_modeler'
+  - when 'broker_comp'
+    = render 'closing/loan_modeler_pre_trids/broker_compensation_modeler'
+        
+.well
+  .h4{style: 'text-align:center;'}= "Borrower Name: #{@loan.borrower_first_name} #{@loan.borrower_last_name} / LOAN #: #{@loan.loan_num} / #{@loan.channel} / #{@loan.loan_purpose}"
+  .h4{style: 'text-align:center;'}
+    Printed at 
+    = l Time.now, :format => :full_american
+    by
+    = current_user.display_name

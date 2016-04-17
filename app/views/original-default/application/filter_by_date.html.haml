@@ -1,0 +1,17 @@
+.row
+  .span12
+    %h2.inline= data.label
+    %table.table.table-striped.table-bordered.table-condensed.datatable
+      = render 'captions'
+      %thead
+        %tr
+          - data.column_list.each do |column|
+            %th
+              .header-text
+                = data.model.human_attribute_name(column.to_s)
+      %tbody
+        - data.record_list.each do |record|
+          %tr
+            - data.columns.each do |column|
+              %td
+                = formatted_column(record, column)

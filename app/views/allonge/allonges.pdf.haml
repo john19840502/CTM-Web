@@ -1,0 +1,56 @@
+- @loans.each do |loan|
+  .page
+    .row
+      .offset3.title ALLONGE
+
+    .gap
+
+    .row
+      .span12
+        %table.loan-info
+          %tr
+            %td.col-name Loan No.:
+            %td.value= loan.loan_num
+          %tr
+            %td.col-name Property Name:
+            %td.value= format_address(loan)
+          %tr
+            %td.col-name Borrower Name:
+            %td.value= all_borrowers(loan)
+
+    .row.gap
+
+    .row
+      %p.span12
+        Reference is made to the 
+        %span.underlined= number_to_currency(loan.original_balance).presence || "LOAN AMOUNT MISSING"
+        promissory note (the "Note") from 
+        %span.underlined= all_borrowers(loan)
+        payable to the order of Cole Taylor Bank, an Illinois Chartered Bank ("Assignor")
+        , as successor to 
+        = succeed '.' do
+          %span.underlined.ensure-width= successor_to(loan, @successors)
+        It is intended that this Allonge be attached to and made a permanent part of the Note.
+    .row
+      %p.span12
+        Pay to the order of Scottrade Bank, a federal savings bank ("Assignee"), without recourse, representations
+        or warranties of any kind.
+    .row
+      %p.span12
+        Executed as of the 31<sup>st</sup> day of July, 2013.
+
+    .row.gap
+
+    .row
+      .span12
+        %table.signature
+          %tr
+            %td
+            %td.value
+          %tr
+            %td.col-name By:
+            %td.value Cindy Duquette
+          %tr
+            %td.col-name Title:
+            %td.value Senior Vice President
+

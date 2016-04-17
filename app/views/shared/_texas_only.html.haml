@@ -1,0 +1,26 @@
+.alert.alert-warning{"ng-if" => "property_state == 'TX' && loan.purpose_type == 'Refinance'"}
+  .form.form-search
+    %h5 Texas 50A6
+    %div{:"ng-hide" => "displayOnlyTexas"}
+      %span
+        Broker Entered 50A6 Indicator: 
+        %span.event_id{"ng-model" => 'copy_id'}
+          %strong {{ brokerTexas }}
+      
+      %div
+        Texas 50A6 Indicator:
+        %select{"ng-model" => "texas_indicator", "ng-options" => "item as item for item in texasitems", "ng-change" => "texasOnly(texas_indicator)"}
+          %option{:value => "", disabled: 'disabled'} Please Select
+        %span.loader{"ng-show" => "loading_texas_only"}
+      .alert.alert-block.alert-error{:"ng-if" => "brokerTexas != 'Yes' && texas_indicator == 'Yes' "}
+        Notify the Change Request team for possible redisclosure.
+      .alert.alert-block.alert-error{:"ng-if" => "error_saving_message", style: ""}
+        Failed to save Ready to Delay Date. Reason:  {{error_saving_message}}
+
+    %div{:"ng-show" => "displayOnlyTexas"}
+      Texas 50A6 Indicator:
+      %span.event_id{"ng-model" => 'copy_id'}
+        %strong {{ texas_indicator }}
+
+.alert.alert-block.alert-error{:"ng-if" => "texas_required_flag"}
+  Please select Texas 50A6 indicator to run validations.

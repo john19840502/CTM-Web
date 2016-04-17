@@ -1,0 +1,17 @@
+.lead 
+  = link_to 'All Controllers', controllers_admin_usage_stats_path
+
+%table.table
+  %tr
+    %th Controller Name
+    %th Accessed Times
+    %th IPs
+    %th Last Accessed On
+
+  - UsageStat::CONTROLLER_NAMES.each do |ctrl|
+    - stats = UsageStat.where(controller_name: ctrl).order(:id)
+    %tr
+      %td= link_to_if stats.count > 0, ctrl, actions_admin_usage_stats_path(ctrl: ctrl)
+      %td= stats.count
+      %td= stats.map(&:ip_address).uniq.compact.join(', ')
+      %td= stats.last.created_at.strftime('%m/%d/%Y %I:%M %P') if stats.last

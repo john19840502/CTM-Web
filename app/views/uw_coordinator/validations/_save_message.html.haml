@@ -1,0 +1,15 @@
+- if record and record.errors.any?
+  .alert.alert-error
+    %span.alert-heading{style: 'font-weight: bold; font-size: 14px;line-height: 18px;'} Please correct the following errors:
+    %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+    %ul{class: "alert-message fade in errors"}
+      - record.errors[:base].each do |msg|
+        %li.message=  msg
+      - record.errors[:validation_error].each do |msg|
+        %li.message=  msg
+- else
+  .alert.alert-success
+    %span.alert-heading{style: 'font-weight: bold; font-size: 14px;line-height: 18px;'} Success!
+    %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+    %ul{class: "alert-message fade in errors"}
+      %li.message Validation data has been saved.

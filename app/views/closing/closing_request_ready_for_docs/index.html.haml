@@ -1,0 +1,25 @@
+- content_for(:page_title) do
+  = "Closing Requests - Ready For Docs"
+
+- content_for(:extras) do
+  .extra-info
+    %strong="Total Count: "
+    = data.record_list.size
+    = " | "
+    = link_to "Channel Counts", '#', :class => 'btn btn-mini btn-primary', :data => {:toggle => 'modal', :url => channel_counts_closing_closing_request_ready_for_docs_path, :title => 'Channel Count', 'modal-options' => {'width' => 100}}
+
+- content_for(:column_data) do
+  - data.record_list.each do |record|
+    %tr
+      %td= record.loan_id
+      %td= record.purpose
+      %td= record.channel
+      %td= record.status
+      %td= record.borrower_last_name
+      %td= record.branch_name
+      %td= record.state
+      %td.date-oneline= record.requester_submitted_date.strftime('%m/%d/%Y %r') unless record.requester_submitted_date.blank?
+      %td.date-oneline= record.closing_date.strftime('%m/%d/%Y %r') unless record.closing_date.blank?
+      %td= record.assigned_to
+
+= render :file => 'shared/base'

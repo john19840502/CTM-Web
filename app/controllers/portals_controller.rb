@@ -1,0 +1,2 @@
+class PortalsController < ApplicationController
+end

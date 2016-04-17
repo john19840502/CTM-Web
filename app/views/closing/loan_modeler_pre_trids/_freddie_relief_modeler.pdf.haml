@@ -1,0 +1,89 @@
+= form_tag(fredd_submit_closing_loan_modeler_pre_trids_path, {remote: true, class: 'form-horizontal fredd_calc', id: 'fredd'}) do
+  .lead
+    Freddie Relief Modeler
+  .errors
+    %div
+  .success
+    %div
+  #fields-invalids
+  #fields-valids
+  .pull-right
+    %table 
+      %tr
+        %td
+          %h6 Comments:
+      %tr
+        %td
+          =text_area_tag :user_comments, @loan.user_comments_freddie, class: 'span3 user_comments editable', :rows => '7'
+      %tr
+        %td
+          %em.muted.small
+            =@loan.current_modeler_user_freddie
+      %tr
+        %td
+          %em.muted.small
+            =@loan.modeler_date_time_freddie
+  .row
+    
+    = hidden_field_tag :loan_id, @loan.loan_num
+    = hidden_field_tag :trid_loan, @loan.trid_loan?
+    .row
+      %table.span4{style: 'margin-left:40px', cellpadding: 4} 
+        %tr
+          %td{style: "width:200px;"}  1. Unpaid Balance:  
+          %td{style:'text-align:right'} 
+            = number_to_currency(@loan.upb_modeler)
+        %tr 
+          %td 2. Accrued Interest:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.accrued_interest_modeler)
+        %tr
+          %td{style: 'padding-left:40px;font-size:x-small'} PAYOFF AMOUNT INCLUDING INTEREST:
+          %td{style:'text-align:right'}
+            = @loan.payoff_amount_modeler
+        %tr
+          %td 3. Closing Cost:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.fredd_closing_cost_modeler)
+        %tr
+          %td{style: 'padding-left:40px;font-size:x-small'}  UNPAID BALANCE x 4 %
+          %td{style:'text-align:right'}
+            = @loan.upb_perc_modeler
+          %td{style: 'font-size:xx-small;padding-left: 30px;font-weight:bold'}
+            = @loan.upb_perc_fail
+        %tr
+          %td{style: 'padding-left:40px;font-size:x-small'}  STEP 3 RESULTS:
+          %td{style:'text-align:right'}
+            = @loan.step_three_modeler
+        %tr
+          %td 4. Maximum Loan Amount:
+          %td{style:'text-align:right'}
+            = @loan.max_loan_amount_modeler
+        %tr
+          %td 5. Actual Loan Amount:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.actual_loan_amount_modeler)
+        %tr
+          %td{style: 'padding-left:40px;font-size:x-small'}  MAXIMUM LOAN AMOUNT - ACTUAL LOAN AMOUNT
+          %td{style:'text-align:right'}
+            = @loan.max_actual_amount_modeler
+          %td{style: 'font-size:small;padding-left: 30px;font-weight:bold;'}
+            = @loan.modeler_pass_or_fail
+        %tr
+          %td 6. Principal Curtailment
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.princ_curt_modeler)
+          %td{style: 'font-size:xx-small;padding-left: 30px;font-weight:bold'}
+            = @loan.princ_curt_fail  
+        %tr
+          %td{style: 'padding-left:40px;font-size:x-small'}  ACTUAL LOAN AMOUNT - PRINCIPAL
+          %td{style:'text-align:right'}
+            = @loan.actual_amount_princ_modeler
+          %td{style: 'font-size:xx-small;padding-left: 30px;font-weight:bold'}
+            = @loan.actual_amout_prin_fail
+        %tr
+          %td Cash Out To Borrower
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.cash_to_borrower_modeler)
+          %td{style: 'font-size:xx-small;padding-left: 30px;font-weight:bold'}
+            = @loan.cash_to_borrower_fail

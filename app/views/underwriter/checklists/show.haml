@@ -1,0 +1,11 @@
+= render :partial => '/underwriter/checklists/partials/page_header'
+
+%table.table-condensed
+  %tr
+    %td.right-border{:width => '50%'}
+      = render UwchecklistSection.for_column(1).as_list
+    
+    %td{:width => '50%'}
+      = render UwchecklistSection.for_column(2).as_list
+
+= render :partial => '/underwriter/checklists/partials/page_footer'

@@ -1,0 +1,20 @@
+%title= APPLICATION_NAME# + ': ' + render_navigation(:renderer => :text, :join_with => ' - ', :items => @navigation)
+/[if lt IE 9]
+  = stylesheet_link_tag 'html5.js', :media => 'screen'
+
+- if params[:controller] == "closing/settlement_agent_audits" || params[:controller] == "initial_disclosure/work_queue"
+  %meta{'http-equiv' => 'X-UA-Compatible', 'content' => 'chrome=1,IE=10'}
+- else
+  %meta{'http-equiv' => 'X-UA-Compatible', 'content' => 'chrome=1,IE=9'} 
+
+= csrf_meta_tag
+= stylesheet_link_tag 'application.css', :media => 'screen, projection, tv'
+= stylesheet_link_tag 'print', :media => 'print'
+
+
+-#/ = stylesheet_link_tag "application-reset", :media => "all"
+-#/ = stylesheet_link_tag "application-bootstrap", :media => "all"
+-#/ = stylesheet_link_tag "application-all", :media => "all"
+-#/ = stylesheet_link_tag "application-screen", :media => "screen, projection, tv"
+-#/ = stylesheet_link_tag "application-print", :media => "print" 
+= javascript_include_tag 'application.js'

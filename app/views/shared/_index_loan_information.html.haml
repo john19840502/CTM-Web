@@ -1,0 +1,281 @@
+.row
+  .span6{style: 'width:460px;'}
+    %table.table.table-bordered
+      %tr
+        %th{style: 'width:190px;'} Product Code
+        %td{style: 'width:265px;'} {{loan.product_code}}
+      %tr
+        %th Loan Purpose
+        %td {{ loan.loan_purpose_type }}
+      %tr
+        %th 
+          Total Balance on 
+          %br
+            All Secondary Financing
+        %td {{ loan.total_balance_secondary_financing | currency }}
+      %tr
+        %th 
+          Max Line Amount of 
+          %br
+            Secondary Financing
+        %td {{ loan.max_amount_secondary_financing | currency }}
+      %tr
+        %th Occupancy
+        %td {{ loan.occupancy }}
+
+      %tr
+        %th Pre-Closer Name
+        %td {{ loan.precloser_name }}
+      %tr
+        %th Underwriter Name
+        %td {{ loan.jr_underwriter_name }}
+      %tr
+        %th Second Underwriter Name
+        %td {{ loan.underwriter_name }}
+      %tr
+        %th Closer Name
+        %td {{ loan.closer_name }}
+      %tr
+        %th Second Closer Name
+        %td.manual-input
+          %select{"ng-model" => "loan.second_closer_name",
+              "ng-change" => "saveManualEntry('Second Closer Name', loan.second_closer_name)",
+              "ng-options" => "x as x for x in second_closer_name_options"}
+            %option{:value => ""} None
+          %span.small-orange-spinner{"ng-show" => "saving['Second Closer Name']"}
+          .error-area{"ng-show" => "error_saving['Second Closer Name']"}
+            {{ error_saving['Second Closer Name'] }}
+
+  .span5{style: 'width:320px;'}
+    %table.table.table-bordered
+      %tr
+        %th{style: 'width:180px;'} Loan Amount
+        %td {{ loan.loan_amount | currency }}
+      %tr
+        %th{style: 'width:135px;'} Note Rate
+        %td {{ loan.note_rate }}
+      %tr
+        %th 
+          Escrows (Yes/No) - 
+          %br
+            From LOCK
+        %td {{ loan.escrow_from_lock }}
+      %tr
+        %th 
+          Escrows (Yes/No) -
+          %br
+            From 1003
+        %td {{ loan.escrow_from_1003 }}
+      %tr
+        %th Channel Name
+        %td {{ loan.channel }}
+      %tr
+        %th Loan Officer Name
+        %td {{ loan.lo_name }}
+      %tr
+        %th Loan Officer Email
+        %td {{ loan.lo_email }}
+      %tr
+        %th Loan Processor
+        %td {{ loan.processor_name }}
+      %tr
+        %th Loan Processor Email
+        %td {{ loan.processor_email }}
+      %tr
+        %th Title Company Name
+        %td {{ loan.title_company_name }}
+      %tr
+        %th Title Company Email
+        %td {{ loan.title_company_email }}
+      %tr
+        %th Broker Name
+        %td {{loan.broker_name }}
+      %tr
+        %th Broker Office
+        %td {{loan.broker_office }}
+      %tr
+        %th Branch Name
+        %td {{loan.branch_name }}
+      %tr
+        %th Closing Request Received Date
+        %td {{ loan.requested_close_date }}
+
+  .span3{style: 'width:320px;'}
+    %table.table.table-bordered
+      %tr
+        %th{style: 'width:180px;'} LTV
+        %td{style: 'width:135px;'} {{ loan.ltv }}
+      %tr
+        %th CLTV
+        %td {{ loan.cltv }}
+      %tr
+        %th HCLTV
+        %td {{ loan.hcltv }}
+      %tr
+        %th Housing Ratio
+        %td {{ loan.housing_ratio }}
+      %tr
+        %th Total Debt Ratio
+        %td {{ loan.total_debt_ratio }}
+      %tr
+        %th Funding Date
+        %td {{ loan.funding_date }}
+      %tr
+        %th Lock Expire Date
+        %td {{ loan.lock_date }}
+      %tr
+        %th 1st Payment Date
+        %td {{ loan.first_payment_date }}
+      %tr
+        %th Settlement Date
+        %td {{ loan.settlement_date }}
+      %tr
+        %th Assigned to Closer Date
+        %td {{ loan.assigned_to_closer_date }}
+      %tr
+        %th Closing Date
+        %td {{ loan.closing_date }}
+
+.lead Pricing Section
+.row
+  .span6{style: 'width:460px;'}
+    %table.table.table-bordered
+      %tr
+        %th Premium Pricing Percent
+        %td.manual-input
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "ng-model" => "loan.premium_pricing_percent",
+            "ng-focus" => "storeOrigValue('Premium Pricing Percent', loan.premium_pricing_percent)",
+            "ng-blur" => "saveManualEntry('Premium Pricing Percent', loan.premium_pricing_percent)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Premium Pricing Percent']"}
+          .error-area{"ng-show" => "error_saving['Premium Pricing Percent']"}
+            {{ error_saving['Premium Pricing Percent'] }}
+      %tr
+        %th Premium Pricing Amount
+        %td.manual-input
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "ng-model" => "loan.premium_pricing_amount",
+            "ng-focus" => "storeOrigValue('Premium Pricing Amount', loan.premium_pricing_amount)",
+            "ng-blur" => "saveManualEntry('Premium Pricing Amount', loan.premium_pricing_amount)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Premium Pricing Amount']"}
+          .error-area{"ng-show" => "error_saving['Premium Pricing Amount']"}
+            {{ error_saving['Premium Pricing Amount'] }}
+      %tr
+        %th Discount Percent
+        %td.manual-input
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "ng-model" => "loan.discount_percent",
+            "ng-focus" => "storeOrigValue('Discount Percent', loan.discount_percent)",
+            "ng-blur" => "saveManualEntry('Discount Percent', loan.discount_percent)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Discount Percent']"}
+          .error-area{"ng-show" => "error_saving['Discount Percent']"}
+            {{ error_saving['Discount Percent'] }}
+      %tr
+        %th Discount Amount
+        %td.manual-input
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "ng-model" => "loan.discount_amount",
+            "ng-focus" => "storeOrigValue('Discount Amount', loan.discount_amount)",
+            "ng-blur" => "saveManualEntry('Discount Amount', loan.discount_amount)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Discount Amount']"}
+          .error-area{"ng-show" => "error_saving['Discount Amount']"}
+            {{ error_saving['Discount Amount'] }}
+      %tr
+        %th First Time Homebuyer
+        %td {{ loan.first_time_buyer }}
+
+
+  .span5{style: 'width:320px;'}
+    %table.table.table-bordered
+      %tr
+        %th Borrower Paid Percent
+        %td.manual-input
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "ng-model" => "loan.borrower_paid_percent",
+            "ng-focus" => "storeOrigValue('Borrower Paid Percent', loan.borrower_paid_percent)",
+            "ng-blur" => "saveManualEntry('Borrower Paid Percent', loan.borrower_paid_percent)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Borrower Paid Percent']"}
+          .error-area{"ng-show" => "error_saving['Borrower Paid Percent']"}
+            {{ error_saving['Borrower Paid Percent'] }}
+      %tr
+        %th Borrower Paid Amount
+        %td.manual-input
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "ng-model" => "loan.borrower_paid_amount",
+            "ng-focus" => "storeOrigValue('Borrower Paid Amount', loan.borrower_paid_amount)",
+            "ng-blur" => "saveManualEntry('Borrower Paid Amount', loan.borrower_paid_amount)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Borrower Paid Amount']"}
+          .error-area{"ng-show" => "error_saving['Borrower Paid Amount']"}
+            {{ error_saving['Borrower Paid Amount'] }}
+      %tr
+        %th Earnest Money Amount
+        %td.manual-input
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "ng-model" => "loan.earnest_money_amount",
+            "ng-focus" => "storeOrigValue('Earnest Money Amount', loan.earnest_money_amount)",
+            "ng-blur" => "saveManualEntry('Earnest Money Amount', loan.earnest_money_amount)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Earnest Money Amount']"}
+          .error-area{"ng-show" => "error_saving['Earnest Money Amount']"}
+            {{ error_saving['Earnest Money Amount'] }}
+      %tr{"ng-if" => "loan.purpose_type == 'Refinance'"}
+        %th Payoff Amount
+        %td.manual-input
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "maxlength" => "25",
+            "ng-model" => "loan.payoff_amount",
+            "ng-focus" => "storeOrigValue('Payoff Amount', loan.payoff_amount)",
+            "ng-blur" => "saveManualEntry('Payoff Amount', loan.payoff_amount)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Payoff Amount']"}
+          .error-area{"ng-show" => "error_saving['Payoff Amount']"}
+            {{ error_saving['Payoff Amount'] }}
+      %tr{"ng-if" => "loan.purpose_type != 'Refinance'"}
+        %th Payoff Amount
+        %td Not Applicable, This Is Not A Refinance
+
+
+
+  .span3{style: 'width:320px;'}
+    %table.table.table-bordered
+      %tr
+        %th Property Type
+        %td {{ loan.gse_property_type }}
+      %tr
+        %th VA Funding Fee Amount
+        %td {{ loan.va_fee_amount }}
+      %tr
+        %th VA Funding Fee Percent
+        %td {{ loan.va_fee_percent }}
+      %tr
+        %th Funds Requested Date
+        %td {{ loan.funds_requested_date }}
+      %tr
+        %th Flood Zone
+        %td {{ loan.flood_zone }}
+
+.lead Closing Cash To / From Borrower
+.row
+  .span12
+    %table.table.table-bordered
+      %tr
+        %th Cash to Close
+        %td.manual-input.span10
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "maxlength" => "25",
+            "ng-model" => "loan.cash_to_close",
+            "ng-focus" => "storeOrigValue('Cash To Close', loan.cash_to_close)",
+            "ng-blur" => "cashToClose(loan.cash_to_close, loan.total_funds_required_to_close)"}
+          %span.small-orange-spinner{"ng-show" => "loading_cash_to_close"}
+          .error-area{"ng-show" => "error_saving_cash_to_close"}
+            {{ error_saving_cash_to_close }}
+      %tr
+        %th Seller Credit Amount
+        %td.manual-input.span10
+          %input.input-medium{"placeholder" => "Please enter a value",
+            "maxlength" => "25",
+            "ng-model" => "loan.seller_credit_amount",
+            "ng-focus" => "storeOrigValue('Seller Credit Amount', loan.seller_credit_amount)",
+            "ng-blur" => "saveManualEntry('Seller Credit Amount', loan.seller_credit_amount)"}
+          %span.small-orange-spinner{"ng-show" => "saving['Seller Credit Amount']"}
+          .error-area{"ng-show" => "error_saving['Seller Credit Amount']"}
+            {{ error_saving['Seller Credit Amount'] }}
+

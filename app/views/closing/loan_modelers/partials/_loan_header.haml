@@ -1,0 +1,30 @@
+/ %table{style: 'width: 100%'}
+/   %tr
+/     %td{style: 'width: 350px;'}
+/       = render 'closing/loan_modelers/partials/logo'
+
+/     %td{style: 'text-align:right'}
+/       .lead= "Borrower Name: #{@loan.borrower_first_name} #{@loan.borrower_last_name}"
+/       .lead= "LOAN #: #{@loan.loan_num}"  
+/       .lead= "#{@loan.channel} / #{@loan.loan_purpose}"
+
+/   %tr
+/     %td &nbsp;
+/     %td &nbsp;
+%table{style: 'width: 100%'}
+  %tr
+    %td{style: 'width: 350px; vertical-align: top;'}
+      = render '/closing/loan_modelers/partials/logo'
+
+
+    %td{style: 'text-align:right'}
+      .lead{style: 'margin-bottom: 0;'}= "LOAN #: #{@loan.loan_num} / #{@loan.try(:mortgage_term).try(:mortgage_type)} /#{@loan.channel} / #{@loan.loan_purpose}"
+      .lead{style: 'margin-bottom: 0;font-size: 16px;'}= "#{loan_status_header_field(@loan)}"
+      .lead{style: 'margin-bottom: 0;font-size: 16px;'}= "#{loan_lock_header_field(@loan)}"
+
+
+      %h5= "Borrower: #{@loan.borrower_first_name} #{@loan.borrower_last_name}"
+
+  %tr
+    %td &nbsp;
+    %td &nbsp;

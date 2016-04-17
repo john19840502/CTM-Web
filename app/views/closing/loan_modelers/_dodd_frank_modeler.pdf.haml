@@ -1,0 +1,154 @@
+%style{type: 'text/css'}
+  input:disabled, input.editable{
+  background-color: transparent;
+  border: none;
+  }
+  label.valid { width: 24px; height: 24px; background: url(/assets/icon_sets/famfamfam_silk/icons/accept.png) center center no-repeat; display: inline-block; text-indent: -9999px;
+  }
+
+
+= form_tag(submit_closing_loan_modelers_path, {remote: true, class: 'form-horizontal', id: 'dodd_frank'}) do
+  .lead{style: 'margin-top:-20px'}
+    Dodd-Frank Loan Modeler
+  .errors
+    %div
+  .success
+    %div
+  #fields-invalid
+  #fields-valid
+  .pull-right
+    %table 
+      %tr
+        %td
+          %h6 Comments:
+      %tr
+        %td
+          =text_area_tag :user_comments, @loan.user_comments_dodd_frank, class: 'span3 user_comments editable', :rows => '7'
+      %tr
+        %td
+          %em.muted.small
+            =@loan.current_modeler_user
+      %tr
+        %td
+          %em.muted.small
+            =@loan.modeler_date_time
+ 
+  .row
+    %table.span4{style: 'margin-top:-30px'} 
+      %tr{style: 'padding-top:-10px'}
+        %td{style: 'width:248px'}
+          %h5.muted Premium Pricing:
+        %td{style: 'padding-top:5px; text-align:right'} 
+          = number_to_currency(@loan.premium_pricing_modeler)
+      %tr
+        %td Loan Discount:
+        %td{style: 'padding-top:5px; text-align:right'} 
+          = number_to_currency(@loan.loan_discount_modeler)
+      %tr
+        %td
+          %h6 Total Loan Amount:
+        %td{style: 'padding-top:5px; text-align:right'} 
+          = @loan.total_ln_amt_modeler
+      %tr
+        %td
+          %h6 Net Price:
+        %td{style: 'padding-top:5px; text-align:right'} 
+          = @loan.net_price_modeler
+      %tr
+        %td
+          %h6 Final Note Rate:
+        %td{style: 'padding-top:5px; text-align:right'} 
+          = @loan.final_note_rate_modeler
+      %tr
+        %td{style: 'width:248px'}
+          %h5.muted Closing Cost:
+        %td{style: 'padding-top:5px; text-align:right'} 
+          = @loan.closing_cost_modeler
+      %tr
+        %td{style: 'width:248px'}
+          %h5 Premium Pricing - Closing Cost:
+        %td{style: 'font-weight:bold; padding-top:5px; text-align:right'} 
+          = @loan.difference_modeler
+        %td{style: 'font-weight:bold; padding-top:5px; padding-left: 40px; text-align:right'}
+          = @loan.message_modeler
+  .row
+    
+    = hidden_field_tag :loan_id, @loan.loan_num
+    .row
+      %table.span4{style: 'margin-left:40px', cellpadding: 4} 
+        %tr
+          %td{style: "width:200px;"}  Origination:  
+          %td{style:'text-align:right'} 
+            = number_to_currency(@loan.origination_fee_modeler)
+        %tr
+          %td Administration Fee:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.admin_fee_modeler)
+        %tr
+          %td Principal Reduction:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.principal_reduction_fee_modeler)
+        %tr
+          %td 3rd Part Proc:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.third_pt_proc_fee_modeler)
+        %tr
+          %td Appraisal:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.appraisal_fee_modeler)
+        %tr
+          %td Credit Report:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.credit_report_modeler)
+        %tr
+          %td Flood Cert.:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.flood_cert_modeler)
+        %tr
+          %td Interim Interest:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.interim_interest_modeler)
+        %tr
+          %td Mortgage Insurance Premium:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.mortgage_insurance_premium_modeler)
+        %tr
+          %td HOI Premium:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.hoi_premium_modeler)
+        %tr
+          %td Escrows:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.escrow_modeler)
+        %tr
+          %td Taxes Due at Close:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.taxes_due_modeler)
+        %tr
+          %td Title Fees:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.title_fees_modeler)
+        %tr
+          %td Owner's Policy:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.owner_policy_modeler)
+        %tr
+          %td Recording Fees:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.recording_fees_modeler)
+        %tr
+          %td Transfer Taxes:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.transfer_taxes_modeler)
+
+        - if @loan.dodd_frank_modeler
+          - @loan.dodd_frank_modeler.dodd_frank_modeler_misc_other_fees.each do |misc_fee|
+            %tr
+              %td
+                = label_tag nil, misc_fee.description, class: 'control-label'
+              %td{style:'text-align:right'}
+                = number_to_currency(misc_fee.amount)
+        %tr
+          %td Prorated Taxes:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.prorated_taxes_modeler)

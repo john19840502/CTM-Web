@@ -1,0 +1,20 @@
+.alert{'ng-class' => 'ctrl.alertClass'}
+  %a.pointer.message{:"ng-click" => 'ctrl.toggleForm()', :"ng-class" => "ctrl.flagClass"}
+  {{ ctrl.message.text }}
+  .last-action{"ng-show" => "ctrl.last_action"}
+    {{ctrl.last_action.action}} by {{ ctrl.last_action.user_name }} on {{ ctrl.last_action.created_at | date:'MM/dd/yyyy' }}.  Reason: {{ctrl.last_action.reason}}
+    %a.pointer.more-link{"ng-click" => "ctrl.toggleHistory()", "ng-show" => "ctrl.showHistoryLink"} ({{ ctrl.showHistory ? 'Hide' : 'Show' }} {{ ctrl.historyCount }} more events)
+  .last-action{"ng-show" => "ctrl.showHistory", "ng-repeat" => "action in ctrl.other_actions"}
+    {{action.action}} by {{ action.user_name }} on {{ action.created_at | date:'MM/dd/yyyy' }}.  Reason: {{action.reason}}
+  %form.form-inline{"ng-show" => "ctrl.showForm"}
+    %h4 {{ ctrl.formActionLabel }}
+    %label{"for" => "reason"} Reason
+    %input.input-xxlarge{"type" => "text", "name" => "reason", "ng-model" => "ctrl.formReason"}
+    %input.btn.btn-primary{"type" => "submit", "ng-click" => "ctrl.submitForm()", "ng-disabled" => "ctrl.formSubmissionPending", 'value' => 'Submit'}
+    %span.loader{"ng-show" => "ctrl.formSubmissionPending"}
+    .alert.alert-error{"ng-show" => "ctrl.errorMessage"}
+      %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+      {{ ctrl.errorMessage }}
+
+
+

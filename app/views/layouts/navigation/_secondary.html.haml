@@ -1,0 +1,11 @@
+//- breadcrumbs = render_navigation :renderer => :bootstrap_breadcrumbs#, :join_with => ' >> '
+- tabs        = render_navigation :level => 2..99, :expand_all => true
+
+#navigation-secondary.container
+  //  - if !!breadcrumbs
+  //    .row
+  //      .span8.columns
+  //        #navigation_breadcrumbs= breadcrumbs
+
+  - if !!tabs
+    #navigation_tabs= tabs

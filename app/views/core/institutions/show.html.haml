@@ -1,0 +1,50 @@
+.row
+  .span12
+    .lead
+      Branch #{@institution.branch_name} :: #{@institution.institution_number}
+      - unless @institution.is_active?
+        %strong :: Inactive since #{ date_formatted @institution.terminated_date }
+
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Branch Name
+          %th Institution #
+          %th Address
+          %th Phone
+          %th Email
+      %tbody
+        %tr
+          %td= @institution.branch_name
+          %td= @institution.institution_number
+          %td= branch_address @institution
+          %td= number_to_phone @institution.phone
+          %td= mail_to @institution.contact_email
+
+    %ul.nav.nav-tabs
+      %li.active
+        %a{ href: "#originators_#{@institution.id}", 'data-toggle' => "tab" } Employees
+      %li
+        %a{ href: "#loans_#{@institution.id}", 'data-toggle' => "tab" } Loans
+      %li
+        %a{ href: "#comp_plans_#{@institution.id}", 'data-toggle' => "tab" } Compensation Plans
+
+    .tab-content
+      .tab-pane.active{id: ("originators_#{@institution.id}")}
+
+        = render 'core/originators/index', originators: @institution.employees.order("is_active desc, last_name asc").page(1).per(20), pid: @institution.id, parent: "branch"
+
+      .tab-pane{id: ("loans_#{@institution.id}")}
+
+        = render 'core/loans/index', loans: @institution.loans.order(:loan_num).page(1).per(20), pid: @institution.institution_number, parent: "branch"
+
+      .tab-pane{id: ("comp_plans_#{@institution.id}")}
+
+        .pull-right{style: 'margin-bottom: 10px;'}
+          - if can?(:read, BranchCompensation)
+            = link_to new_accounting_branch_compensation_path(bid: @institution.id), class: 'btn btn-mini btn-info' do
+              %i.icon-plus
+              Add New Plan
+
+        = render 'accounting/branch_compensations/index', bc: @institution.branch_compensations
+

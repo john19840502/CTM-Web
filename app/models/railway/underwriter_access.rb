@@ -1,0 +1,2 @@
+class UnderwriterAccess < Note
+end

@@ -1,0 +1,24 @@
+.page-header
+  %h2 Import Purchased Loan File
+
+= form_tag({ action: :import}, multipart: true) do
+  .row
+    .span5
+      .control-group
+        .controls
+          = file_field_tag 'purchased_loan_file', style: 'line-height: 20px;'
+  .row
+    .span2
+      .control-group
+        =label_tag :dispdate, 'Disbursement Date', class: 'control-label'
+        .controls
+          = text_field_tag :dispdate, nil, class: 'datepicker span2'
+
+  .row &nbsp;
+
+  .row
+    .span5
+      .control-group
+        .controls
+          %button.btn.btn-primary Upload File
+          = link_to "Back to Purchased Loans", compliance_hmda_purchased_loans_path, class: 'btn'

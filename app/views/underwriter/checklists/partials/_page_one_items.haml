@@ -1,0 +1,8 @@
+- sections = UwchecklistSection.as_list.for_page(1)
+
+- if sections
+  %table.table.table-condensed
+    %tr
+      - for section in sections
+        %td.right-border.left-border{:width => "#{100/sections.size}%"}
+          = render section

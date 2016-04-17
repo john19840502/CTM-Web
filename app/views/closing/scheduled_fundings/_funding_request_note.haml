@@ -1,0 +1,7 @@
+%div{id: "note-text-for-loan-#{record.id}"}
+  - if result
+    .dblclick-edit{:edit_path => edit_loan_note_path(:id => result.id)}
+      = result
+  - else
+    .dblclick-edit{:edit_path => new_loan_note_path(loan_note: { :loan_id => record.id }.merge(LoanNote::FUNDING_REQUEST_CONDITIONS)) }
+      &nbsp;

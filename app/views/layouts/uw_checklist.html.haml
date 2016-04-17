@@ -1,0 +1,10 @@
+!!! 5
+%html
+  %head
+    = wicked_pdf_stylesheet_link_tag 'pdf'
+    = wicked_pdf_stylesheet_link_tag 'underwriter/uw_checklist'
+    = wicked_pdf_javascript_include_tag 'pdf'
+    -#= javascript_include_tag 'uw_checklist.js'
+    
+  %body
+    = yield

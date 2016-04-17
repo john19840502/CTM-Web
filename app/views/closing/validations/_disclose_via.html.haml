@@ -1,0 +1,12 @@
+%hr
+.alert.alert-warning{ "ng-hide" => "show_cd_only" }
+  .btn.btn-inverse{ "ng-click" => "requestCD()" } Only Disclose Via CD 
+  %p Click here to specify that all future disclosures for this loan should be sent via CD instead of LE. If a CD has already been sent, no LEs will be sent regardless of this button action.
+
+.alert.alert-warning{ "ng-show" => "show_cd_only" }
+  %h3.lead Only disclosing Via CD ({{ disclose_by.disclose_by_cd_at }} by {{ disclose_by.disclose_by_cd_user }})
+  .btn.btn-inverse{ "ng-click" => "requestCD()" } Allow LE disclosures
+  %p Click to allow disclosures to be sent via LE. If a CD has already been sent, no LEs will be sent regardless of this button action.
+
+.alert.alert-success{ "ng-show" => "false" }
+  %h3.lead Only disclosing Via CD (Initial CD sent {{ disclose_by.cd_already_sent_at }})

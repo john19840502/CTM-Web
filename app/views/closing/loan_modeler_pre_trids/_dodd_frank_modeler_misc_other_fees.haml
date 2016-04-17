@@ -1,0 +1,10 @@
+- dodd_frank_modeler_misc_other_fees ||= DoddFrankModelerMiscOtherFee.new
+- fee = dodd_frank_modeler_misc_other_fees
+%div.misc-fee
+  .control-group
+    = label_tag :description, 'Seller Paid Closing Cost', class: 'control-label'
+    .controls
+      = hidden_field_tag "misc_other_fees[][id]", fee.id, class: 'id-field'
+      = text_field_tag "misc_other_fees[][amount]", fee.amount, class: 'text_field num input-small editable', :placeholder => 'Fee Amount'
+      = text_field_tag "misc_other_fees[][description]", fee.description, class: 'text_field input-large editable', :placeholder => 'Enter Fee Name'
+      %a.btn.btn-mini.btn-danger.remove-misc-other-fee{"data-id" => fee.id, "href" => dodd_frank_misc_fee_remove_closing_loan_modeler_pre_trids_path(id: fee.id)} Del

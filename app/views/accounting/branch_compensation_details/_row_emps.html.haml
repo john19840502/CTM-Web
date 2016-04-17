@@ -1,0 +1,17 @@
+- if det
+  / - details = det.employee.compensation_details_for_branch_and_date(det.branch_compensation.branch.id, det.effective_date)
+  %td= date_formatted details.effective_date
+  %td= date_formatted det.effective_date
+  %td= number_to_percentage details.lo_traditional_split, precision: 3
+  %td= number_to_percentage details.tiered_split_low, precision: 3
+  %td= number_to_percentage details.tiered_split_high, precision: 3
+  %td= number_to_currency details.tiered_amount, precision: 0
+  %td= number_to_currency details.lo_min, precision: 0
+  %td= number_to_currency details.lo_max, precision: 0
+- else
+  %td
+    - if can?(:manage, BranchCompensation)
+      = link_to new_accounting_branch_compensation_detail_path(pid: pid), class: 'btn btn-mini btn-info' do
+        %i.icon-plus
+        Add New Details
+  %td{colspan: 7} This plan has no compensation details currently in effect.

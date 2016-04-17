@@ -1,0 +1,9 @@
+.page-header
+  %h2 #{controller.delivery_name}
+
+= form_tag controller.filter_by_date_path, method: 'get', class: 'well form-search' do
+  = label_tag :start_date, 'From: '
+  = text_field_tag :start_date, l(Time.now), class: 'datepicker', readonly: true
+  = label_tag :end_date, 'To: '
+  = text_field_tag :end_date, l(Time.now), class: 'datepicker', readonly: true
+  = submit_tag "Search by settlement date", class: 'btn btn-inverse'

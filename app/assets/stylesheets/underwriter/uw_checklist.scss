@@ -1,0 +1,143 @@
+body {
+    background-color: #ffffff;
+    margin: 0;
+    font-weight: normal;
+    line-height: 10px;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+ul {
+/*  margin-top: -10px;
+*/  margin-bottom: 0px;
+}
+
+ul li {
+  font-size: 90%;   
+  color: black;
+  padding: none;
+  margin: none;
+  margin-left: -10px;
+  list-style-type:disc;
+  line-height: 12px;
+}
+
+ul li.check {
+  list-style-image: none;
+}
+
+.strong {
+  font-weight: bolder;
+}
+
+.credit-score {
+  font-weight: bolder;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.right {
+  text-align: right !important;
+}
+
+.capitalize {
+  text-transform: uppercase;
+}
+
+.percent_110 {
+  font-size: 110% !important;
+}
+
+.percent_80, .small-font {
+  font-size: 80% !important;
+}
+
+.percent_70 {
+  font-size: 70% !important;
+}
+
+table {
+  border-bottom: none;
+  margin-bottom: 0px !important;
+}
+
+table.table-bordered {
+  border-bottom: 1px solid #DDD;
+  -webkit-border-radius: 0px;
+}
+
+.no-borders {
+  border:none !important;
+}
+
+table th {
+  font-size: 80% !important;
+  line-height:10px !important;
+}
+
+.right-border {
+  border-right: 1px solid #DDD;
+  -webkit-border-radius: 0px;
+}
+
+.left-border {
+  border-right: 1px solid #DDD;
+  -webkit-border-radius: 0px;
+}
+
+.page-break {
+  page-break-after: always;
+}
+
+.table-striped th {
+  background-color: #CCC !important;
+}
+
+.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
+  background-color: #EEE;
+}
+
+.checklist-section {
+  line-height: 10px !important;
+  margin: 4px !important;
+}
+
+table.checklist-section  {
+  margin:none;
+  padding:none;
+  position: relative;
+  left: -5px;
+  top: -5px;
+}
+
+.checklist-section th {
+  margin: 4px !important;
+}
+
+.checklist-body table th {
+  font-size: 100% !important;
+}
+
+.checklist-body td {
+  font-size: 9px;
+  line-height: 10px;
+}
+
+tr .checklist-item {
+  font-size: 9px;
+  line-height: 10px;
+}
+
+td.checklist-item-value p {
+  font-size: 9px;
+  line-height: 10px;
+  margin: 0px !important;
+  margin: 0px !important;
+}
+
+.table-condensed th, .table-condensed td {
+  padding: none;
+  margin: none;
+}

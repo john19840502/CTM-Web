@@ -1,0 +1,18 @@
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Plan Name
+      %th Actions
+      %th Current Effective Date
+      %th Traditional Split
+      %th Tiered Split (Low)
+      %th Tiered Split (High)
+      %th Tiered Amount
+      %th Loan Officer Min (per loan)
+      %th Loan Officer Max (per loan)
+      %th Plan Termination Date
+
+  %tbody
+    - bc.group_by(&:branch).each do |branch, plans|
+      - plans.each do |plan|
+        = render 'accounting/branch_compensations/row', plan: plan, branch: branch

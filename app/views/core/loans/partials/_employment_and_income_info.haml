@@ -1,0 +1,23 @@
+.lead 6. Employment and Income Information
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th.percent_70 Borrower
+      %th.percent_70 Employer
+      %th.percent_70 Self?
+
+  %tbody
+  - for borrower in @loan.borrowers
+  - rowspan = borrower.employments.current.size
+
+    - for employment in borrower.employments.current
+    
+      %tr
+      / Only show the name on the first row
+      - if rowspan == borrower.employments.current.size
+        %td{:rowspan => borrower.employments.current.size}
+          %span.strong= borrower.position.to_s + ': ' + borrower.full_name
+        %td= employment.name
+        %td= 'Yes' if !!employment.is_self_employed
+        - rowspan -= 1

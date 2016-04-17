@@ -1,0 +1,9 @@
+.page-header
+  %h2= @title
+
+= form_tag [:search, :compliance_hmda_purchased_loans], method: 'get', class: 'well form-search' do
+  = text_field_tag :dispdate, nil, class: 'datepicker span2 search-query'
+  = submit_tag "Display Loans", class: 'btn btn-inverse'
+  = link_to import_form_compliance_hmda_purchased_loans_path, :class => "btn" do
+    %i.icon-upload
+    Import File

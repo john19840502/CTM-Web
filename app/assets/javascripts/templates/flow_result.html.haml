@@ -1,0 +1,8 @@
+.flow-result{:"ng-class" => "setClass(flow_name.status)"}
+  %span.title{:"ng-class" => "{'pending-validation': loading_flag}"} 
+    %span{:"popover" => "{{ popover_text }}", :"popover-trigger" => "mouseenter", :"popover-placement" => 'right'}
+      %span.icon-info.icon12.inline-block{:"ng-show" => 'popover_text'}
+      %a{:"ng-hide" => 'popover_text'} +
+      %span {{ flow_title }}
+  %span.orange-spinner{"ng-show" => "loading_flag"}
+  %span.result {{ flow_name.conclusion || flow_name.error_response | uppercase }} 

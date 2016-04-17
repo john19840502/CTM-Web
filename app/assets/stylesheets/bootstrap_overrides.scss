@@ -1,0 +1,220 @@
+body { padding-top: 0; }
+
+.span12 {
+  width: 1170px !important;
+}
+
+.container {
+  width: 1170px !important;
+
+  //a.brand {
+  //  color: #000000;
+  //}
+}
+
+.navbar {
+  background-color: salmon !important;
+  .container {
+    padding: 0 10px;
+  }
+}
+.active-scaffold table tr.record td {
+  border-bottom: none;
+  border-left: none;
+}
+
+.breadcrumb {
+}
+
+div.dataTables_length label {
+    width: 460px;
+    float: left;
+    text-align: left;
+}
+
+div.dataTables_length select {
+    width: 75px;
+}
+
+div.dataTables_filter {
+  display: inline !important;
+
+  label {
+    float: right !important;
+    text-align: right;
+    width: 460px;
+  }
+}
+
+div.dataTables_info {
+    padding-top: 8px;
+}
+ 
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
+}
+
+span.DataTables_sort_icon {
+  display: inline-block;
+}
+
+h2 {
+  padding: 2px 0px;
+  margin: 0;
+  color: #555;
+  font: bold 160% arial, sans-serif;
+}
+
+h2.inline {
+  padding: none;
+  float: left;
+  display: inline;
+}
+
+th {
+  background-color: #555;
+  color: white;
+}
+
+table.datatable {
+  th.sorting_asc, th.sorting_desc {
+    background-color: #333 !important;
+  }
+
+  .header-text {
+    padding-right: 10px;
+  }
+
+  tr.odd {
+    td.sorting_1, td.sorting_2, td.sorting_3, td.sorting_4 {
+      background-color: #B9DCFF !important;
+    }
+  }
+
+  tr.even {
+    td.sorting_1, td.sorting_2, td.sorting_3, td.sorting_4 {
+      background-color: #E6F2FF;
+    }
+  }
+}
+
+.table tbody tr:hover td,.table tbody tr:hover th{background-color:#DDD !important;}
+
+.table {
+  th { 
+    background-color: #eee; 
+    color: #666;
+  }
+}
+
+.lead-footer {
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 18px;
+}
+
+.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
+  background-color: #E6F2FF;
+}
+
+input[readonly].datepicker {
+  cursor: pointer;
+}
+
+/**
+ * Bootstrap 2.0 dropdown multi-level menu enabler
+ * Bootstrap: http://twitter.github.com/bootstrap/javascript.html#dropdowns
+ */
+/* overrides */
+
+.navbar {
+  .submenu-show
+  {
+    border-radius: 3px;
+    display: block;
+    left: 100%;
+    margin-top: -25px !important;
+    moz-border-radius: 3px;
+    position: absolute;
+    webkit-border-radius: 3px;
+
+    &:before
+    {
+      border:
+      {
+        bottom: 7px solid transparent;
+        left: none;
+        right: 7px solid #000;
+        top: 7px solid transparent;
+      }
+      left: -7px;
+      top: 10px;
+    }
+    
+    &:after 
+    {
+      border: {
+        bottom: 6px solid transparent;
+        left: none;
+        right: 6px solid #fff;
+        top: 6px solid transparent;
+      }
+      left: 10px;
+      left: -6px;
+      top: 11px;
+    }
+  }
+
+  .submenu-hide
+  {
+    display: none !important;
+    float: right;
+    position: relative;
+    top: auto;
+  }
+}
+
+#navigation-target ul.nav ul.dropdown-menu li {
+  list-style: none !important;
+  content: "";
+  clear:both;
+  line-height:14px;
+  vertical-align:text-top;
+}
+#navigation-target ul {list-style:none !important;}
+/****************************************************************/
+
+
+/* BEST_IN_PLACE style - this is for in-place editing fields */
+.best_in_place {
+  color: #06C;
+  cursor: pointer;
+}
+
+caption.header {
+  font-weight: bold;
+  text-align: left;
+}
+
+.diff {
+  color: red;
+}
+
+.small {
+  font-size: x-small;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.field_with_errors {
+  color: #b94a48;
+  input {
+    border-color: #b94a48;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  }
+}

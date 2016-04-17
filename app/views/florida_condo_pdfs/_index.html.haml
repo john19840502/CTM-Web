@@ -1,0 +1,17 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Florida Condo PERS Pdf list
+      %th Created at
+  %tbody
+    - if perse_list.empty?
+      %tr
+        %td No Florida Condo Approved Projects PDF
+    - else 
+      - perse_list.each do |perse|
+        %tr
+          %td= link_to perse.pdf_file_label, perse.pdf.url(:original)
+          %td= perse.created_at.strftime(I18n.t('date.formats.default')) 	
+
+= page_entries_info @perse_list
+= paginate @perse_list, remote: true, theme: "bootstrap"

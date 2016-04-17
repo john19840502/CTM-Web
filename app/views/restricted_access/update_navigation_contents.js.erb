@@ -1,0 +1,11 @@
+$("#navigation-target").html('<%= render(partial: '/layouts/navigation/context_menu', locals: {context: Navigation.nav_for_current_context(params[:context])}) %>');
+$("#navigation ul").first().addClass("nav");
+App.prepare_dropdown_layouts($("ul.nav"), false);
+$("li.submenu").hover((function() {
+  return $(this).children("ul").removeClass("submenu-hide").addClass("submenu-show");
+}), function() {
+  return $(this).children("ul").removeClass(".submenu-show").addClass("submenu-hide");
+});
+$("#navigation_tabs ul").first().addClass("nav nav-tabs");
+App.prepare_dropdown_layouts($("ul.nav-tabs"), false);
+$("ul.nav-tabs ul.dropdown-menu li.active").removeClass("active");

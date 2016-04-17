@@ -1,0 +1,10 @@
+- if @loan.nil?
+	%h3
+		Loan not found.
+- else
+	%h3
+		Fact Types for
+		= @loan.loan_num
+	.span12
+		- @flow_results.each do |key, val|
+			= render partial: 'fact_type', locals: {title: key, data: val}

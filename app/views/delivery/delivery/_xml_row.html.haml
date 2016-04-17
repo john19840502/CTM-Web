@@ -1,0 +1,14 @@
+%tr
+  - data.column_list.each do |column|
+    %td= best_in_place_if data.editable?(column), record, column.to_sym,
+        :place_holder => 'Click to edit',
+        :as => record.class.input_type(column),
+        :collection => (Hash[record.class.options_for_column(column)] if record.class.options_for_column(column)),
+        :display_with => record.class.display_with(column)
+  %td
+    = render 'delivery/balance_detail_link', record: record
+    = render 'delivery/export_xml_link', record: record
+    - if record.is_fhlb?
+      = render 'delivery/export_fhlb_csv_link', record: record
+    - else
+      = render 'delivery/bony_mellon_export_link', record: record, start_date: start_date, end_date: end_date

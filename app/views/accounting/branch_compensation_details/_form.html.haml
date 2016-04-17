@@ -1,0 +1,34 @@
+.control-group
+  = f.label :effective_date, class: 'control-label'
+  .controls
+    = f.text_field :effective_date, value: date_formatted(f.object.effective_date), class: 'datepicker'
+
+.control-group
+  = f.label :lo_traditional_split, class: 'control-label'
+  .controls
+    = f.text_field :lo_traditional_split, value: number_with_precision(f.object.lo_traditional_split, precision: 3)
+
+.control-group
+  = f.label :tiered_split_low, class: 'control-label'
+  .controls
+    = f.text_field :tiered_split_low, value: number_with_precision(f.object.tiered_split_low, precision: 3)
+
+.control-group
+  = f.label :tiered_split_high, class: 'control-label'
+  .controls
+    = f.text_field :tiered_split_high, value: number_with_precision(f.object.tiered_split_high, precision: 3)
+
+.control-group
+  = f.label :tiered_amount, class: 'control-label'
+  .controls
+    = f.text_field :tiered_amount, value: number_with_precision(f.object.tiered_amount, precision: 0)
+
+.control-group
+  = f.label :lo_min, class: 'control-label'
+  .controls
+    = f.text_field :lo_min, value: number_with_precision(f.object.lo_min, precision: 0)
+
+.control-group
+  = f.label :lo_max, class: 'control-label'
+  .controls
+    = f.text_field :lo_max, value: number_with_precision(f.object.lo_max, precision: 0)

@@ -1,0 +1,17 @@
+%table.table.table-striped
+  %tr
+    %th Loan Number
+    %th Borrower Name
+    %th Address
+    %th Min #
+    %th
+  - @loans.each do |loan|
+    %tr
+      %td= loan.loan_num
+      %td= loan.primary_borrower.full_name
+      %td= loan.property_address
+      %td= loan.min_number
+      %td
+        = link_to loan.loan_num, class: 'btn btn-mini btn-success add-loan-to-boarding' do
+          %i{class: 'icon-plus icon-white'}
+          Add

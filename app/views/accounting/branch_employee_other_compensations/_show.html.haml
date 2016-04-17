@@ -1,0 +1,31 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th 
+      %th Effective Date
+      %th BSM Override
+      %th BMSF Override
+      %th Per Loan Processed
+      %th Per Branch Loan Processed
+  %tbody
+    %tr
+      - if non_plan_comp
+        %td
+          - if can?(:manage, BranchEmployeeOtherCompensation)
+            = link_to edit_accounting_branch_employee_other_compensation_path(non_plan_comp.id), class: 'btn btn-mini btn-warning' do
+              %i.icon_pencil
+              Edit
+        %td= date_formatted non_plan_comp.effective_date
+        %td= non_plan_comp.bsm_override
+        %td= non_plan_comp.bmsf_override
+        %td= non_plan_comp.per_loan_processed
+        %td= non_plan_comp.per_loan_branch_processed
+      - else
+        %td
+          - if can?(:manage, BranchEmployeeOtherCompensation)
+            = link_to new_accounting_branch_employee_other_compensation_path(uid: uid, bid: bid), class: 'btn btn-mini btn-warning' do
+              %i.icon_pencil
+              Edit
+        %td
+        %td
+        %td

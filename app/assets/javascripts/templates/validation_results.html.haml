@@ -1,0 +1,28 @@
+%div{:"ng-hide" => "errors | isEmpty"}
+  %h1.lead{style: "display:inline"} Please correct the following errors:
+  %div{:"ng-repeat" => "e in errors"}
+    %validation-message{ "message" => "e", "loan_number" => "loan_number", "message_type" => "'error'", validation_type: "validation_type"}
+
+%div{:"ng-hide" => "warnings | isEmpty"}
+  %h1.lead{style: "display:inline"} Validation Warnings:
+  %div{:"ng-repeat" => "w in warnings"}
+    %validation-message{ "message" => "w", "loan_number" => "loan_number", "message_type" => "'warning'", validation_type: "validation_type"}
+
+.well{:"ng-controller" => "editNoteCtrl"}
+  %h4 Notes : 
+  %span
+    %ul
+      %form{"editable-form" => "", :name => "editableForm", :onaftersave => "editNoteData()"}
+        %span{"editable-textarea" => "editing_note", "e-rows" => "8", "e-cols" => "1000" }
+          %li{:"ng-repeat" => "note in notes track by $index"}
+            {{note}}     
+        .buttons
+          / button to show form
+          %button.btn.btn-default{"ng-click" => "editableForm.$show()", "ng-show" => "!editableForm.$visible && manage", :type => "button"}
+            Edit
+          / buttons to submit / cancel form
+          %span{"ng-show" => "editableForm.$visible"}
+            %button.btn.btn-primary{"ng-disabled" => "editableForm.$waiting", :type => "submit"}
+              Save
+            %button.btn.btn-default{"ng-click" => "editableForm.$cancel()", "ng-disabled" => "editableForm.$waiting", :type => "button"}
+              Cancel

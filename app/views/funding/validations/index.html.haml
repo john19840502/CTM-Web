@@ -1,0 +1,23 @@
+.underwriter_validation{:"ng-controller" => 'FundingValidationsCtrl'}
+  %base{href: funding_validations_path}
+  .page-header
+    %h2 Funding Validations
+
+  %form.well.form-search
+    %input.search-query{:type => 'text', :placeholder => 'Enter a loan number', :id => 'loan_id', :"ng-model" => 'loan_number'}
+    %input.btn.btn-inverse{:type => 'submit', :value => 'Display Loan', :"ng-click" => 'getLoan()'}
+    %span.loader{"ng-show" => "loading_loan"}
+  
+  .alert.alert-block.alert-error{:"ng-if" => "loan_not_found", style: ""}
+    Loan not found or you are not allowed to view it.
+
+  .loan-container{:"ng-if" => "loan"}
+    %div{:"style" => "float:left; width:100%; background-color: #ffffee; padding: 5px; border: 1px solid #ffffed"}
+      .lead
+        %span.text Settlement Agent Audit
+      %settlement-agent-audit{"loan-number" => "loan_number"}
+    %hr
+    %div{:"style" => "float:left; width:100%; background-color: #efffdf; padding: 5px; border: 1px solid #efffdd"}
+      .lead
+        %span.text Funding checklist 
+      %funding-checklist{"loan-number" => "loan_number"}  

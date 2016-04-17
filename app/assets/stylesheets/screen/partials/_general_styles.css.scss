@@ -1,0 +1,61 @@
+.right_align {
+  float: right !important;
+  text-align: right !important;
+}
+
+.navbar a.brand {
+  margin-left: 0px;
+  padding-left: 25px;
+}
+
+.cole_taylor_logo {
+  background-image: url(/assets/site/cole-taylor-logo-small.png);
+  background-repeat: no-repeat;
+  background-position: 0px 9px;
+}
+
+.icon {
+  background-repeat: no-repeat;
+  background-position: 0px 12px;
+  padding-left: 18px !important;
+//  background-color:lightgray;
+}
+
+.home {
+  background-image: url('/assets/icon_sets/fugue/icons/home.png');
+}
+
+.logout {
+  background-image: url('/assets/icon_sets/fugue/icons/lock-unlock.png');
+}
+
+.subdomain_nav {
+  background-image: url('/assets/icon_sets/fugue/icons/report--arrow.png');
+}
+
+.current_user {
+  background-image: url('/assets/icon_sets/fugue/icons/user.png');
+}
+
+.current_user:hover{
+  background-image: url('/assets/icon_sets/fugue/icons/user.png');
+}
+
+.toggle {
+  margin-left: 5px;
+}
+
+.toggle_on {
+  background: url(/assets/icon_sets/famfamfam_silk/icons/tick.png) no-repeat center;
+  padding: 8px 10px;
+}
+
+.toggle_off {
+  background: url(/assets/icon_sets/famfamfam_silk/icons/cross.png) no-repeat center;
+  padding: 8px 10px;
+}
+
+.modal_link {
+  background: url(/assets/icon_sets/famfamfam_silk/icons/page_link.png) no-repeat left;
+  padding-left: 20px;
+}

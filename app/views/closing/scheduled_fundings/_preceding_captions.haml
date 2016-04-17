@@ -1,0 +1,8 @@
+%caption
+  = link_to 'Print Report', '#', :class=> 'print-page'
+  = " | "
+  = link_to "Download Spreadsheet", :format => :xls, :start_date => params[:start_date], :end_date => params[:end_date]
+%caption= "Report for: #{date_formatted(params[:start_date])} to #{date_formatted(params[:end_date])}"
+%caption 
+  ="Total Loan Amount: "
+  %strong= "#{number_to_currency(data.records.sum(:borrower_requested_loan_amount))}"

@@ -1,0 +1,14 @@
+- records.each do |record|
+  %tr
+    - columns.each do |colname|
+      - if templates.include?(colname)
+        %td
+          / render here adds 1-2 seconds of time to display on testing (5.5 - 6.0s)
+          / using the one template is around 4s / This is closing to CTMDB.
+          = render colname.to_s, record: record, column: colname, result: record.send(colname.to_s)
+          /= render :partial => 'default/column_header', result: record.send(colname.to_s)
+          /= 'other template'
+          /= record.send(colname.to_s)
+      - else
+        %td
+          = record.send(colname.to_s)

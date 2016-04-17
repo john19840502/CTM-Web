@@ -1,0 +1,15 @@
+-if current_user
+  #current_user.secondary-nav.pull-right
+    %ul.nav
+      %li#navigation
+        = link_to 'Menus', nil, :class => 'icon subdomain_nav'
+        -# Class of link should be 'menu' for dropdown
+        %ul.dropdown-menu
+          - Navigation.for_roles(@current_user.roles).each.each do |nav|
+            %li.role= link_to nav.label, "/update_navigation_contents/#{nav.name}/#{nav.uuid}"
+
+      %li#user_menu
+        = link_to 'Logout', logout_path, :class => 'icon logout'
+
+      %li#account_menu
+        = link_to current_user.login, nil, :class => 'icon current_user menu'

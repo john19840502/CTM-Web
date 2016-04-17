@@ -1,0 +1,5 @@
+- if record.respond_to?('pool_identifier')
+  - link_options = {action: 'bony_mellon_export', record_id: record.pool_identifier, start_date: start_date, end_date: end_date}
+  = link_to link_options, class: 'btn btn-inverse' do
+    %i{:class => 'icon-download icon-white'}
+    = "Export to Bank of New York"

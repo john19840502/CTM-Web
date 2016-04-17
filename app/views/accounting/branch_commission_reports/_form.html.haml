@@ -1,0 +1,14 @@
+.control-group
+  = f.label :report_month, class: 'control-label'
+  .controls
+    = f.select :report_month, options_for_select(Date::MONTHNAMES.each_with_index.collect{|m, i| [m, i]}, 15.days.ago.month)
+
+.control-group
+  = f.label :report_year, class: 'control-label'
+  .controls
+    = f.select :report_year, options_for_select((2010..Date.today.year).to_a.unshift(nil), 15.days.ago.year)
+
+.control-group
+  = f.label :report_period, class: 'control-label'
+  .controls
+    = f.select :report_period, [['1st Half', 1], ['2nd Half', 2], ['Full Month', 3]]

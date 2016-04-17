@@ -1,0 +1,7 @@
+.well
+  .lead-footer{style: 'float:left;'}= "LOAN #: #{@loan.loan_num} / #{@loan.channel} / #{@loan.loan_purpose}"
+  .lead-footer{style: 'float:right;'}
+    Printed at 
+    = l Time.now, :format => :full_american
+    by
+    = current_user.display_name

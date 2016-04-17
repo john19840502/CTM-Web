@@ -1,0 +1,23 @@
+.page-header
+  %h2 Mass Update Form
+
+= form_tag({ action: :mass_update}, multipart: true) do
+  .row
+    .span5
+      .control-group
+        .controls
+          = file_field_tag 'update_file', style: 'line-height: 20px;'
+
+      .control-group
+        %label.control-label{ for: "header" } Header:
+        .controls
+          = select_tag 'header', options_for_select([['APR', 'apr'], ['Application Date', 'apdate'], ['Action Date', 'actdate'], ['Address Info', 'address'], ['GeoCode Info', 'geocode'], ['Loan Amount', 'lnamount'], ['Preapproval Code', 'preappr'], ['Action Code', 'action_code'], ['Income', 'tincome']]), style: 'line-height: 20px;'
+
+  .row &nbsp;
+
+  .row
+    .span5
+      .control-group
+        .controls
+          %button.btn.btn-primary Upload File
+          = link_to "Back to Reportable Events", compliance_hmda_loan_compliance_events_path, class: 'btn'

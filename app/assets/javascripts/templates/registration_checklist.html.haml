@@ -1,0 +1,77 @@
+%span.loader{"ng-show" => "loading"}
+%div.error-area{"ng-show" => "loading_error"}
+  Failed to load checklist: {{ loading_error }}
+%div{"ng-show" => "started == false && loading == false"}
+  %input.btn.btn-inverse{:type => 'submit', :value => 'Start Checklist', :"ng-click" => 'ctrl.startChecklist()'}
+  %span.small-orange-spinner{"ng-show" => "loading_new_checklist"}
+  %div.error-area{"ng-show" => "new_checklist_error"}
+    {{ new_checklist_error }}
+
+%form.registration-checklist{name: "registration_checklist_form", 'ng-show' => 'started'}
+
+  %table.table.table-bordered{ "ng-repeat" => "section in sections"}
+  
+    %tr{'ng-repeat' => 'q in ctrl.visibleQuestions(section)'}
+      %td.question
+        %span{"ng-bind-html" => "q.prompt"}
+        %span.pull-right.optional{"ng-show" => "q.optional && q.input_type != 'dynamic'"} (Optional)
+        .error-area{'ng-show' => 'q.error'} {{ q.error }}
+
+      %td.answer
+
+        %span{'ng-if' => "q.input_type == 'select'"}
+          %select{'ng-model' => 'q.answer', 'ng-options' => "x as x for x in q.options", "ng-change" => "ctrl.saveValue(q.name, q.answer)"}
+            %option{:value => "", disabled: 'disabled'}
+
+        %span{'ng-if' => "q.input_type == 'textbox'"}
+          %input.input-large{"placeholder" => "Please enter an answer", "ng-model" => "q.answer", "ng-blur" => "ctrl.saveValue(q.name, q.answer)"}
+
+        %span{'ng-if' => "q.input_type == 'textbox25'"}
+          %input.input-large{"placeholder" => "25 positions only", "ng-model" => "q.answer", :maxlength => "25", "ng-blur" => "ctrl.saveValue(q.name, q.answer)"}
+
+        %span{'ng-if' => "q.input_type == 'loan_rush_reason'"}
+          %select{'ng-model' => 'q.answer', 'ng-change' => "ctrl.saveValue(q.name, q.answer)"}
+            -# this trick does not work because we are not using ng-options.  
+            -# %option{:value => "", disabled: 'disabled'} 
+            %option{:value => "Rate Lock Expiring"} Rate Lock Expiring
+            %option{:value => "Borrower is Homeless"} Borrower is Homeless
+            %option{:value => "Borrower has moving van in the driveway"} Borrower has moving van in the driveway
+            %option{:value => "Borrower is going away / out of the country"} Borrower is going away / out of the country
+            %option{:value => "Short sale / Foreclosure"} Short sale / Foreclosure
+            %option{:value => "Purchase Contract is expiring"} Purchase Contract is expiring
+            %optgroup{:label => "MB Created the Delay"}
+              %option{:value => "MB Created the Delay - Underwriting"} Underwriting
+              %option{:value => "MB Created the Delay - Change Requests"} Change Requests
+              %option{:value => "MB Created the Delay - Lock Extensions"} Lock Extensions
+              %option{:value => "MB Created the Delay - Appraisal"} Appraisal
+              %option{:value => "MB Created the Delay - Compliance Issues"} Compliance Issues
+            %option{:value => "Other"} Other
+
+        %span{'ng-if' => "q.input_type == 'dynamic'"}
+          %p {{ q.info }}
+
+        %span{'ng-if' => "q.input_type == 'datebox'"}
+          %input.datepicker.input-large{"placeholder" => "Please enter a date", "ng-model" => "q.answer",
+            "ng-blur" => "ctrl.saveValue(q.name, q.answer)"}
+
+        %span{'ng-if' => "q.input_type == 'money'"}
+          %input.input-large{"placeholder" => "Please enter a value", "ng-model" => "q.answer",
+            "ng-blur" => "ctrl.saveValue(q.name, q.answer)"}
+
+        %span{'ng-if' => "q.input_type == 'zip'"}
+          %input.input-large{ "placeholder" => "Enter Zip Code", "ng-model" => "q.answer", "ng-blur" => "ctrl.validateZipCode(q.name, q.answer)"}
+
+        %span{'ng-if' => "q.input_type == 'three_percentages'"}
+          %input.input-mini{"ng-model" => "q.percentages[0]", "ng-blur" => "ctrl.savePercentage(q.name)"}
+          = '%'
+          &nbsp; / &nbsp;
+          %input.input-mini{"ng-model" => "q.percentages[1]", "ng-blur" => "ctrl.savePercentage(q.name)"}
+          = '%'
+          &nbsp; / &nbsp;
+          %input.input-mini{"ng-model" => "q.percentages[2]", "ng-blur" => "ctrl.savePercentage(q.name)"}
+          = '%'
+ 
+        %span.small-orange-spinner{"ng-show" => "q.loading"}
+
+        %span.prompt-warning{:'ng-if' => 'ctrl.displayThisMessage(q)'}
+          {{ q.display_message_on["message"] }}

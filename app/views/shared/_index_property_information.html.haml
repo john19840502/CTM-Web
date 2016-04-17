@@ -1,0 +1,52 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Property Address
+      %th Property State
+      %th Property County
+      %th Property Type
+      %th Occupancy Type
+      %th Number of Units
+  %tbody
+    %tr 
+      %td {{loan.property_address}}
+      %td {{loan.property_state}}
+      %td {{loan.property_county}}
+      %td {{loan.gse_property_type}}
+      %td {{loan.occupancy_type}}
+      %td {{loan.property_num_of_units}}
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Loan Purpose Type
+      %th Appraised Value
+      %th Sales Price
+      %th Condo/PUD Project Code
+      %th Project Name
+      %th Project Classification
+  %tbody
+    %tr
+      %td {{loan.purpose_type}}
+      %td {{loan.appraised_value | currency }}
+      %td {{loan.purchase_price_amount }}
+      %td {{loan.project_code}}
+
+      %td.manual-input
+        %input.input-medium{"ng-model" => "loan.project_name",
+          "ng-focus" => "storeOrigValue('Condo Project Name', loan.project_name)",
+          "ng-blur" => "saveManualEntry('Condo Project Name', loan.project_name)"}
+        %span.small-orange-spinner{"ng-show" => "saving['Condo Project Name']"}
+        .error-area{"ng-show" => "error_saving['Condo Project Name']"}
+          {{ error_saving['Condo Project Name'] }}
+
+      %td {{loan.project_classification}}
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Primary Borrower Mailing Address
+  %tbody
+    %tr
+      %td {{loan.primary_borrower_mailing_address}}
+

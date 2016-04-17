@@ -1,0 +1,60 @@
+.row
+  .span12
+    .lead  Non-Reportable Loans
+
+    = form_tag search_compliance_hmda_loan_compliance_non_reportables_path, method: 'get', class: 'well form-search' do
+      = label_tag 'Select year:'
+      = select_tag :year, options_for_select([2011, 2012, 2013, 2014, 2015], params[:year]), include_blank: true, class: 'input-medium search-query'
+      = label_tag ' -- OR -- ', nil, style: 'margin: 0 50px'
+      = label_tag 'Start Date:'
+      = text_field_tag :start_date, params[:start_date], class: 'input-medium search-query datepicker', placeholder: 'mm/dd/yyyy'
+      = label_tag "End Date:"
+      = text_field_tag :end_date, params[:end_date], class: 'input-medium search-query datepicker', placeholder: 'mm/dd/yyyy'
+      %button.btn{ type: "submit" } Search
+
+      = link_to "Download as CSV", search_compliance_hmda_loan_compliance_non_reportables_path(:format => 'csv'), :class => 'btn btn-success pull-right', id: 'downloadXls'
+
+  .span12
+
+    / = paginate @loans #, theme: "bootstrap"
+    / = page_entries_info @loans
+
+    %table.table
+      %th Loan Number
+      %th Borrower Name
+      %th Property Street Address
+      %th Loan Status
+      %th Underwriting Status
+      %th Loan Cert Field: Does Prospective Applicant wish to Apply at this time?
+      %th Excluded from HMDA Date
+      %th Funded Date
+      %th Cancelled Date
+      %th Denied Date 
+      %th Loan Notes
+
+      - @loans.each do |loan|
+        %tr
+          %td= loan.loan_num
+          %td= loan.primary_borrower.full_name rescue nil
+          %td= loan.property_address
+          %td= loan.pipeline_lock_status_description
+          %td= loan.pipeline_loan_status_description
+          %td= loan.applicant_wishes_to_apply?
+          %td= loan.excluded_from_hmda_on.strftime('%m/%d/%Y') rescue nil
+          %td= loan.funded_at.strftime('%m/%d/%Y') rescue nil
+          %td= loan.cancelled_or_withdrawn_at.strftime('%m/%d/%Y') rescue nil
+          %td= loan.denied_at.strftime('%m/%d/%Y') rescue nil
+          %td= loan.loan_notes_notes.order(:created_date).try(:last).try(:content)
+
+
+    / = page_entries_info @loans
+    / = paginate @loans #, theme: "bootstrap"
+
+:javascript
+  $(document).ready(function(){
+    $('#downloadXls').click(function(e){
+      e.preventDefault()
+      
+      document.location.href = this.href + '?' + $('form.form-search').serialize();
+    })
+  })

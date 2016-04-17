@@ -1,0 +1,25 @@
+.row
+  .span5
+    .lead 2. Good Faith Estimate
+
+    %table.table.table-bordered
+      %tr
+        %th GFE Base Loan Amount
+        %td= number_to_currency @loan.loan_general.try(:gfe_loan_datum).try(:original_loan_amount)
+      %tr
+        %th GFE Total Loan Amount
+        %td= number_to_currency @loan.loan_general.mortgage_term.borrower_requested_loan_amount
+
+  .span1
+    .lead &nbsp;
+
+  .span5
+    .lead 3. 1003 Mortgage
+
+    %table.table.table-bordered
+      %tr
+        %th 1003 Base Loan Amount
+        %td= number_to_currency @loan.loan_general.mortgage_term.base_loan_amount
+      %tr
+        %th 1003 Total Loan Amount
+        %td= number_to_currency @loan.loan_general.transaction_detail.net_loan_disbursement_amount

@@ -1,0 +1,14 @@
+development: &base_config
+  base_url: "https://ctmauth.dev.ctmtg.com"
+
+qa: &qa
+  base_url: "https://ctmauth.corp.ctmtg.com"
+
+test:
+  <<: *base_config
+
+trid_uat:
+  base_url: "https://ctmauth.trid.ctmtg.com"
+
+production:
+  base_url: "https://ctmauth.corp.ctmtg.com"

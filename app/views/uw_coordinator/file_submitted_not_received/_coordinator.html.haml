@@ -1,0 +1,4 @@
+.hide= record.coordinator if record.coordinator #so the sorting mechanism has something to sort
+.self-assign{ href: assign_self_uw_coordinator_file_submitted_not_received_path(record) }
+  = form_for record, :url => uw_coordinator_file_submitted_not_received_path(record), html: { class: 'form-inline autosubmit' } do |f|
+    = f.collection_select(:coordinator_id, @coordinators, :id, :to_s, {include_blank: true}, { class: 'input-medium' })

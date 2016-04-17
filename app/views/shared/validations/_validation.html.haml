@@ -1,0 +1,10 @@
+%flow-thingy-result.flowresult{ flow: "flow", "ng-click" => "flow.showCaption = !flow.showCaption"}
+%div{:"ng-show" => "flow.showCaption"}
+  %span
+    %ul
+      %li{'ng-repeat' => 'caption in flow.captions'}
+        %div{'ng-bind-html' => "caption"}
+  %span.validation_link{:"ng-show" => "flow.def_path != null"}
+    %a{:"ng-href" => "#{POLICY_VALIDATIONS_URL}/{{ flow.def_path }}", :target => "_blank"} {{ flow.title }}
+  %span.validation_link{:"ng-show" => "flow.skip_to_unanswered"}
+    %a{:id => "skip_to_unanswered", :href => "#", :onClick => "document.getElementsByClassName('unanswered')[0].scrollIntoView()" }Go to first unanswered question

@@ -1,0 +1,66 @@
+%style{type: 'text/css'}
+  input:disabled, input.editable{
+  background-color: transparent;
+  border: none;
+  }
+  label.valid { width: 24px; height: 24px; background: url(/assets/icon_sets/famfamfam_silk/icons/accept.png) center center no-repeat; display: inline-block; text-indent: -9999px;
+  }
+
+
+= form_tag('#', {remote: true, class: 'form-horizontal', id: 'broker_comp'}) do
+  .lead
+    Maximum Broker Compensation
+  .errors
+    %div
+  .success
+    %div
+  .fields-invalid
+  .fields-valid
+  .pull-right
+    %table 
+      %tr
+        %td
+          %h6 Comments:
+      %tr
+        %td
+          =text_area_tag :user_comments, @loan.user_comments_broker_comp, class: 'span3 user_comments editable', :rows => '7'
+      %tr
+        %td
+          %em.muted.small
+            =@loan.current_modeler_user_broker_comp
+      %tr
+        %td
+          %em.muted.small
+            =@loan.modeler_date_time_broker_comp
+
+  .row
+    
+    = hidden_field_tag :loan_id, @loan.loan_num
+    .row
+      %table.span4{style: 'margin-left:40px', cellpadding: 4}
+        %tr
+          %td
+            %h5.muted Broker Name
+          %td{style: 'padding-top:5px; text-align:right'} 
+            = @loan.broker_name_modeler 
+        %tr
+          %td{style: "width:350px;"}  CTM Broker Compensation Tier Percentage:  
+          %td{style:'text-align:right'} 
+            = @loan.broker_comp_tier_rate
+        %tr 
+          %td Loan Amount:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.loan_amount_modeler)
+        %tr
+          %td Maximum Broker Compensation:
+          %td{style:'text-align:right'}
+            = number_to_currency(@loan.max_broker_comp_modeler)
+        %tr
+          %td Total Broker Compensation from GFE:
+          %td{style:'text-align:right'}
+            = number_to_currency(params['total_comp'])
+          %td{style:'font-weight:bold;text-align:right;padding-left:25px'} 
+            = params['message']
+    
+    %em{style:'padding-left:45px;font-size:small'} 
+      Broker compensation may not exceed maximum lender paid percentage or CT maximum of $12,000

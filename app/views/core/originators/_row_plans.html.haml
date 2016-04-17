@@ -1,0 +1,27 @@
+- orig = emp_plan.employee
+- if orig
+  - curr_plan = orig.current_or_future_compensation_plan
+  %tr
+    %td
+      - if curr_plan && curr_plan.effective_date > Date.today && curr_plan.branch_compensation_id == @plan.id
+        = link_to edit_accounting_datamart_user_compensation_plan_path(curr_plan), class: 'btn btn-mini btn-warning' do
+          %i.icon-pencil
+          Edit
+          
+    %td{ style: 'width: 80px;' }
+      - if orig.is_active? 
+        %i.icon-ok-sign
+      - else
+        %i.icon-remove
+        %small= date_formatted orig.terminated_at
+
+    %td= orig.username
+
+    %td= link_to orig.name_last_first, core_originator_path(orig)
+    - if curr_plan && curr_plan.branch_compensation_id == @plan.id
+      %td Current
+    - else
+      %td No longer on this plan
+
+    %td= date_formatted emp_plan.effective_date
+    %td= date_formatted emp_plan.created_at

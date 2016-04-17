@@ -1,0 +1,14 @@
+-# http://stackoverflow.com/questions/8529420/how-to-show-twitter-bootstrap-modal-via-js-request-in-rails
+-# That link really helped here... - Hans
+
+.modal_link= link_to loan.loan_num, core_loan_path(loan), {:remote => true, 'data-controls-modal' =>  dom_id_for_loan(loan), 'data-backdrop' => true, 'data-keyboard' => true}
+
+%div.modal.hide.fade{:id => dom_id_for_loan(loan)}
+  .modal-header
+    %a.close{:href => '#'} X
+    %h3= "Loan ##{loan.loan_num}"
+  .modal-body.center
+    .throbber= image_tag "indicator.gif"
+    .modal-body-content
+  .modal-footer
+    &nbsp;

@@ -1,0 +1,15 @@
+.navbar{'data-dropdown' => 'dropdown'}
+  .navbar-inner
+    .container
+      %a.brand.cole_taylor_logo{:href => '/'}
+        = "#{APPLICATION_NAME}#{get_rails_env}::#{user_menu_root.label rescue 'Welcome'}"
+
+      #navigation-target
+        = render partial: '/layouts/navigation/context_menu', locals: {context: Navigation.nav_for_current_context(session[:navigation_context])}
+      
+      -#<form class="pull-left" action=""><input type="text" placeholder="Non-functional Search"></form>
+
+      = render :partial => '/layouts/navigation/user_menu'
+      
+      %ul.nav
+        %li.divider-vertical

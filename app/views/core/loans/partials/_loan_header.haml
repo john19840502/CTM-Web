@@ -1,0 +1,13 @@
+%table{style: 'width: 100%'}
+  %tr
+    %td{style: 'vertical-align: top;'}
+      = render 'layouts/shared/loan_header'
+
+    %td{style: 'text-align:right;vertical-align: top;'}
+      = raw loan_show_header @loan
+
+      / %h5= underwriter_name_field(@loan)
+
+  %tr
+    %td &nbsp;
+    %td &nbsp;

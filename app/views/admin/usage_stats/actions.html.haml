@@ -1,0 +1,29 @@
+- ctrl = params[:ctrl]
+.lead 
+  = link_to 'Controller:', controllers_admin_usage_stats_path
+  %strong #{ctrl.classify}
+
+%table.table
+  %tr
+    %th Action Name
+    %th Accessed Times
+    %th User
+    %th Last Accessed On
+
+  - @actions.map(&:to_s).each do |act|
+    - unless act.starts_with?('_')
+      - stats = UsageStat.where(controller_name: ctrl, action_name: act).order(:id)
+      - users = stats.map(&:username).uniq
+      %tr
+        %td{ rowspan: "#{users.count}" }= link_to_if stats.count > 0, act, users_admin_usage_stats_path(ctrl: ctrl, act: act)
+        %td{ rowspan: "#{users.count}" } #{stats.count}
+        - users.each_with_index do |u, i|
+          - if i == 0
+            %td= link_to_if stats.count > 0, u, users_admin_usage_stats_path(ctrl: ctrl, act: act, usr: u)
+            %td= "#{i} :: #{stats.where(username: u).order(:created_at).try(:last).try(:created_at).strftime('%m/%d/%Y %I:%M %P')}"
+          - else
+            %tr 
+              %td= link_to_if stats.count > 0, u, users_admin_usage_stats_path(ctrl: ctrl, act: act, usr: u)
+              %td= "#{i} :: #{stats.where(username: u).order(:created_at).try(:last).try(:created_at).strftime('%m/%d/%Y %I:%M %P')}"
+        - if users.empty?
+          %td{ colspan: 2 }

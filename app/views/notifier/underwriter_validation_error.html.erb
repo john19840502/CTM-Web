@@ -1,0 +1,6 @@
+<h3>Underwriter <%= @type %> Validation failed on loan # <%= @loan.loan_num %></h3>
+
+<p>Exception message <%= @exception.message %></p>
+<p><%= raw @exception.backtrace.join('<br>') %></p>
+
+<h3>For more details login at http://ctmerrors</h3>

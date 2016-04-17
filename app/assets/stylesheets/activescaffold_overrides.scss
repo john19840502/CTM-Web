@@ -1,0 +1,392 @@
+#as_accounting__scheduled_fundings-active-scaffold {
+  background: none repeat scroll 0 0 #FAFAFA;
+  border: 1px solid #CFCFCF;
+  border-radius: 3px 3px 3px 3px;
+  clear: both;
+  margin-top: 0;
+}
+.active-scaffold-header {
+    background-color: #E8E8E8;
+    background-image: -moz-linear-gradient(center top , #FCFCFC, #E8E8E8);
+    border-bottom: 1px solid #CFCFCF;
+    border-radius: 2px 2px 0 0;
+    font-size: 21px;
+    font-weight: bold;
+    height: auto;
+    line-height: 24px;
+    padding: 3px 6px !important;
+    div.actions {
+    position: absolute;
+    right: 5px;
+    text-align: right;
+    top: 2px;
+    a:hover {
+      background-color: transparent;
+      transform: rotateX(360deg);
+      opacity: 0.6;
+      transition: all 0.5s ease 0s;
+    }
+    }
+
+}
+.active-scaffold-header h2 {
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 24px;
+}
+#as_accounting__scheduled_fundings-content {
+    border-bottom: 1px solid #B3B3B3;
+    border-radius: 0 0 2px 2px;
+    padding: 10px;
+  table {
+    background-color: #D7D6D6;
+    border: 1px solid #D9D9D9;
+    border-collapse: separate;
+    border-radius: 2px 2px 2px 2px;
+  thead tr th {
+    border-left:1px solid #CCCCCC;
+    background-color: #D9EDF7;
+    color: #666666;
+    opacity: 0.9;
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #cccccc;
+    &:hover {
+      opacity: 0.6;
+      transition: all 0.5s ease 0s;
+      color: #000;
+    }
+    a {
+      background-color: transparent;
+      color: #666666;
+    &:hover {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #000000;
+    font-weight: bolder;
+    text-decoration: none;
+    transition: all 2s ease 0s;
+    transform:rotateX(360deg);
+    }
+    }
+
+  }
+  }
+  }
+    #as_accounting__scheduled_fundings-tbody tr.record {
+    background-color: #fff;
+    td.sorted {
+      background-color: inherit;
+    }
+    }
+    #as_accounting__scheduled_fundings-tbody tr.even-record {
+      background-color: #D9D9D9;
+      td.sorted {
+        background-color: inherit;
+      }
+    }
+div#as_accounting__scheduled_fundings-content table td.actions table {
+  background: transparent;
+  border: 0;
+  a {
+    font-weight: bolder;
+  &:hover {
+    background-color: transparent;
+    transition: all 0.5s ease 0s;
+    font-weight: normal;
+    text-decoration: underline;
+  }
+  }
+}
+#as_accounting__scheduled_fundings-tbody .show-view {
+  background-color: #ffffee;
+  h4 {
+    color: #555555;
+  }
+  dt {
+    display: block; 
+    clear: none; 
+    float: none;
+  }
+  dd {
+    display: block; 
+    float: none;
+  }
+}
+
+.active-scaffold {
+/*
+  // Our CSS framework has an .actions class, which is interfering with the active scaffold one.
+  .actions {
+    //background:             transparent;
+    -moz-border-radius:     0px;
+    -webkit-border-radius:  0px;
+    border-radius:          0px;
+    border-top:             none;
+    padding:                0 0 0 0;
+    
+  }
+
+  .active-scaffold-header div.actions {
+    position: absolute;
+    right: 5px;
+    top: -5px;
+    text-align: right;
+  }
+  
+  .active-scaffold-header, .record, .messages {
+    .actions {
+      background:             transparent;
+    }
+  }
+  */
+  div.actions a.new_file {
+    background-image: url(/assets/active_scaffold/add.png);
+    padding-left: 20px;
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  .required label {
+    color: red;
+  }
+
+  .required label:before {
+    content: '*';
+    color: red;
+  };
+
+  // // Hack because we LOVE ACTIVE SCAFFOLD!!!!!!!!
+
+  form#as_tss__sellers-create--form label[for=record_status_note_] {
+    color: #555555;
+  }
+
+   form#as_tss__sellers-create--form label[for=record_effective_date_] {
+    color: #555555;
+  }
+
+   form#as_tss__sellers-create--form label[for=record_status_note_]:before {
+    content: '';
+  }
+
+   form#as_tss__sellers-create--form label[for=record_effective_date_]:before {
+    content: '';
+  }
+ 
+  // form#as_tss__sellers-create--form .required label:before {
+  //   content: '';
+  // }
+
+  .view {
+    background-color: f5f5f5 !important;
+    padding: 4px;
+    border: none !important
+  }
+  
+  input.text-input, select {
+    font: bold 16px arial;
+    letter-spacing: -1px;
+    border: solid 1px #CCC;
+  }
+  
+  .submit,
+  a.as_cancel {
+    font-weight: normal !important;
+    font-size: 13px !important;
+    font-family: Arial, sans-serif;
+    letter-spacing: 0;
+    margin: 0;
+    margin-top: 0px;
+  }
+  
+  .active-scaffold a, .active-scaffold a:visited {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  // .edit-view, .create-view, .show-view {
+  //   background-color: transparent !important;
+  //   padding: 15px !important;
+  //   border: none !important;
+  //   -moz-box-shadow:inset 0px 0px 8px #000000;
+  //   -webkit-box-shadow:inset 0px 0px 8px #000000;
+  //   box-shadow:inset 0px 0px 8px #000000;
+  //   /*Inner elements should not cover inner shadows*/
+  //   /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+  //   background-image: -moz-linear-gradient(top, #fff49c, #fff);
+  //   background-image: -webkit-gradient(linear, center top, center bottom, from(#fff49c), to(#fff));
+  //   background-image: -o-linear-gradient(top, #fff49c, #fff);
+  //   /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff49c', endColorstr='#000'); */
+  //   /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+  //   /*Element must have a height (not auto)*/
+  //   /*All filters must be placed together*/
+  //   /* -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff49c', endColorstr='#000')";*/
+  //   /*Element must have a height (not auto)*/
+  //   /*All filters must be placed together*/
+  //   background-image: linear-gradient(top, #fff49c, #fff);
+  // }
+  
+  .form dd {
+    margin: 5px 0px 5px -10px;
+  }
+  
+  li.form-element {
+    border-bottom: 1px solid lightBlue;
+  
+    .checkbox-list {
+      padding-top:20px;
+      padding-bottom:20px;
+    
+      li {
+        padding-right: 5px;
+        display: block;
+        border-bottom: 1px solid lightgray;
+      }
+    
+      label {
+        padding: 4px 0px 5px 0px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  table {
+    th, td {
+      padding: 0 0 0 0;
+    }
+    
+    tr.record {
+      background-color: #E0F0FF; //#F9F9F9;
+      border-left:      1px solid #CCC;
+
+      td {
+        border-left:      1px solid #CCC;
+
+        .actions {
+          border:         none;
+        }
+      }
+    }
+
+    tr.even-record {
+      background-color: #FFF;
+    }
+
+    .record:hover {
+      background-color: #DDD;
+    }
+  }
+}
+
+td.inline-adapter-cell {
+  div.index-view {
+    margin: 20px;
+  }
+  td.actions {
+    background-color: #ECFFE7 !important;
+  }
+}
+
+form.as_form.create {
+  padding: 5px;
+}
+
+div.as_content {
+  th {
+    padding: 5px 0;
+    
+    a {
+      color: white;
+      :visited {
+        color: #FF8;
+      }
+    }
+  }
+}
+
+.active-scaffold {
+  .active-scaffold {
+    th {
+      a {
+        color: white;
+
+        :visited {
+          color: #FF8;
+        }
+      }
+    }
+  }
+}
+/******************************/
+/******************************/
+/* Active Scaffold Pagination */
+/******************************/
+/******************************/
+div#as_accounting__scheduled_fundings-active-scaffold .active-scaffold-pagination {
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);*/
+    display: inline-block;
+    margin: 0 !important;
+    clear: both;
+      a {
+      background-color: #E6E6E6;
+      background: -moz-linear-gradient(center top , #F2F2F2, #E6E6E6);
+      border-bottom: 1px solid #D9D9D9;
+      border-left: 1px solid #D9D9D9;
+      border-top: 1px solid #D9D9D9;
+      border-right: 1px solid #D9D9D9;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 10px 20px;
+      color: #0088CC;
+      font-weight: normal;
+      &:hover {
+        background-color: transparent;
+        background-image: none;
+        color:#af4d00;
+        text-decoration: none;
+        transition: all 0.5s ease 0s;
+      }
+      &.previous {
+        padding-right:9px;
+        padding-left: 9px;
+      }
+      &.next {
+        padding-right: 9px;
+        padding-left: 9px;
+      }
+      }
+      span.as_paginate, span.current {
+      background-color: #E6E6E6;
+      background-image: -moz-linear-gradient(center top , #F2F2F2, #E6E6E6);
+      border-bottom: 1px solid #D9D9D9;
+      border-left: 1px solid #D9D9D9;
+      border-top: 1px solid #D9D9D9;
+      border-right: 1px solid #D9D9D9;
+      line-height: 20px;
+      font-size: 14px;
+      padding: 10px 20px;
+      &:hover {
+        background-color: #ffffff;
+        background-image: none;
+        cursor: pointer;
+        -webkit-transition: all 1s ease-in-out;
+        -moz-transition: all 1s ease-in-out;
+        -o-transition: all 1s ease-in-out;
+        transition: all 1s ease-in-out;
+        color:#af4d00; 
+      }
+      &.current {
+      background-color: #ffffff;
+      background-image: -moz-linear-gradient(center top , #ffffff, #ffffff);
+      color:green;
+      font-weight: bold;
+      }
+      }
+}

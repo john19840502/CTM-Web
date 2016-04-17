@@ -1,0 +1,9 @@
+.flow-result{:"ng-class" => "setClass(flow.status)"}
+  %span.title{:"ng-class" => "{'pending-validation': flow.loading}"} 
+    %span
+      %a +
+      %span {{ flow.title }}
+  %span.orange-spinner{"ng-show" => "flow.loading"}
+  %span.result{:"ng-show" => "flow.conclusion == 'Incomplete'"} {{ flow.unanswered_count }} UNANSWERED
+  %span.result{:"ng-show" => "flow.conclusion != 'Incomplete'"} {{ flow.conclusion || flow.error_response | uppercase }}
+

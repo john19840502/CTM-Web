@@ -1,0 +1,23 @@
+
+%h2 Choose date ranges for exceptions:
+
+=form_tag( { action: :search}, method: :get, :class => 'form-horizontal well', id: 'import_form') do
+  %table.span11
+    %tr
+      %td{style: 'text-align: right'}
+        %label.span2
+          Period 1:
+      %td
+        %input.required.datepicker.span2{id: "from", name: "from", placeholder: "From"}
+      %td
+        %input.required.datepicker.span2{id: "to", name: "to", placeholder: "To"}
+      %td{style: 'text-align: right'}
+        %label.span2
+          Period 2:
+      %td
+        %input.required.datepicker.span2{id: "from2", name: "from2", placeholder: "From"}
+      %td
+        %input.required.datepicker.span2{id: "to2", name: "to2", placeholder: "To"}
+      %td
+        %button.btn.btn-primary 
+          View Exceptions

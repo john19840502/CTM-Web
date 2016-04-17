@@ -1,0 +1,2 @@
+The list of loans included in the LOI file created at <%= l @bf.created_at.in_time_zone("Eastern Time (US & Canada)"), format: :full %> is available here:  
+<%= link_to @bf.name, servicing_boarding_file_url(@bf) %>

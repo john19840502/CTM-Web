@@ -1,0 +1,65 @@
+.underwriter_validation{:"ng-controller" => 'UwValidationCtrl'}
+  %base{href: underwriter_validations_path}
+  .page-header
+    %h2 Validations / Final Approval
+
+  %form.well.form-search
+    %input.search-query{:type => 'text', :placeholder => 'Enter a loan number', :id => 'loan_id', :"ng-model" => 'loan_number'}
+    %input.btn.btn-inverse{:type => 'submit', :value => 'Display Loan', :"ng-click" => 'getLoan()'}
+    %span.loader{"ng-show" => "loading_loan"}
+
+  .alert.alert-block.alert-error{:"ng-if" => "loan_not_found", style: ""}
+    Loan not found or you are not allowed to view it.
+
+  .loan-container{:"ng-if" => "loan"}
+    =render :partial => 'shared/index_header'
+
+    =render 'shared/texas_only'
+
+    =render :partial => 'shared/manual_fact_types'
+
+    %span{:"ng-if" => "!texasRequiredForValidations()"}
+      %h1.lead 
+        Validation Status:
+        %span.result{"ng-class" => "setClass(validation_status)"} 
+          {{ validation_status | uppercase }}
+        %span{"ng-show" => "loading_validation_flag"}
+          %span.orange-spinner
+
+      %validation-results{:errors => 'errors', :warnings => 'warnings', :"loan-number" => 'loan_number', :"validation-type" => "'underwriter'" }
+
+      .flow-results-container
+        .left_container
+          %span.header Validations
+          %span.header Conclusions
+
+          = render 'shared/validations/normal_validations'
+                  
+        .right_container
+          %span.header Informative Validations
+
+          = render 'shared/validations/info_validations'
+
+    .lead 1. Program Guidelines
+    = render :partial => 'shared/index_program_guidelines'
+
+    .lead 2. Borrowers Information
+    = render :partial => 'shared/index_borrower_information'
+
+    .lead 3. Property Information
+    = render :partial => 'shared/index_property_information'
+
+    .lead 4. Loan Information
+    = render :partial => 'shared/index_loan_information'
+
+    .lead 5. Asset Information
+    = render :partial => 'shared/index_asset_information'
+
+    .lead 6. Employment and Income Information
+    = render :partial => 'shared/index_income_information'
+    = render :partial => 'shared/index_footer'
+
+    .lead 7. Data Comparison
+    = render :partial => 'shared/data_compare'
+
+

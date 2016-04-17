@@ -1,0 +1,16 @@
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Plan Name
+      %th Plan Current Effective Date
+      %th Employee Effective Date
+      %th Traditional Split
+      %th Tiered Split (Low)
+      %th Tiered Split (High)
+      %th Tiered Amount
+      %th Loan Officer Min (per loan)
+      %th Loan Officer Max (per loan)
+      %th Plan Termination Date
+
+  %tbody
+    = render 'accounting/branch_compensations/row_emps', dt_cmp_plans: dt_cmp_plans

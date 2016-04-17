@@ -1,0 +1,214 @@
+.underwriter_validation{
+  validation-results {
+    .alert {
+      margin-bottom: 5px;
+    }
+
+    a.message {
+      margin-right: 5px;
+    }
+
+    a.more-link {
+      margin-left: 10px;
+    }
+
+    .indent {
+      margin-left: 22px;
+    }
+
+    .last-action {
+      @extend .indent;
+      font-size: small;
+    }
+    
+    .alert form {
+      @extend .indent;
+    }
+  }
+
+  #loan_id{
+  }
+
+  .f16{
+    font-size: 16px;
+  }
+  .header{
+    width: 100%;
+    td.logo{
+      width: 350px;
+      vertical-align: top;
+      background-image: asset-url('ctm_logo.png');
+      background-size: 232px 40px;
+      background-repeat: no-repeat;
+    }
+
+    td.content {
+      text-align: right;
+
+      .lead{
+        margin-bottom: 0px;
+      }
+    }
+  }
+  
+  .red_flag{
+    width: 16px;
+    background-image: asset-url('icon_sets/famfamfam_silk/icons/flag_red.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left:16px;
+  }
+
+  .green_flag{
+    width: 16px;
+    background-image: asset-url('icon_sets/famfamfam_silk/icons/flag_green.png');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left:16px;
+  }
+
+  .orange-spinner {
+    background-image: asset-url('ct_spinner.gif');
+    background-size: 15px;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+  }
+
+  .manual-input {
+    width: 205px;
+  }
+}
+
+.small-orange-spinner {
+  background-image: asset-url('ct_spinner.gif');
+  background-size: 15px;
+  background-repeat: no-repeat;
+  padding-left: 20px;
+}
+
+
+.flow-result {
+  display: block; 
+  height: 30px; 
+  margin-bottom: 5px;
+  border-radius: 10px;
+  background-color: #EBEBEB;
+
+  .title{
+    width: 280px;
+    line-height:30px; 
+    padding-left: 10px;
+    display: inline-block;
+    background-color: #F5F5F5;
+    border-radius: 5px 0px 0px 5px;
+    color: #03444D;
+  }
+
+  .pending-validation{
+    color: #92A3A5;
+  }
+}
+
+.result.failing-validation{
+  background-color: #fff;
+  color: rgb(203, 126, 126);
+}
+.result.passing-validation{
+  background-color: #fff;
+  color: #7ECB8B;
+}
+
+.flow-results-container{
+  margin-bottom: 20px;
+  float: left;
+  width: 100%;
+  .header{
+    width: 280px;
+    font-size: 17.5px; 
+    font-weight: bold;
+    display:inline-block;
+    margin-bottom: 10px;
+    padding-left: 5px
+  }
+  .left_container{
+    float: left;
+    width: 50%;
+  }
+  .right_container{
+    float: left;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding-left: 1%;
+    padding-top: 1%;
+    width: 47%;
+  }
+}
+
+
+.flow-result{
+  width: 500px;
+  display: block;
+}
+.flow-result.failing-validation{
+  background-color: rgb(203, 126, 126);
+  color: #fff;
+}
+.flow-result.passing-validation{
+  background-color: #7ECB8B;
+  color: #fff;
+}
+.flow-result.manual-validation{
+  background-color: #BFBFBF;
+  color: #fff;
+}
+
+table.registration-checklist {
+  select {
+    margin-bottom: 0;
+  }
+}
+
+.add_tab {
+  padding-left:25px;
+}
+
+.data-compare {
+  .field-match {
+    background-color: #B2E0B9;
+  }
+
+  .field-mismatch {
+    background-color: #D08B8B;
+  }
+}
+
+.error-area {
+  color: red;
+  font-size: small;
+}
+
+.closing-checklist {
+  td.question {
+    width: 70%;
+  }
+
+  .section-header {
+    font-size: 150%;
+  }
+
+  .unanswered {
+    background-color: #F5F5DC;
+  }
+
+  .optional {
+    font-style: italic;
+    font-size: small;
+    color: gray;
+  }
+  .prompt-warning {
+    font-size: small;
+    color: gray;
+    float:left;
+    width: 90%;
+  }
+}

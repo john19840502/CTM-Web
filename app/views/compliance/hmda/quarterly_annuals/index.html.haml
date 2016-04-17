@@ -1,0 +1,15 @@
+- content_for(:page_title) do
+  = "Quarterly / Annual Process"
+
+- content_for(:functions) do
+  = form_tag search_compliance_hmda_quarterly_annuals_path, method: 'get', class: 'well form-search' do
+    = select_tag :period, options_for_select(%w(Q1 Q2 Q3 Q4), params[:period]), prompt: "Select period"
+    = select_tag :period_year, options_for_select((2010..Date.today.year).to_a, params[:period_year]), prompt: "Select period year"
+    = submit_tag 'Submit', :class => 'btn'
+  .button-functions
+    = link_to "Mass Update", update_form_compliance_hmda_loan_compliance_events_path, :class => "btn"
+    = link_to "Export CSV", export_form_compliance_hmda_loan_compliance_events_path, :class => "btn"
+    = transform_button
+    = render 'shared/spreadsheet_button'
+
+= render :file => 'shared/base'

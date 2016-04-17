@@ -1,0 +1,19 @@
+development: &base_config
+  base_url: <%= ENV["ISOLATE"] ? "http://localhost:3900" : "http://ctmroles.dev.ctmtg.com" %>
+  cache_time: 60
+
+qa: &qa
+  <<: *base_config
+  base_url: "http://ctmroles-qa"
+
+test:
+  <<: *base_config
+
+trid_uat:
+  <<: *qa
+  base_url: "http://ctmroles.trid.ctmtg.com"
+
+production:
+  <<: *base_config
+  base_url: "http://ctmroles"
+  cache_time: 60

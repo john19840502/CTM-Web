@@ -1,0 +1,108 @@
+.underwriter_validation{:"ng-controller" => 'RegistrationValidationCtrl'}
+  %base{href: registration_validations_path}
+  .page-header
+    %h2 Registration Validations 
+
+  %form.well.form-search
+    %input.search-query{:type => 'text', :placeholder => 'Enter a loan number', :id => 'loan_id', :"ng-model" => 'loan_number'}
+    %input.btn.btn-inverse{:type => 'submit', :value => 'Display Loan', :"ng-click" => 'getLoan()'}
+    %span.loader{"ng-show" => "loading_loan"}
+
+  .alert.alert-block.alert-error{:"ng-if" => "error_loading_loan", style: ""}
+    Failed to load loan.  Reason:  {{error_loading_message}}
+
+  .loan-container{:"ng-if" => "loan"}
+    = render 'shared/index_header'
+
+    %hr
+    .alert.alert-warning{"ng-hide" => "loan.signature_dates_match"}
+      %p Borrower signature dates on the 1003 do not match. 1003 signature date must be the same for all borrowers.
+
+    = render 'shared/manual_fact_types'
+
+  .validations-container{"ng-if" => "validating"}
+    %h1.lead 
+      Validation Status:
+      %span.result{"ng-class" => "setClass(validation_status)"} 
+        {{ validation_status | uppercase }}
+      %span{"ng-show" => "loading_validation_flag"}
+        %span.orange-spinner
+
+    %validation-results{:errors => 'errors', :warnings => 'warnings', :"loan-number" => 'loan_number', :"validation-type" => "'registration'"}
+
+    .flow-results-container
+      .left_container
+        %span.header Validations
+        %span.header Conclusions
+        
+        = render 'shared/validations/normal_validations'
+
+      .right_container
+        %span.header Informative Validations
+
+        = render 'shared/validations/info_validations'
+
+    .lead 1. Loan Summary - 1003
+    .row
+      .span3
+        %table.table.table-bordered
+          %tr
+            %th Loan Officer's Name
+            %td {{ loan.loan_officer_name }}
+
+    .row
+      .span3
+        %table.table.table-bordered
+          %tr
+            %th Product Code
+            %td {{ loan.product_code}}
+          %tr
+            %th Product Description
+            %td {{ loan.product_description}}
+
+      .span3
+        %table.table.table-bordered
+          %tr
+            %th Property State
+            %td {{ loan.property_state }}
+          %tr
+            %th Mortgage Type
+            %td {{ loan.mortgage_type}}
+
+      .span3
+        %table.table.table-bordered
+          %tr
+            %th Loan Amount
+            %td {{ loan.loan_amount | currency }}
+          %tr
+            %th LTV
+            %td {{ loan.ltv}}
+
+      .span3
+        %table.table.table-bordered
+          %tr
+            %th Occupancy Type
+            %td {{ loan.occupancy_type }}
+
+    .row
+      .span5
+        %table.table.table-bordered
+          %tr
+            %th 1003 Base Loan Amount
+            %td {{ loan.base_loan_amount_1003 | currency}}
+          %tr
+            %th 1003 Total Loan Amount
+            %td {{ loan.total_loan_amount_1003 | currency}}
+          %tr
+            %th 1003 Interest Rate
+            %td {{ loan.interest_rate_1003}} 
+
+    %section{ 'ng-show' => 'loan.trid_loan' }
+      .lead 2. Registration Validation Checklist
+      %registration-checklist{"loan-number" => "loan_number"}
+      
+    .lead Data Comparison
+    = render :partial => 'shared/data_compare'
+
+    = render :partial => 'shared/index_footer'
+    

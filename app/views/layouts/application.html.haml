@@ -1,0 +1,10 @@
+!!! 5
+%html
+  %head#htmlhead
+    = render :partial => '/layouts/page_head'
+
+  %body#htmlbody
+    = render :partial => '/layouts/navigation'
+    = render :partial => '/layouts/status_messages', :object => flash
+    = render :partial => '/layouts/main'
+    = render :partial => '/layouts/footer'

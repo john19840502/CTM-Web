@@ -1,0 +1,43 @@
+.loans{:"ng-controller" => 'EsignConsentCtrl', id: "consents"}
+  
+  %div{:style => "float:left; margin-top: 5px; width: 100%"}
+    %form.well.form-search{action: search_registration_esign_consent_index_path, method: :get}
+      Accepted Between 
+      %input.datepicker.input-small{:name => "start_date", "format" => 'mm/dd/yyyy', :placeholder => "#{start_date}", :type => "text"}
+      %input.datepicker.input-small{:name => "end_date", "format" => 'mm/dd/yyyy', :placeholder => "#{end_date}", :type => "text"} 
+      %input.btn.btn-inverse{:type => 'submit', :value => 'Display Range'}
+
+      %span.inline_separator
+        OR
+
+      %input.search-query.input-small{:type => 'text', :placeholder => "#{loan_num}", :id => 'loan_id', :name => 'loan_id'}
+      %input.btn.btn-inverse{:type => 'submit', :value => 'Display Loan'}
+
+      %input.btn.btn-inverse.pull-right{:type => 'button', :value => 'Clear Search', :"ng-click" => "goPath('#{registration_esign_consent_index_path}')"}
+
+    - if @error
+      .alert.alert-block.alert-error
+        Failed to load loan.  Reason: "#{@error}"
+
+  - if !@loans.empty?
+    = paginate loans, params: params, theme: "bootstrap"    
+    = page_entries_info loans
+
+    %form{id: "consent_form", action: "/registration/esign_consent/create?page=#{params[:page]}", method: "post"}
+      %table.table.table-striped.table-bordered
+        %thead
+          %tr
+            %th Loan Number 
+            %th Borrower Last Name
+            %th Date of Status
+            %th Loan Status
+            %th Consent
+            %th Email
+            %th Completed
+
+        %tbody
+          - loans.each do |loan|
+            = render 'registration/esign_consent/row', loan: loan
+
+    = page_entries_info loans
+    = paginate loans, params: params, theme: "bootstrap"

@@ -1,0 +1,12 @@
+.lead 1. Program Guidelines
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %td{colspan: 9}
+        - if (doc = @loan.loan_guideline_doc)
+          = raw "<a target='_blank' href='#{doc.document}'>#{doc.document_file_name}</a>&nbsp;&nbsp;Effective Date: #{doc.effective_date.strftime('%m/%d/%Y')}"
+        - elsif !@loan.product_code.blank?
+          = "No product guideline found for Product Code #{@loan.product_code}"
+        - else
+          = "No product code found for this loan"

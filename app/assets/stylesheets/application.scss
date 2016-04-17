@@ -1,0 +1,141 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ * require_tree ./reset
+ *= require jquery-ui
+ *= require bootstrap_and_overrides
+ *= require active_scaffold
+ *= require angular_pagination.min.css
+ *= require bootstrap_overrides
+ *= require activescaffold_overrides
+ *= require job_status
+ *= require_tree ./screen
+ *= require ./underwriter/validations
+ *= require jquery-tablesorter/theme.blue
+ *= require dataTables/jquery.dataTables
+ *= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
+ *= require buttons.dataTables
+ *= require buttons.bootstrap
+ *= require bpm/statistic_reports
+ *= require tss/application
+ *= require jquery.multiselect.css
+ *= require pagination.css.scss
+ *= require boarding_files.css.scss
+ *= require pickadate/classic
+ *= require pickadate/classic.date
+ *= require font-awesome
+ *= require xeditable.css
+ *= require registration/esign_consent
+ *= require registration/forced_registrations.scss
+ *= require initial_disclosure/work_queue
+ *= require esign/event_details
+ *= require esign/event_listings
+*/
+
+.last-transaction {
+  text-align: center;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+// used to hide edit links for active scaffold that are disabled
+tr.record td.actions a.disabled{
+  display: none;
+}
+
+.active-scaffold #search_validated_at_opt {
+  display: none;
+}
+
+.date-oneline {
+  white-space:nowrap;
+}
+
+.modal-body {
+  max-height: 400px;
+  padding: 15px;
+  overflow-y: auto;
+  position: absolute;
+}
+
+.button-functions {
+  width: 100%;
+  text-align: right;
+  padding: 5px;
+}
+
+.extra-info {
+  margin-top: -40px;
+  padding: 10px 10px 5px 0px;
+}
+
+th.header-text.sorting {
+  font-size: 12px;
+}
+
+tbody tr td {
+}
+
+.sort-buttons {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.spinner {
+  background: url(/assets/ajax-loader.gif) no-repeat 5px 3px;
+  padding-left: 25px;
+}
+
+.loader{
+  width: 16px;
+  vertical-align: sub;
+  background-image: asset-url('loading_bars.gif');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  padding-left:16px;
+}
+
+.orange-spinner {
+  background: url(/assets/ct_spinner.gif) no-repeat 5px 3px;
+  padding-left: 25px;
+}
+
+.loading_bar{
+    width: 16px;
+    vertical-align: sub;
+    background-image: asset-url('loading_bars.gif');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    padding-left:16px;
+  }
+
+.datatable_changed_value {
+  font-weight: bold;
+  color: green;
+}
+
+.passive-link{
+  border-bottom: 1px dashed orange;
+  color: #4c4a4a;
+}
+.pointer{
+  cursor: pointer;
+}
+
+.icon-info{
+  background-image: url('info_icon.png');
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.icon12{
+  background-size: 12px;
+}
+.inline-block{
+  display: inline-block;
+}

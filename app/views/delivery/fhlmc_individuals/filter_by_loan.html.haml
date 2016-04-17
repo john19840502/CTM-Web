@@ -1,0 +1,23 @@
+- content_for(:page_title) do
+  FHLMC Individuals
+
+- content_for(:column_headers) do
+  - data.column_list.each do |column|
+    %th.header-text= data.model.human_attribute_name(column.to_s)
+  %th.header-text Actions
+
+
+- content_for(:column_data) do
+  %tr
+    - record = data.record_list.first
+    - data.column_list.each do |column|
+      %td= best_in_place_if data.editable?(column), record, column.to_sym,
+          :nil => 'Click to edit',
+          :type => record.class.input_type(column),
+          :collection => (Hash[record.class.options_for_column(column)] if record.class.options_for_column(column)),
+          :display_with => record.class.display_with(column)
+    %td
+      = render 'delivery/balance_detail_link', record: record
+      = render 'export_xml_link', record: @loan
+
+= render :file => 'shared/base'

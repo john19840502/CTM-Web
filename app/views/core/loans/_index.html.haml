@@ -1,0 +1,25 @@
+- params.merge!({controller: "core/loans", action: "index"})
+- params.merge!({pid: pid, parent: parent}) if defined? parent  
+- params.merge!({bid: bid}) if defined? bid
+
+= paginate loans, params: params, remote: true, theme: "bootstrap"
+= page_entries_info loans
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Branch 
+      %th Loan Officer
+      %th Loan Number
+      %th Loan Amount
+      %th Funded At
+      %th Borrower
+      %th Product Code
+      %th Purpose
+
+  %tbody
+    - loans.each do |loan|
+      = render 'core/loans/row', loan: loan
+
+= page_entries_info loans
+= paginate loans, params: params, remote: true, theme: "bootstrap"

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="HMDA Data Changes">
+    <Table>
+      <% @changes.each do |d| %>
+          <Row>
+            <Cell><Data ss:Type="String">Loan #: <%= d.loan_num %></Data></Cell>
+          </Row>
+
+          <Row>
+            <Cell><Data ss:Type="String">Field</Data></Cell>
+            <Cell><Data ss:Type="String">Original Value</Data></Cell>
+            <Cell><Data ss:Type="String">Current Value</Data></Cell>
+            <Cell><Data ss:Type="String">Changed On</Data></Cell>
+            <Cell><Data ss:Type="String">Changed By</Data></Cell>
+          </Row>
+
+          <% d.loan_compliance_event_changes.group_by(&:changed_column).each do |col, changes| %>
+            <% ch = changes.sort_by(&:changed_at) %>
+            <Row>
+              <Cell><Data ss:Type="String"><%= col %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= ch.first.value_was %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= ch.last.value_is %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= ch.last.changed_at.strftime('%m/%d/%Y %H:%I %p') %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= current_user.display_name %></Data></Cell>
+            </Row>
+          <% end %>
+          <% if d.loan_compliance_event_changes.empty? %>
+            <Row>
+              <Cell><Data ss:Type="String">No Data Has Changed</Data></Cell>
+            </Row>
+          <% end %>
+      <% end %>
+      <% if @changes.empty? %>
+        <Row>
+          <Cell><Data ss:Type="String">No data found</Data></Cell>
+        </Row>
+      <% end %>
+
+
+
+    </Table>
+  </Worksheet>
+</Workbook>

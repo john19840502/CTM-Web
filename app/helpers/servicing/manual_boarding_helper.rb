@@ -1,0 +1,2 @@
+module Servicing::ManualBoardingHelper
+end

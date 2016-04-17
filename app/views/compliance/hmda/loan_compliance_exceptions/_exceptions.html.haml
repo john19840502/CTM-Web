@@ -1,0 +1,26 @@
+%legend
+  Current Exceptions
+- if @diffs.all?{ |diff| diff.none?{ |hash| hash.values.flatten.many? } }
+  .alert.alert-success
+    %button.close{"data-dismiss" => "alert", :type => "button"} ×
+    There are no exceptions for these periods.
+
+- @diffs.each do |diff|
+  - if diff.any?{ |hash| hash.values.flatten.many? }
+    - aplno = diff.find{|ap| ap.keys.first == :aplnno}[:aplnno].first
+    - actdate = diff.find{|ad| ad.keys.first == :actdate}[:actdate].first
+    .lead 
+      = "Aplnno: #{aplno}"
+    =form_tag( { action: :reconcile }, remote: true, method: :get, id: "reconcile_form_#{aplno}") do
+      - diff.each do |field|
+        -if field.values.flatten.many?
+          =hidden_field_tag :aplnno, diff.find{|a| a.keys.first == :aplnno}[:aplnno].first
+          =label_tag :diff_label, field.keys.first.to_s.capitalize
+          %select{:name => field.keys.first.to_sym}
+            - field.values.flatten.each do |fvalue|
+              %option{:value => fvalue}
+                = "#{fvalue} -- #{actdate}"
+      .control-group
+        .controls
+          %button.btn.btn-success Reconcile
+      %hr

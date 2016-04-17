@@ -1,0 +1,35 @@
+- if @job_status.present?
+  .well.well-small
+    = render partial: 'shared/job_status/job_status', locals: { job_status: @job_status }
+
+.page-header
+  %h2 Append Loans for #{@loan_upload.period_names}
+
+= form_tag({ action: :import}, multipart: true) do
+  .row
+    .span5
+      .control-group
+        .controls
+          = file_field_tag 'lar_file', style: 'line-height: 20px;'
+
+          - @loan_upload.periods.each do |p|
+            = hidden_field_tag 'month[]', p.month
+          = hidden_field_tag 'year', @loan_upload.periods.pluck(:year).uniq.join
+
+  .row &nbsp;
+
+  .row
+    .span5
+      .control-group
+        .controls
+          %button.btn.btn-primary Upload File
+          = link_to "Back to Reportable Events", compliance_hmda_loan_compliance_events_path, class: 'btn'
+
+
+
+:javascript
+  JobStatus.initializeJobStatus({
+    onComplete: function(job) {
+      location.href = '#{compliance_hmda_loan_compliance_events_path}';
+    }
+  });

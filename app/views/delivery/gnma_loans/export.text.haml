@@ -1,0 +1,8 @@
+-# doing things this way prevents HAML from stripping whitespace at the end of the last line of each block
+- r = Smds::GnmaRecordRenderer.render_logical_record(Smds::GnmaPool::FILE_SPEC, @delivery) 
+- r << Smds::GnmaRecordRenderer.render_logical_records(Smds::GnmaLoan::FILE_SPEC, @loans, [], ["M05","M06","M07","M08"])
+-# subscriber record info will be entered online via the GinnieNET interface
+-# r << Smds::GnmaRecordRenderer.render_logical_record(Smds::GnmaPool::SUBSCRIBER_FILE_SPEC, @delivery) 
+- r << Smds::GnmaRecordRenderer.render_logical_record(Smds::GnmaPool::MASTER_AGREEMENT_FILE_SPEC, @delivery) 
+- r << '.'
+#{r}

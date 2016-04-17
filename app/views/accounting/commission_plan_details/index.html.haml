@@ -1,0 +1,46 @@
+- content_for(:page_title) do 
+  = "Commission Plan Details"
+
+Filter By:
+= select_tag 'title', options_for_select(UserProfile::ACCOUNTING_TITLES.collect {|v| [v,UserProfile::ACCOUNTING_TITLES.index(v)] }, selected: params[:title]), prompt: ''
+
+- content_for(:column_data) do
+  - data.record_list.each do |record|
+    %tr
+      %td= link_to_if can?(:read, Institution), record.branch_name(record["branch_id"]), core_institution_path(record["branch_id"])
+      %td= record["institution_number"]
+      %td
+        - if record.is_active 
+          %i.icon-ok-sign
+        - else
+          %i.icon-remove
+          %small= date_formatted record.terminated_at
+      %td.date-oneline= Date.parse(record.commission_plan_date).strftime('%m/%d/%Y') unless record.commission_plan_date.blank?
+
+      = raw profile_cells record
+
+      %td= record.fixed_first_name
+      %td= link_to record.last_name, core_originator_path(record)
+      / %td= record.supervisor
+      %td= record.location
+
+      = raw comp_plan_cells record
+
+      = raw non_plan_comp_cells record
+
+= render :file => 'shared/base'
+
+:javascript
+  $(document).ready(function(){
+    $('#title').change(function(){
+      var regex = new RegExp("/([?|&]title=)[^\&]+/");
+      if (document.location.search.length > 0 && document.location.href.indexOf('title=') > -1)
+        if ($(this).val() == '') 
+          document.location.href = document.location.href.replace(/(title=)[^\&]+/, '')
+        else
+          document.location.href = document.location.href.replace(/(title=)[^\&]+/, '$1' + $(this).val())
+      else
+        q = document.location.href.indexOf('?') > 0 ? '&' : '?'
+        document.location.href = document.location.href + q + 'title=' + $(this).val()
+    })
+  })

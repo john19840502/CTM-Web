@@ -1,0 +1,4 @@
+%caption
+  = link_to 'Print Report', '#', :class=> 'print-page'
+  = " | "
+  = link_to "Download Spreadsheet", :format => :xls, :start_date => params[:start_date], :end_date => params[:end_date]

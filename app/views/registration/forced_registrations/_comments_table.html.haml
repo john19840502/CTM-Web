@@ -1,0 +1,15 @@
+%div
+  %table.table.table-striped.table-bordered.work_queue_comments
+    %thead
+      %tr
+        %th User
+        %th Action
+        %th Comment
+        %th Date
+    %tbody
+    - loan.comments.each do |comment|
+      %tr
+        %td #{comment.user_name}
+        %td #{comment.user_action}
+        %td #{comment.comment}
+        %td #{comment.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('%m/%d/%Y %l:%M %p')}

@@ -1,0 +1,21 @@
+.lead Email Tests
+
+= form_tag(admin_email_tests_path, {class: 'form-horizontal', id: 'email_tests'}) do
+
+  .span8
+    .row
+      .span6 
+        
+        .control-group
+          %h5.control-label Email Addresses (separated by ;)
+          .controls{:style => "padding-top:12px"}
+            = text_area_tag :emails, nil, class: 'input-medium'
+        
+        .control-group
+          %h5.control-label Email text
+          .controls{:style => "padding-top:12px"}
+            = text_area_tag :email_text, nil, class: 'input-medium'
+        
+        .control-group
+          .controls{:style => "padding-top:12px"}
+            = submit_tag 'Send Email'

@@ -1,0 +1,2 @@
+module Underwriter::CondPendingReviewsHelper
+end

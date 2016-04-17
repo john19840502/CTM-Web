@@ -1,0 +1,6 @@
+.page-header
+  %h2 Fact Types
+
+= form_tag [:search, :fact_types], method: 'get', class: 'well form-search' do
+  = text_field_tag :loan_id, nil, placeholder: 'Loan Number', class: 'search-query'
+  = submit_tag "Show Fact Types", class: 'btn btn-inverse'

@@ -1,0 +1,96 @@
+
+#bpe-statistics{:"ng-controller" => 'BpeStatisticsCtrl'} 
+  .page-header
+    %h2 Statistic Reports
+  #statistic-report-search.span6
+    %form.form-horizontal.pull-left.report-search{name: "statisticReportForm", :"novalidate" => true, :"ng-submit" => 'createReport()'}
+      .control-group
+        %input{:"pick-a-date" => "end_date", "format" => 'yyyy-mm-dd', "editable" => "true", :placeholder => 'Enter Date', :type => "text"}
+      .control-group  
+        %select{:"ng-model" => "inputDropdown"}
+          %option{:selected => "selected", :value => ""} Select filter
+          %option{:value => "underwriter"} Underwriter
+          / %option{:value => "site"} Site
+          %option{:value => "region"} Region
+          / %option{:value => "team"} UW Team
+      .control-group
+        %input{:"ng-show" => "inputDropdown=='underwriter'", :"ng-model" => "underwriter", placeholder: "Enter Underwriter", :type => "text", :typeahead => "suggestion for suggestion in underwriters($viewValue)"}
+        %select{:"ng-show" => "inputDropdown=='region'", :"ng-model" => "region"}
+          %option{:selected => "selected", :value => ""} Select region
+          %option{:value => "NE/Midwest"} NE/Midwest
+          %option{:value => "SE/Mid-Atlantic"} SE/Mid-Atlantic
+          %option{:value => "West"} West
+
+      %span.input-group-btn
+        %input.btn.btn-success{:type => 'submit', :value => 'submit'}
+        .btn.btn-default{:"ng-click" => 'clearFilters()'} clear
+    #prior-searches.pull-left
+      %h5{style: "margin:0;"} Prior Searches
+      %ul.search-list{:"ng-repeat" => "report in prior_searches"}
+        %li
+          %a{:"ng-click" => "viewReport(report)", href: ''} 
+            {{ report.created_at | date:'short' }}
+
+  .report-info-container.span5{:"ng-if" => "loanDecisionsChartConfig"}
+    .action-btns.span5
+      .btn.btn-default{:"ng-click" => "getExport(report.id)"}
+        %i.fa.fa-file-excel-o
+        %span Export
+      .btn.btn-success.print-btn{:"ng-click" => "printPage()"} 
+        %i.fa.fa-print
+        %span Print
+    .report-info
+      %p.lead 
+        Start Date: 
+        %span.param-vals {{ report.start_date | date:'shortDate'}}
+      %p.lead 
+        End Date: 
+        %span.param-vals {{ report.end_date | date:'shortDate'}}
+      %p.lead 
+        Region: 
+        %span.param-vals {{ report.region | isAll}}
+      %p.lead 
+        Underwriter: 
+        %span.param-vals {{ report.underwriter | isAll}}
+  .charts.pull-left
+    %highchart#chart1.chart{:config => "loanDecisionsChartConfig", :"ng-if" => "loanDecisionsChartConfig"}
+    / %highchart#chart2.chart{:config => "notValidatedChartStatic", :"ng-if" => "notValidatedChartStatic"}
+    / %highchart#chart3.chart{:config => "notValidatedChart", :"ng-if" => "notValidatedChart"}
+    %highchart#chart4.chart{:config => "decisionsErrorsChart", :"ng-if" => "decisionsErrorsChart"}
+
+    .approved-errors-container.chart-table{:"ng-if" => "decisionsErrorsChart"}
+      %table.table
+        %caption.text-center{style: 'font-size: 16px; color: #274b6d;padding: 9px;'} Approved Loans with Errors
+        %thead
+          %tr
+            %th Loan Number
+            %th Underwriter
+            %th Error
+            %th Reviewed?
+        %tbody
+          %tr{:"ng-repeat" => "error in approved_errors", :"ng-class" => "{'approved-error' : error.error_id == approvedClass}"}
+            %td {{error.loan_num}}
+            %td {{error.underwriter}}
+            %td {{error.error_msg}}
+            %td 
+              %input{:type => "checkbox", :"ng-click" => "markAsReviewed(error)"}
+
+    .non-valid-loans-container.chart-table{:"ng-if" => "notValidatedChart"}
+      %table.table
+        %caption.text-center{style: 'font-size: 16px; color: #274b6d;padding: 9px;'} Non Validated Loans - Current List View
+        %thead
+          %tr
+            %th 
+              %a{:href => "", :"ng-click" => "predicate = 'initial_decision_date'; reverse=!reverse"}
+                Initial Decision
+            %th 
+              %a{:href => "", :"ng-click" => "predicate = 'final_approval_date'; reverse=!reverse"}
+                Final Approval
+            %th 
+              %a{:href => "", :"ng-click" => "predicate = 'loan_num'; reverse=!reverse"}
+                Loan Number
+        %tbody
+          %tr{:"ng-repeat" => "loan in non_valid_loans | orderBy:predicate:reverse"}
+            %td {{loan.initial_decision_date | date:'short'}}
+            %td {{loan.final_approval_date | date:'short'}}
+            %td {{loan.loan_num}}

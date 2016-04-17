@@ -1,0 +1,29 @@
+%table.table.table-bordered
+  %tr
+    %td Settlement Agent Name
+    %td 
+      {{audit.settlement_agent || 'Not Available'}}
+    %td
+  %tr
+    %td Escrow Agent Name
+    %td
+      %input{"ng-model" => "escrow_agent.name", :typeahead => "suggestion for suggestion in ctrl.agentName($viewValue)"}
+    %td 
+  %tr
+    %td Escrow Agent Street Address
+    %td
+      %input{"ng-model" => "escrow_agent.address", :typeahead => "suggestion for suggestion in ctrl.agentAddress($viewValue)"}
+    %td
+  %tr
+    %td 
+      Escrow Agent City/ State
+    %td
+      %input{"ng-model" => "escrow_agent.city", :typeahead => "suggestion for suggestion in ctrl.agentCity($viewValue)", :placeholder => "City"} /  
+      %input{"ng-model" => "escrow_agent.state", :typeahead => "suggestion for suggestion in ctrl.agentState($viewValue)", :placeholder => "State", :style => "width: 3em"}
+      %small (State should be 2 letter abbreviation)
+    %td   
+  %tr
+    %td Escrow Agent Zipcode
+    %td
+      %input{"ng-model" => "escrow_agent.zip_code", :typeahead => "suggestion for suggestion in ctrl.agentZipcode($viewValue)"}
+    %td

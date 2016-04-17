@@ -1,0 +1,6 @@
+.page-header
+  %h2 Registration Validations / Compliance Check
+
+= form_tag [:search, :uw_coordinator, :validations], method: 'get', class: 'well form-search' do
+  = text_field_tag :loan_id, nil, placeholder: 'Loan ID', class: 'search-query'
+  = submit_tag "Display Loan", class: 'btn btn-inverse'

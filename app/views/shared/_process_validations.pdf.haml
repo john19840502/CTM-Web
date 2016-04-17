@@ -1,0 +1,43 @@
+- if @record and @record.errors[:base].any?
+  .alert.alert-error
+    %span.alert-heading{style: 'font-weight: bold; font-size: 14px;line-height: 18px;'} Please correct the following errors:
+    %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+    %ul{class: "alert-message fade in errors"}
+      - @record.errors[:base].each do |msg|
+        %li.message=  msg
+      - @record.errors[:validation_error].each do |msg|
+        %li.message=  msg
+- elsif @record and @record.errors[:validation_error].any?
+  .alert.alert-error
+    %span.alert-heading{style: 'font-weight: bold; font-size: 14px;line-height: 18px;'} Attention!
+    %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+    %ul{class: "alert-message fade in errors"}
+      - @record.errors[:validation_error].each do |msg|
+        %li.message=  msg
+- elsif @record
+  .alert.alert-success
+    %span.alert-heading{style: 'font-weight: bold; font-size: 14px;line-height: 18px;'} Validation succeeded:
+    %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+    %ul{class: "alert-message fade in errors"}
+      %li.message= "No validation errors found!"
+- else
+  .alert.alert-error
+    %span.alert-heading{style: 'font-weight: bold; font-size: 14px;line-height: 18px;'} Attention!
+    %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+    %ul{class: "alert-message fade in errors"}
+      %li.message Validations could not be performed due to internal issues. IT department has been notified.
+
+- if @record and @record.errors[:warning].any?
+  .alert.alert-warning
+    %span.alert-heading{style: 'font-weight: bold; font-size: 14px;line-height: 18px;'} Validation alerts:
+    %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+    %ul{class: "alert-message fade in errors"}
+      - @record.errors[:warning].each do |msg|
+        = warning_flag @record.id, msg
+
+- if @record and @record.errors[:info].any?
+  .alert.alert-info
+    %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+    %ul{class: "alert-message fade in errors", style: 'margin-bottom: 0;'}
+      - @record.errors[:info].each do |msg|
+        %li.message=  msg

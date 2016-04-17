@@ -1,0 +1,7 @@
+- if @loan.errors.size > 0
+  %div.update_error
+    Could not update loan.  Reason(s):
+    - @loan.errors.full_messages.each do |error| 
+      %p.alert.alert-danger #{error}
+- else
+  %p.alert.alert-success.hidden 

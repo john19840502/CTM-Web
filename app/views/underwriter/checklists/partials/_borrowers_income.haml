@@ -1,0 +1,39 @@
+%table.table.table-condensed.table-bordered.table-striped.small-header
+  %tr
+    %th.capitalize{:colspan => 9} Borrowers Income
+  %tr
+    %th.percent_70 Borrower
+    %th.percent_70 Fed Tax<br/>Return?
+    %th.percent_70 4506T<br/>Results
+    %th.percent_70 Employer
+    %th.percent_70 Self?
+    %th.percent_70 Monthly&nbsp;Income
+    %th.percent_70 W-2?
+    %th.percent_70 30 Day<br/>Pay Stub?
+  - for borrower in @loan.borrowers
+    - rowspan = borrower.employments.current.size
+    - for employment in borrower.employments.current
+    
+      %tr.small-font
+        -# Only show the name on the first row
+        - if rowspan == borrower.employments.current.size
+          %td{:rowspan => borrower.employments.current.size}
+            %span.strong= borrower.position.to_s + ': ' + borrower.full_name
+            %br
+            &nbsp;&nbsp;&nbsp;
+            Oldest Doc Date:_______________
+          %td{:rowspan => borrower.employments.current.size}
+            %br
+            Year: ________
+          %td{:rowspan => borrower.employments.current.size}
+        %td= employment.name
+        %td= employment.is_self_employed if !!employment.is_self_employed
+        %td.right= number_to_currency employment.monthly_income
+        %td
+        %td
+        - rowspan -= 1
+  %tr
+    %td.right{:colspan => 5} Total:
+    / %td.right= number_to_currency @loan.borrowers_income_total
+    %td
+    %td.right{:colspan => 3}

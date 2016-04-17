@@ -1,0 +1,7 @@
+= form_tag set_session_compliance_hmda_loan_compliance_events_path, method: 'get', class: 'well form-search' do
+  .lead Please select report type and period:
+  = select_tag :report_type, options_for_select([['Quarterly', 'q'], ['Monthly', 'm']], session[:report_type]), prompt: "Select report type"
+  = select_tag :q_period, options_for_select(%w(Q1 Q2 Q3 Q4), session[:period]), prompt: "Select period"
+  = select_tag :m_period, options_for_select(Date::MONTHNAMES.each_with_index.collect{|m, i| [m, i]}, session[:period]), multiple: true, prompt: "Select period(s):"
+  = select_tag :period_year, options_for_select((2010..Date.today.year).to_a, session[:period_year]), prompt: "Select period year"
+  = submit_tag 'Submit', :class => 'btn'

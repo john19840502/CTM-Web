@@ -1,0 +1,36 @@
+%table.span4{cellpadding: 4}
+  %tr
+    %th{style: 'text-align:left'} Most Recent Imaged Broker GFE Date
+    %th{style: 'text-align:left'} Initial 1003 Signature Date
+    %th
+    %th{style: 'text-align:left'} Prior APR
+
+  %tr
+    %td{style: 'padding-top:5px'}= date_formatted @uw_registration_validation.most_recent_imaged_gfe_date
+    %td{style: 'padding-top:5px'}= date_formatted @uw_registration_validation.signature_1003_date
+    %td
+    %td{style: 'padding-top:5px'}= @uw_registration_validation.prior_apr
+
+  %tr
+    %th{style: 'text-align:left'} Initial Imaged Broker GFE Date
+    %th{style: 'text-align:left'} TIL Signature Date from the Imaged TIL
+    %th
+    %th{style: 'text-align:left'} Current APR
+
+  %tr
+    %td{style: 'padding-top:5px'}= date_formatted @uw_registration_validation.initial_imaged_ctm_gfe_date
+    %td{style: 'padding-top:5px'}= date_formatted @uw_registration_validation.til_signature_date_from_image
+    %td
+    %td{style: 'padding-top:5px'}= @loan.loan_general.additional_loan_datum.apr
+
+  %tr
+    %th
+    %th
+    %th
+    %th{style: 'text-align:left'} APR Increase/Decrease
+
+  %tr
+    %td
+    %td
+    %td
+    %td{style: 'padding-top:5px'}= apr_delta(@loan, @uw_registration_validation)

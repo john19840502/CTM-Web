@@ -1,0 +1,270 @@
+en:
+  activerecord:
+    attributes:
+      defaults: &defaults
+        received_at: 'Received Date'
+        submitted_at: 'Submitted Date'
+        closed_at: 'Closed Date'
+        borrower_last_name: 'Borrower'
+        closing_at: 'Closing Date'
+        lock_expire_at: 'Lock Expire Date'
+        property_state: 'State'
+        branch_name: 'Branch'
+        loan_num: 'Loan #'
+        is_jumbo_candidate: '> $417,000'
+        finaled_at: 'Final Date'
+        uw_product_code: 'UW Product'
+        mortgage_type: 'MTG Type'
+        institution_identifier: 'Inst. ID'
+        loan_purpose: "Purpose"
+        loan_status: 'Status'
+        closing_request_notes: 'Closing Req. Notes'
+        note_last_updated_by: 'Note Updater'
+        ultipro_emp_id: 'UP Emp. ID'
+
+      branch_employee:
+        <<: *defaults
+
+
+      files_to_be_underwritten:
+        submitted_at: "Submit Date"
+        received_at: "Received Date"
+
+      commission_plan_detail:
+        commission_plan_date: "Date"
+        preferred_first_name: "Pref. First Name"
+        fixed_first_name: "Legal First Name"
+        last_name: "Last Name"
+        profile_title: "Title"
+        location: "Location"
+        traditional_split: "LO Trad. Split %"
+        tiered_split_low: "Tiered Split % (Low)"
+        tiered_split_high: "Tiered Split % (High)"
+        tiered_amount: "Tiered Split - Loan Up to Amt"
+        amount_per_loan: "$ Per Loan Ind."
+        amount_per_branch: "$ Per Loan Branch"
+
+      cond_submitted_not_received:
+        channel: "Channel"
+        purpose: "Purpose"
+        loan_num: "Loan #"
+        borrower_last_name: "Borrower"
+        state: "State"
+        underwriter_name: "Underwriter"
+        pac_condition: "PAC"
+        mortgage_type: "Mortgage Type"
+        production_code: "Product Code"
+        production-decs: "Produc Desc"
+        uw_submitted_at: "Submitted Date"
+
+      cond_pending_review:
+        <<: *defaults
+        property_condition: Prop Cond
+        mortgage_type: 'Mortgage Type'
+
+      closing_request_ready_for_doc:
+        <<: *defaults
+        branch_name: "Branch"
+        requester_submitted_date: "Req. Submitted"
+        closing_date: "Closing Date"
+        assigned_to: "Assigned"
+
+
+      uw_submitted_not_received:
+        <<: *defaults
+        loan_id: "Loan Num"
+        uw_submitted_at: "UW Submit Date"
+        coordinator_pid: "Coordinator"
+        purpose: "Purpose"
+        borrower_last_name: "Borrower"
+        is_mi_required: "MI Required"
+        is_jumbo_candidate: "> $417,000"
+
+      closing_requests_awaiting_review:
+        <<: *defaults
+        originator_name: 'Loan Officer'
+        area_manager: 'Area MGR'
+
+      scheduled_funding:
+        id: Loan Num
+        borrower_last_name: Borrower
+        loan_purpose: Loan Purp.
+        channel: Chnl
+        property_state: ST
+        branch_listing: Branch
+        borrower_requested_loan_amount: Loan Amount
+        disbursed_at: Disbursement Date
+        funding_request_note: Note Text
+        note_last_updated_by: Note Last Updated By
+
+      closing_request_received:
+        loan_id: Loan Nbr
+        closing_request_received_at: Closing Request Received
+        docs_out_at: Docs Out
+        funding_request_received_at: Funding Request Received
+        closed_at: Closed
+        funded_at: Funded
+        closing_cancelled_postponed_at: Closing Cancelled/Postponed
+        shipping_received_at: Shipping Received
+
+      pending_funding_request:
+        disbursed_at: Disbursement Date
+        loan_id: Loan
+        borrower_last_name: Borrower Last Name
+        request_received_at: Request Received Date
+        loan_type: Loan Type
+
+      file_received_no_uw_assigned:
+        <<: *defaults
+        is_mi_required: 'MI Required'
+        pre_approval: 'Pre-Approv'
+        refi_type: 'Refi Type'
+
+      mers_import:
+        port_analysis: 'Detailed Portfolio Analysis'
+        monthly_reconcile: 'Monthly Reconciliation'
+        mers_loans_count: 'Loans'
+
+
+      accounting_scheduled_funding:
+        disbursement_date: Disbursement Date
+        loan_id: Loan Num
+        borrower_last_name: Borrower Last Name
+        title_company: Title Company
+        loan_amount: Loan Amount
+        net_loan_disbursement: Net Loan Disbursement
+        total_disbursed_amount: Total Disbursed
+        bank_name: Bank
+        aba_number: ABA Number
+        account_number: Account Number
+
+      mers_biennial_review:
+        id: '#'
+        name: 'Name'
+        status: 'Job Status'
+        bundle: 'Review Report'
+        recompare: 'Recompare List'
+        is_recompare: 'Recompare?'
+        errorz: '# Errors'
+        processed: '# Processed'
+        created_at: 'Created At'
+
+      branch_compensation:
+        name: 'Plan Name'
+
+      branch_compensation_detail:
+        effective_date: 'Effective Date'
+        lo_traditional_split: 'Traditional Split'
+        tiered_split_low: 'Tiered Split (Low)'
+        tiered_split_high: 'Tiered Split (High)'
+        tiered_amount: 'Tiered Amount'
+        branch_min: 'Branch Min (per loan)'
+        branch_max: 'Branch Max (per loan)'
+        lo_min: 'Loan Officer Min (per loan)'
+        lo_max: 'Loan Officer Max (per loan)'
+
+      datamart_user:
+        branch_compensations: 'Compensation Plan'
+        effective_date: 'Effective Date'
+        lo_traditional_split: 'Traditional Split'
+        tiered_split_low: 'Tiered Split (Low)'
+        tiered_split_high: 'Tiered Split (High)'
+        tiered_amount: 'Tiered Amount'
+
+      datamart_user_compensation_plan:
+        branch_compensation: 'Plan Name'
+        plan_effective_date: 'Effective Date'
+        plan_lo_traditional_split: 'Traditional Split'
+        plan_tiered_split_low: 'Tiered Split (Low)'
+        plan_tiered_split_high: 'Tiered Split (High)'
+        plan_tiered_amount: 'Tiered Amount'
+        lo_min: 'Loan Officer Min (per loan)'
+        lo_max: 'Loan Officer Max (per loan)'
+
+      branch_employee_other_compensation:
+        effective_date: 'Effective Date'
+        bsm_override: 'BSM Override'
+        bmsf_override: 'BMSF Override'
+        per_loan_processed: '$ Per Loan They Processed'
+        per_loan_branch_processed: '$ Per Loan The Branch Processed'
+
+    models:
+      branch_compensation: "Compensation Plan"
+      branch_compensation_detail: "Compensation Plan Details"
+      branch_employees: "Branch Employees"
+      datamart_user_compensation_plan: "Compensation Plan"
+
+  active_scaffold:
+    create_another: ''
+
+  roles:
+    new: 'Create new role'
+
+    edit: 'Edit'
+    edit_this: 'Edit this element'
+    delete: 'Delete'
+    delete_confirm: 'Are you sure?'
+    cant_be_deleted: 'Cant be deleted - has nested elements'
+    delete_nested_elements: 'Delete nested elements before deleting'
+
+    up: 'Up'
+    cant_up: 'Cant be up'
+    down: 'Down'
+    cant_down: 'Cant be down'
+
+  date:
+    formats:
+      default:        '%m/%d/%Y'
+      full_american:  '%m/%d/%Y' # so we have a full_american for all types
+      american:       '%m-%d-%y' # Duplicated, but for consistency.
+      pretty:         '%m/%d/%Y'
+      mers:           '%Y-%m-%d'
+      mers_comparison: '%Y-%m-%d'
+
+  datetime:
+    formats:
+      default:         '%m/%d/%Y'
+      full_american:   '%m/%d/%Y %r'
+      full:            '%Y-%m-%d %I:%M:%S %p'
+      checklist:       '%Y-%b-%d %I:%M %p'
+      sortable:        '%Y-%m-%d %H:%M:%S %p'
+      filename:        '%Y_%b_%d__%I_%M_%p'
+      american:        '%m-%d-%y'
+      pretty:          '%m/%d/%Y'
+      mers:            '%Y-%m-%d %T'
+      mers_comparison: '%Y-%m-%d'
+      report_compact:  '%Y%m%d%H%M%S'
+      yyyy_mm_dd:      '%Y-%m-%d'
+      yyyymmdd:        '%Y%m%d'
+      mm_dd_yyyy_slash: '%m/%d/%Y'
+
+  time:
+    formats:
+      full:           '%Y-%m-%d %I:%M:%S %p'
+      checklist:      '%Y-%b-%d %I:%M %p'
+      filename:       '%Y_%b_%d__%I_%M_%p'
+      default:        '%m/%d/%Y'
+      american:       '%m-%d-%y'
+      pretty:         '%m/%d/%Y'
+      full_american:  '%m/%d/%Y %r'
+      mers:            '%Y-%m-%d %T'
+      mers_comparison: '%Y-%m-%d'
+      report_compact:  '%Y%m%d%H%M%S'
+      yyyy_mm_dd:      '%Y-%m-%d'
+      yyyymmdd:        '%Y%m%d'
+      mm_dd_yyyy_slash: '%m/%d/%Y'
+
+  errors:
+    messages:
+      invalid_date: "is not a valid date"
+      invalid_time: "is not a valid time"
+      invalid_datetime: "is not a valid datetime"
+      is_at: "must be at %{restriction}"
+      before: "must be before %{restriction}"
+      on_or_before: "must be on or before %{restriction}"
+      after: "must be after %{restriction}"
+      on_or_after: "must be on or after %{restriction}"
+  helpers:
+    links:
+      cancel: 'Cancel'
+      confirm: 'Are you sure?'

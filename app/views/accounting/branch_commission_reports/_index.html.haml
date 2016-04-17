@@ -1,0 +1,16 @@
+= paginate reports, remote: true, theme: "bootstrap"
+= page_entries_info reports
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+      %th Report
+      %th Requested At
+      %th Status
+  %tbody
+    - reports.each do |report|
+      = render 'accounting/branch_commission_reports/row', report: report
+
+= page_entries_info reports
+= paginate reports, remote: true, theme: "bootstrap"

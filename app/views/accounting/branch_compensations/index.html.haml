@@ -1,0 +1,8 @@
+.row
+  .span12
+  - if @institution
+    .lead Branch #{@institution.branch_name} :: #{@institution.institution_number}
+  - else  
+    .lead Branch Compensation Plans
+
+    = render 'accounting/branch_compensations/index', bc: @branch_compensations || @institution.branch_compensations

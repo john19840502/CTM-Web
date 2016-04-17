@@ -1,0 +1,9 @@
+.alert.alert-warning
+  .form.form-search
+    %h5 Right to Delay Date:
+    %input.datepicker{:"ng-model" => "delay_date", "format" => 'mm/dd/yyyy', :placeholder => 'mm/dd/yyyy', :type => "text", "ng-change" => "rightDelay(delay_date)"}
+    %span.loader{"ng-show" => "loading_date"}
+    %span{:"ng-show" => "by_closer != null"}
+      Added By: {{by_closer}}
+    .alert.alert-block.alert-error{:"ng-if" => "error_saving_message", style: ""}
+      Failed to save Ready to Delay Date. Reason:  {{error_saving_message}}

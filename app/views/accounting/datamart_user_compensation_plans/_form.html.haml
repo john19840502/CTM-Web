@@ -1,0 +1,23 @@
+- if defined? employees
+  .control-group
+    = f.label :datamart_user_id, "Loan Officer", class: 'control-label'
+    .controls
+      = f.select :datamart_user_id, options_for_select(available_employees(employees, branch.id)), {include_blank: 'Select One'}
+
+.control-group
+  = f.label :effective_date, class: 'control-label'
+  .controls
+    = f.text_field :effective_date, class: 'datepicker'
+
+:javascript    
+  
+  $(document).ready(function(){
+    $('#datamart_user_compensation_plan_datamart_user_id').change(function(){
+      selected_option = $("#datamart_user_compensation_plan_datamart_user_id option:selected");
+      if (selected_option.val() < 0)
+      {
+        alert('This employee must have title set up before they can be added to a compensation plan.');
+        document.getElementById('datamart_user_compensation_plan_datamart_user_id').selectedIndex = 0;
+      }
+    });
+  });

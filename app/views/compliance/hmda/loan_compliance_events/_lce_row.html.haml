@@ -1,0 +1,10 @@
+%tr
+  - data.column_list.each do |column|
+    - if data.any_editable?
+      %td= best_in_place_if data.editable?(column), record, column.to_sym,
+          :nil => 'Click to edit',
+          :type => record.class.input_type(column),
+          :collection => (Hash[record.class.options_for_column(column)] if record.class.options_for_column(column)),
+          :display_with => record.class.display_with(column)
+    - else
+      %td= record.send(column)

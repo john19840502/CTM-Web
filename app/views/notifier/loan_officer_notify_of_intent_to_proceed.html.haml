@@ -1,0 +1,50 @@
+%h4{style: "color#FF00000; font-size:23px; font-weight:500;"} Notification of Intent to Proceed for #{@loan.primary_borrower.full_name}
+%br/
+
+%p Hello, #{@loan.broker_first_name} #{@loan.broker_last_name},
+
+%p MB Financial has received Intent to Proceed from one or more of the applicants on this loan, therefore we must issue an Underwriting Decision within 30 days to be compliant with Regulation B.
+ 
+%p To allow sufficient time to review the loan, the loan must be submitted to Underwriting no later than #{(Date.parse(@loan.custom_fields.intent_to_proceed_date_string) + 30.days).strftime('%m/%d/%Y')}  in order to be compliant with MB Financial Registration requirements.
+ 
+Loan Number: #{@loan.loan_num}
+%br
+Applicant Name: #{@loan.primary_borrower.full_name}
+%br
+Property Address: #{@loan.property_address} #{@loan.property_city}, #{@loan.property_state} #{@loan.property_postal_code}
+%br
+Initial Disclosure Date: #{@loan.initial_gfe_disclosure_on.strftime('%m/%d/%Y')}
+%br
+Intent to Proceed Date: #{Date.parse(@loan.custom_fields.intent_to_proceed_date_string).strftime('%m/%d/%Y')}
+%br
+Loan Must be Submitted to MB by: #{(Date.parse(@loan.custom_fields.intent_to_proceed_date_string) + 30.days).strftime('%m/%d/%Y')}
+%br
+%br
+ 
+%p{style: "font-weight: bold;"} Please note that the borrower e-consent, Intent to Proceed and all other e-signed documents may be found in Mortgagebot Imageflow if the package was signed electronically.
+
+- content_for :signature do
+  - if @loan.is_retail?
+    %p
+    %p{style: "font-family: Verdana, Geneva, sans-serif;"} Please contact Retail Services at 1-855-926-2400 with any questions.
+
+    %h5{style: "font-size:18px; color:#FF0000;padding:0;margin:0;"} MB Retail Services
+    %br/
+    %span
+      Email:
+      = mail_to "MBRetailServices@mbmortgage.com"
+      %br/
+      Phone:
+      %strong 855.926.2400, Option 1, Option 1   
+  - else
+    %p
+    %p{style: "font-family: Verdana, Geneva, sans-serif;"} Please contact Client Services at 1-855-926-2400 with any questions.
+
+    %h5{style: "font-size:18px; color:#FF0000;padding:0;margin:0;"} MB Client Services
+    %br/
+    %span
+      Email:
+      = mail_to "MBClientServices@mbmortgage.com"
+      %br/
+      Phone:
+      %strong 855.926.2400, Option 1, Option 2

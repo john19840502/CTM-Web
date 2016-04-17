@@ -1,0 +1,65 @@
+.lead 4. Loan Information
+
+.row
+  .span6{style: 'width:460px;'}
+    %table.table.table-bordered
+      %tr
+        %th{style: 'width:190px;'} Product Code
+        %td{style: 'width:265px;'}= @loan.product_code
+      %tr
+        %th Loan Purpose
+        %td= (@loan.purpose.eql?('REFIPLUS') or @loan.purpose.eql?('REFINANCE')) ? "#{@loan.loan_purpose}#{" - #{@loan.loan_purpose_description}" unless @loan.loan_purpose_description.blank? }" : @loan.loan_purpose
+      %tr
+        %th 
+          Total Balance on 
+          %br
+            All Secondary Financing
+        %td= number_to_currency @loan.loan_general.total_balance_secondary_financing
+      %tr
+        %th 
+          Max Line Amount of 
+          %br
+            Secondary Financing
+        %td= number_to_currency @loan.loan_general.max_amount_secondary_financing
+      %tr
+        %th Occupancy
+        %td= @loan.occupancy
+
+  .span5{style: 'width:320px;'}
+    %table.table.table-bordered
+      %tr
+        %th{style: 'width:180px;'} Loan Amount
+        %td= number_to_currency @loan.amount
+      %tr
+        %th{style: 'width:135px;'} Note Rate
+        %td= @loan.loan_general.lock_price.final_note_rate rescue nil
+      %tr
+        %th 
+          Escrows (Yes/No) - 
+          %br
+            From LOCK
+        %td= @loan.loan_general.escrow_from_lock rescue nil
+      %tr
+        %th 
+          Escrows (Yes/No) -
+          %br
+            From 1003
+        %td= @loan.loan_general.escrow_from_1003 rescue nil
+
+  .span3{style: 'width:320px;'}
+    %table.table.table-bordered
+      %tr
+        %th{style: 'width:180px;'} LTV
+        %td{style: 'width:135px;'}= number_with_precision @loan.ltv, precision: 3
+      %tr
+        %th CLTV
+        %td= number_with_precision @loan.cltv, precision: 3 rescue nil
+      %tr
+        %th HCLTV
+        %td= number_with_precision @loan.hcltv, precision: 3 rescue nil
+      %tr
+        %th Housing Ratio
+        %td= @loan.loan_general.mortgage_payment_to_income_ratio_percent
+      %tr
+        %th Total Debt Ratio
+        %td= @loan.debt_to_income_ratio

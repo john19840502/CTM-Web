@@ -1,0 +1,21 @@
+.lead 2. Borrowers Information
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Name
+      %th SSN
+      %th Credit Score
+      %th US Citizen?
+      %th Permanent Resident Alien?
+      %th Primary Residence?
+  %tbody
+  - for borrower in @loan.borrowers.includes(:loan_general)
+    %tr
+      %td= borrower.full_name
+      %td
+        %a.ssn{title: "#{borrower.full_name} SSN:", 'data-content' => borrower.ssn_formatted, style: 'cursor: pointer' } click to view
+      %td= borrower.credit_score || 'n/a'
+      %td= borrower.citizen?
+      %td= borrower.permanent_alien?
+      %td= borrower.intent_to_occupy?

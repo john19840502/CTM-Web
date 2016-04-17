@@ -1,0 +1,20 @@
+- custom_data = custom_loan_data(loan)
+%tr
+  %td.alert.alert-block.alert-error{:"ng-show" => "error_saving_consent_data[#{custom_data.id}]", :"ng-hide" => "!error_saving_consent_data[#{custom_data.id}]", style: "background-color:#f2dede", colspan: 7}
+    Failed to save consent information.  Reason: {{ error_saving_consent_message["#{custom_data.id}"] }}
+%tr
+  %td.alert.alert-block.alert-success{:"ng-show" => "consent_data_saved[#{custom_data.id}]", :"ng-hide" => "consent_data_saved[#{custom_data.id}] == null", style: "background-color:#dff0d8", colspan: 7}
+    Consent information been saved.
+%tr
+  %td= loan.loan_num
+  %td= loan.primary_borrower.last_name
+  %td= denial_cancel_or_withdrawal_date(loan)
+  %td= loan.pipeline_loan_status_description
+  %td
+    %select{ name: "consent_action[#{custom_data.id}]", required: '', :"ng-change" => "processConsentAction(#{custom_data.id})", :"ng-model" => "consent_actions[#{custom_data.id}]", :"ng-init" => "consent_actions[#{custom_data.id}]='#{custom_data.consent_action}'" }
+      %option{style: "display:none", value: ""} --Choose a Consent Action--
+      - custom_data.valid_consent_actions.each do |action|
+        %option= action
+  %td= borrower_email(loan)
+  %td
+    %input{ type: "checkbox", name: "consent_complete[#{custom_data.id}]", :"ng-change" => "processConsentComplete(#{custom_data.id})", :"ng-model" => "consent_completes[#{custom_data.id}]", :"ng-init" => "consent_completes[#{custom_data.id}]=#{custom_data.consent_complete ? true : false}"}

@@ -1,0 +1,17 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Name
+      %th SSN
+      %th Credit Score
+      %th US Citizen?
+      %th Permanent Resident Alien?
+      %th Primary Residence?
+  %tbody
+    %tr{:"ng-repeat" => "person in loan.borrowers"}
+      %td {{person.first_name}} {{person.last_name}}
+      %td{"hide-element" => "", "hidden-value" => "{{person.ssn}}", "hidden-label" => 'Show SSN'}
+      %td {{person.credit_score}}
+      %td {{person.is_citizen}}
+      %td {{person.is_permanent_alien}}
+      %td {{person.intent_to_occupy}}

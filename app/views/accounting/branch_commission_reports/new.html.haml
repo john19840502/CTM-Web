@@ -1,0 +1,12 @@
+.row
+  .span12
+    .lead Add Branch Commission Report
+
+    = form_for @branch_commission_report, url: accounting_branch_commission_reports_path, method: :post, html: { class: 'form-horizontal' } do |f|
+
+      = render 'accounting/branch_commission_reports/form', f: f
+
+      .form-actions
+        = f.submit 'Request Report', :class => 'btn btn-primary'
+        = link_to t('.cancel', :default => t("helpers.links.cancel")),
+            accounting_branch_commission_reports_path, :class => 'btn'

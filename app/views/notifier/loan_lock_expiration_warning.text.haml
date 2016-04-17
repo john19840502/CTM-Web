@@ -1,0 +1,20 @@
+:plain
+  Dear #{@loan.originator.first_name},
+
+  MB Lock Desk would like to remind you of the upcoming lock expiration on your loan ** #{@loan.primary_borrower.last_name} #{@loan_num} ** expiring on ** #{@lock} **. 
+
+  Our current rate lock policy requires that you extend the rate lock no later than at 11:59 pm, on the day of the lock expiration date.
+
+  ======================================================================
+  
+  Please email MBlockdesk@mbmortgage.com (with ** #{@subj} ** in subject line) to request an extension. Your request must be received prior to 11:59 PM EST #{@lock} to be considered a valid request.
+  
+  Any requests received after 11:59 PM EST on the date of expiration will be considered late and the lock will be subject to worse case pricing minus a .375 relock cost.
+  
+  ======================================================================
+
+  If you have any questions, please contact the Lock Desk or your Area Manager.
+
+  MB Lock Desk
+  email: MBlockdesk@mbmortgage.com
+  phone: 855.926.2400, Option 3

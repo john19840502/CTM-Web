@@ -1,0 +1,23 @@
+- params = {controller: "core/originators", action: "index"}
+- params.merge!({pid: pid, parent: parent}) if defined? parent
+
+= paginate originators, params: params, remote: true, theme: "bootstrap"
+= page_entries_info originators
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+      %th Active?
+      %th Username
+      %th Name
+      %th Current Plan?
+      %th Effective Date
+      %th Selected On
+
+  %tbody
+    - @plan.datamart_user_compensation_plans.each do |emp_plan|
+      = render 'core/originators/row_plans', emp_plan: emp_plan
+
+= page_entries_info originators
+= paginate originators, params: params, remote: true, theme: "bootstrap"

@@ -1,0 +1,11 @@
+- content_for(:page_title) do
+  = "Purchased Loans"
+
+- content_for(:functions) do
+  .button-functions
+    = link_to import_form_compliance_hmda_purchased_loans_path, :class => "btn" do
+      %i.icon-upload
+      Import File
+    = render 'shared/spreadsheet_button'
+
+= render :file => 'shared/base'

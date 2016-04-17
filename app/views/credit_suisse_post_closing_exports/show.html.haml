@@ -1,0 +1,7 @@
+- content_for(:functions) do
+  .button-functions
+    = form_for(@first, :url => credit_suisse_post_closing_export_path(@first.id, :format => :xls), :method => :get) do |f|
+      = f.hidden_field :id
+      = f.submit 'Download Spreadsheet', :class => 'btn btn-success'
+
+= render :file => 'shared/base'

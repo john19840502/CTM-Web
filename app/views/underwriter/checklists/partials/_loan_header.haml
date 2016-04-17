@@ -1,0 +1,33 @@
+%table.table
+  %tr
+    %td
+      = render 'underwriter/checklists/partials/logo'
+      %br
+      %br
+      .strong.percent_110
+        - for borrower in @loan.borrowers
+          = "#{borrower.first_name rescue '[ERROR]'} #{borrower.last_name rescue '[ERROR]'}"
+          %br
+        = @loan.property_street
+        %br
+        = "#{@loan.property.city}, #{@loan.property.state} #{@loan.property.zip}"
+
+    %td
+      .center.strong.percent_110= "LOAN #: #{@loan.loan_num} / #{@loan.channel} / #{@loan.loan_purpose}"
+      %table.table.table-condensed.table-bordered{:style => 'border-bottom:none;'}
+        %tr
+          %td.center Approved
+          %td.center Suspended
+          %td.center Declined
+      
+      %table.table.table-condensed.table-bordered.table-striped.small-header
+        %tr
+          %th Interest Rate
+          %th Ratios
+          %th Mortgage<br/>Insurance?
+          %th Escrow<br/>Waiver?
+        %tr
+          %td.white &nbsp;
+          %td.white
+          %td.white Y / N
+          %td.white!= escrow_waiver_field(@loan)

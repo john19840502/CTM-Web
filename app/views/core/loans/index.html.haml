@@ -1,0 +1,15 @@
+.row
+  .span12
+    =h raw(header @header)
+
+    = form_tag [:search, :core, :loans], method: 'get', class: 'well form-search' do
+      = label_tag 'Loan #: '
+      = text_field_tag :loan_num, nil, class: 'input-medium search-query'
+      = label_tag "Branch (City): "
+      = text_field_tag :branch_name, nil, class: 'input-medium search-query'
+      = label_tag "Employee's Last Name: "
+      = text_field_tag :emp_name, nil, class: 'input-medium search-query'
+      %button.btn{ type: "submit" } Search
+
+    %div{id: "loans#{@added_id}"}
+      = render 'core/loans/index', loans: @loans

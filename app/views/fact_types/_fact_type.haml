@@ -1,0 +1,10 @@
+%h5= title
+
+%table.table.table-striped.table-bordered{style: "width: 100%;"}
+  %tbody
+    - Array(data).each do |k, v|
+      %tr
+        %td{style: "width: 20%;"}= k
+        %td{style: "width: 80%;"}= v
+
+%hr

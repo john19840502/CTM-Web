@@ -1,0 +1,12 @@
+.container
+  .row
+    .span12.columns
+      .last-transaction.alert.alert-info
+        %button.close{'data-dismiss' => 'alert'}
+        .container
+          .pull-left
+            %strong= "Last Datamart Transaction Received: "
+            %span.timestamp= '...loading...'
+          .pull-right{:style => 'margin-right: 25px;'}
+            %strong= "Page Loaded: "
+            %abbr{:class => 'timeago'}

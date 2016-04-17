@@ -1,0 +1,20 @@
+.underwriter_validation{:"ng-controller" => "SettlementAgentComparisionReportsCtrl"}
+	%h4 Settlement Agent Month to Month Comparision Report
+	.alert.alert-block.alert-error{:"ng-show" => "!agents.length", style: ""}
+		There is no comparision report for this month
+	%form.well.form-search
+		Select Yearly Report
+		%select{"ng-model" => "year", "ng-options" => "year for year in years"}	
+		%input.btn.btn-success{:type => 'submit', :value => 'Get Report', :"ng-click" => 'get_monthly_comparision()'}
+		%input.btn.btn-inverse{:style => "float:right", :type => 'submit', :value => 'Download as CSV', :filename => "{{year}} YTD Comparision Report.csv", :"ng-csv" => "agents", :"csv-header" => "headers"}
+
+	%table.table.table-bordered
+		%thead
+			%tr
+				%th{:"ng-repeat" => "title in headers"}
+					{{title | removeUnderscore}}
+		%tbody
+			%tr{:"ng-repeat" => "audits in agents | orderBy:'Settlement_Agent_Name' | orderBy: 'Escrow_Agent_Name' "}	
+				%td{:"ng-repeat" => "title in headers"}
+					{{audits[title]}}
+	

@@ -1,0 +1,13 @@
+.page-header
+  %h2= @title
+
+= render :partial => '/compliance/hmda/loan_compliance_filters/filter'
+- if data.model == @non_reportable
+  = form_tag action: :remove_event, method: 'post', remote: true, class: 'form-inline' do
+    %h5 Remove from CRA WIZ
+    = label_tag :loan_num, "Aplnno Number:"
+    .input-append
+      = text_field_tag :loan_num, nil, class: 'text_field input-medium'
+      = submit_tag "Remove", :class => "btn"
+
+= render :file => 'shared/base'

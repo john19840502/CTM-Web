@@ -1,0 +1,142 @@
+.stats-report-container {
+  .inset1 { 
+    float: left;
+    margin-left: 50;
+  }
+
+  .group-top {
+  }
+
+  .underwriter-name {
+    color: orange;
+  }
+
+  .single-loan-validation {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+    border: thin solid green;
+    border-radius: 5px;
+  }
+
+  .padded {
+    margin-left: 10px;
+  }
+
+  .expand-contract {
+    @extend .padded;
+  }
+
+  .no-errors {
+    color: gray;
+    font-style: italic;
+  }
+  
+  .grand-total {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #fafafa;
+    border: thin solid blue;
+    border-radius: 5px;
+  }
+
+  .export-button {
+    margin-left: 0px;
+  }
+}
+
+.chart {
+  width: 575px;
+  border: 1px solid red;
+  float: left;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.chart-table {
+  width: 575px;
+  height: 402px;
+  overflow: auto;
+  float: left;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.approved-error {
+  background-color: #dff0d8;
+}
+
+.report-search {
+  margin-right: 50px;
+  margin-top: -5px;
+  border-right: 1px solid gray;
+  padding-right: 55px;
+  padding-top: 20px;
+}
+
+.search-list {
+  margin: 0 0 5px 20px;
+}
+
+.search-list li {
+  background: asset-url('icon_sets/famfamfam_silk/icons/bullet_go.png') no-repeat left;
+  padding-left: 20px;
+  padding-top: 2px;
+  list-style: none;
+  margin-left: -20px;
+}
+
+#statistic-report-search{
+  background-color: #EEEEEE;
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 30px;
+  margin-bottom: 50px;
+  border-radius: 2px;
+  width: 550px;
+}
+
+.report-info-container {
+  padding: 15px;
+  padding-top: 0;
+  float: right;
+}
+
+.action-btns {
+  text-align: right;
+  padding-bottom: 25px;
+  float: right;
+}
+
+.lead {
+  margin-bottom: 10px;
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 20px;
+
+  .event_id {
+    border: 1px solid #ddd;
+    background: #eee ;
+    text-aligh: center;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 2px 15px;
+    width: auto;
+  }
+
+  .text {
+  float: left;
+  padding: 5px;
+  width: 300px;
+  font-weight: 300;
+  }
+}
+
+.report-info {
+  width: 395px;
+}
+
+.param-vals {
+  font-style: italic;
+  float: right;
+}

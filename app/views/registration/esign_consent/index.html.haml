@@ -1,0 +1,7 @@
+%base{href: registration_esign_consent_index_path}
+.row
+  .span12
+    .lead
+      = "EConsent on Cancelled, Denied, or Withdrawn Loans"
+
+    = render 'registration/esign_consent/loans', loans: @loans, start_date: @start_date_text, end_date: @end_date_text, loan_num: @loan_text

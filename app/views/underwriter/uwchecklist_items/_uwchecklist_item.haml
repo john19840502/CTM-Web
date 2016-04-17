@@ -1,0 +1,5 @@
+/ For now include all checklist items - Hans
+/ -if uwchecklist_item.display_for_loan?(@loan)
+%tr.checklist-item
+  %td.checklist-bullet{:width => '10%'}= bullet uwchecklist_item.bullet_type
+  %td.checklist-item-value!= RedCloth.new(uwchecklist_item.value).to_html

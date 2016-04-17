@@ -1,0 +1,25 @@
+%table.table.table-condensed.table-bordered.table-striped.small-header
+  %tr
+    %th.capitalize{:colspan => 9} Borrowers Credit
+  %tr
+    %th.percent_70 Borrower
+    %th.percent_70 Credit<br/>Score
+    %th.percent_70 Credit<br/>Score Date
+    %th.percent_70 Recent Bank<br/>Statement
+    %th.percent_70 Telephone Cert w/in<br/>30 Days of Close
+    %th.percent_70 Oldest<br/>Doc Date
+    %th.percent_70 Notes
+  
+  - for borrower in @loan.borrowers
+    %tr.small-font
+      %td
+        %span.strong= borrower.position.to_s + ': ' + borrower.full_name
+
+      %td
+        .credit-score= borrower.credit_score
+      %td
+      %td
+      %td
+      %td
+      %td{:width => '25%'}
+

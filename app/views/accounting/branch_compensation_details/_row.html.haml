@@ -1,0 +1,27 @@
+- if det
+  %td
+    - if det.effective_date > Date.today && can?(:manage, BranchCompensation)
+      = link_to edit_accounting_branch_compensation_detail_path(det), class: 'btn btn-mini btn-warning' do
+        %i.icon-pencil
+        Edit
+
+      = link_to accounting_branch_compensation_detail_path(det), method: :delete,
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-mini btn-danger' do
+        %i.icon-trash
+        Delete
+
+  %td= date_formatted det.effective_date
+  %td= number_to_percentage det.lo_traditional_split, precision: 3
+  %td= number_to_percentage det.tiered_split_low, precision: 3
+  %td= number_to_percentage det.tiered_split_high, precision: 3
+  %td= number_to_currency det.tiered_amount, precision: 0
+  %td= number_to_currency det.lo_min, precision: 0
+  %td= number_to_currency det.lo_max, precision: 0
+- else
+  %td
+    - if can?(:manage, BranchCompensation)
+      = link_to new_accounting_branch_compensation_detail_path(pid: pid), class: 'btn btn-mini btn-info' do
+        %i.icon-plus
+        Add New Details
+  %td{colspan: 7} This plan has no compensation details currently in effect.

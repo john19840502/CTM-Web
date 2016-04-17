@@ -1,0 +1,10 @@
+- if @loan
+  %h4{style: "color:#FF0000; font-size:23px; font-weight:500;"} Action History for loan #{@loan.loan_num}
+  %br/
+
+  = render :partial => 'comments_table', locals: {loan: @loan}
+
+- else
+  %h4{style: "color:#FF0000; font-size:23px; font-weight:500;"} Could not find action history for loan #{params[:loan_num]}. If you believe this to be an error, please report it.
+
+= link_to "Back to Forced Registrations Queue", registration_forced_registrations_path

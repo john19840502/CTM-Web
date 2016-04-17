@@ -1,0 +1,20 @@
+= f.hidden_field :institution_id
+  
+.control-group
+  = f.label :name, class: 'control-label'
+  .controls
+    = f.text_field :name
+
+- if f.object.new_record?
+  = f.fields_for :branch_compensation_details do |d|
+    = render 'accounting/branch_compensation_details/form', f: d
+
+.control-group
+  = f.label :termination_date, class: 'control-label'
+  .controls
+    = f.text_field :termination_date, value: date_formatted(f.object.termination_date), class: 'datepicker'
+
+.form-actions
+  = f.submit 'Save Changes', :class => 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")),
+      core_institution_path(id: @plan.institution_id), :class => 'btn'

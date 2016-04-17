@@ -1,0 +1,51 @@
+- ctrl = params[:ctrl]
+- act = params[:act]
+- user = params[:usr]
+
+.lead 
+  - if ctrl.present?
+    = link_to 'Controller:', controllers_admin_usage_stats_path
+    %strong #{ctrl.classify}
+  - if act.present? && ctrl.present?
+    \=> 
+    = link_to 'Action:', actions_admin_usage_stats_path(ctrl: ctrl)
+    %strong #{act}
+  - if user.present?
+    \=> 
+    = link_to 'User:', users_admin_usage_stats_path(usr: user)
+    %strong #{user}
+    
+.row
+  .span12
+
+    = paginate @stats, params: params, theme: "bootstrap"
+    = page_entries_info @stats
+    %br 
+    %br 
+
+    %table.table
+      %tr
+        %th Controller Name
+        %th Action Name
+        - unless user.present?
+          %th Username
+        %th Request Hash
+        %th Session Hash
+        %th IP Address
+        %th Referred
+        %th Accessed On
+
+      - @stats.each do |stat|
+        %tr
+          %td= link_to stat.controller_name.classify, actions_admin_usage_stats_path(ctrl: stat.controller_name)
+          %td= link_to stat.action_name, users_admin_usage_stats_path(ctrl: stat.controller_name, act: stat.action_name)
+          - unless user.present?
+            %td= link_to stat.username, users_admin_usage_stats_path(ctrl: stat.controller_name, act: stat.action_name, usr: stat.username)
+          %td= stat.request_hash
+          %td= stat.session_hash
+          %td= stat.ip_address
+          %td= stat.referrer
+          %td= stat.created_at.strftime('%m/%d/%Y %I:%M %P')
+
+    = page_entries_info @stats
+    = paginate @stats, params: params, theme: "bootstrap"

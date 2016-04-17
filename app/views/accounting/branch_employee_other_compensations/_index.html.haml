@@ -1,0 +1,13 @@
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+      %th Effective Date
+      %th BSM Override
+      %th BMSF Override
+      %th Per Loan Processed
+      %th Per Branch Loan Processed
+  %tbody
+    - non_plan_comps.sort_by(&:effective_date).reverse.each do |non_plan_comp|
+      %tr
+        = render 'accounting/branch_employee_other_compensations/row', non_plan_comp: non_plan_comp

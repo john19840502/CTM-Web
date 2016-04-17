@@ -1,0 +1,4 @@
+%h5= summary.borrowers.size > 0 ? 'Borrowers' : 'Borrower'
+- summary.borrowers.each do |borrower|
+  .borrower= borrower.full_name_sort
+  

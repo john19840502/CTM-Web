@@ -1,0 +1,17 @@
+%div.error-area{"ng-show" => "loading_error"}
+  {{checklist_error}}
+%input.btn.btn-inverse{:type => 'submit', :value => 'Start checklist', :"ng-click" => 'ctrl.loadChecklist()'}
+%span.loader{"ng-show" => "loading"}
+%span{:"ng-show" => "show_checklist"}
+  %form{:name => 'funding_checklist_form'}
+    %table.table.table-bordered
+      %tr{'ng-repeat' => 'question in checklist.questions'}
+        %td {{ question.prompt}}
+        %td
+          %select{'ng-model' => 'question.answer', :required => "", 'ng-options' => "opt for opt in ['Yes', 'No', 'NA'] track by opt"}
+            %option{:value => "", disabled: 'disabled'} Please Select
+  %input.btn.btn-success{:type => 'submit', :value => 'Save', :"ng-click" => "ctrl.saveChecklist(checklist, 'save')"}
+  %input.btn.btn-success{:type => 'submit', :value => 'Complete', :'ng-disabled' => "funding_checklist_form.$invalid", :"ng-click" => "ctrl.saveChecklist(checklist, 'complete')"}
+  %input.btn.btn-inverse{:type => 'submit', :value => 'Cancel', :"ng-click" => 'ctrl.cancelChecklist()'}
+  .alert.alert-block{:"ng-if" => "saved_checklist"}
+    Checklist saved successfully.

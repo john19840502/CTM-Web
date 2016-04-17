@@ -1,0 +1,11 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %td{colspan: 9}
+        %span{"ng-show" => "!(loan.document | isEmpty)"}
+          %a{:target => '_blank', "ng-href" => "{{loan.document}}"}
+            {{ loan.document_file_name }}
+        %span{"ng-show" => "(loan.document | isEmpty) && (loan.product_code)"}
+          No product guideline found for Product Code {{loan.product_code}}
+        %span{"ng-show" => "!loan.product_code"}
+          No product code found for this loan

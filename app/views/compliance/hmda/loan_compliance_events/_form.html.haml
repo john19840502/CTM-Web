@@ -1,0 +1,444 @@
+/ .control-group
+/   = f.label :aplnno, class: 'control-label'
+/   .controls
+/     = f.label f.object.aplnno, class: 'control-label'
+
+.control-group
+  = f.label :appname, class: 'control-label'
+  .controls
+    = f.text_field :appname
+
+.control-group
+  = f.label :propstreet, class: 'control-label'
+  .controls
+    = f.text_field :propstreet
+
+.control-group
+  = f.label :propcity, class: 'control-label'
+  .controls
+    = f.text_field :propcity
+
+.control-group
+  = f.label :propstate, class: 'control-label'
+  .controls
+    = f.text_field :propstate
+
+.control-group
+  = f.label :propzip, class: 'control-label'
+  .controls
+    = f.text_field :propzip
+
+.control-group
+  = f.label :apdate, class: 'control-label'
+  .controls
+    = f.text_field :apdate, value: date_formatted(f.object.apdate), class: 'datepicker'
+
+.control-group
+  = f.label :lntype, class: 'control-label'
+  .controls
+    = f.text_field :lntype
+
+.control-group
+  = f.label :proptype, class: 'control-label'
+  .controls
+    = f.text_field :proptype
+
+.control-group
+  = f.label :lnpurpose, class: 'control-label'
+  .controls
+    = f.text_field :lnpurpose
+
+.control-group
+  = f.label :occupancy, class: 'control-label'
+  .controls
+    = f.text_field :occupancy
+
+.control-group
+  = f.label :lnamount, class: 'control-label'
+  .controls
+    = f.text_field :lnamount
+
+.control-group
+  = f.label :preappr, class: 'control-label'
+  .controls
+    = f.text_field :preappr
+
+.control-group
+  = f.label :action_code, class: 'control-label'
+  .controls
+    = f.text_field :action_code
+
+.control-group
+  = f.label :actdate, class: 'control-label'
+  .controls
+    = f.text_field :actdate, value: date_formatted(f.object.actdate), class: 'datepicker'
+
+.control-group
+  = f.label :apeth, class: 'control-label'
+  .controls
+    = f.text_field :apeth
+
+.control-group
+  = f.label :capeth, class: 'control-label'
+  .controls
+    = f.text_field :capeth
+
+.control-group
+  = f.label :aprace1, class: 'control-label'
+  .controls
+    = f.text_field :aprace1
+
+.control-group
+  = f.label :aprace2, class: 'control-label'
+  .controls
+    = f.text_field :aprace2
+
+.control-group
+  = f.label :aprace3, class: 'control-label'
+  .controls
+    = f.text_field :aprace3
+
+.control-group
+  = f.label :aprace4, class: 'control-label'
+  .controls
+    = f.text_field :aprace4
+
+.control-group
+  = f.label :aprace5, class: 'control-label'
+  .controls
+    = f.text_field :aprace5
+
+.control-group
+  = f.label :caprace1, class: 'control-label'
+  .controls
+    = f.text_field :caprace1
+
+.control-group
+  = f.label :caprace2, class: 'control-label'
+  .controls
+    = f.text_field :caprace2
+
+.control-group
+  = f.label :caprace3, class: 'control-label'
+  .controls
+    = f.text_field :caprace3
+
+.control-group
+  = f.label :caprace4, class: 'control-label'
+  .controls
+    = f.text_field :caprace4
+
+.control-group
+  = f.label :caprace5, class: 'control-label'
+  .controls
+    = f.text_field :caprace5
+
+.control-group
+  = f.label :apsex, class: 'control-label'
+  .controls
+    = f.text_field :apsex
+
+.control-group
+  = f.label :capsex, class: 'control-label'
+  .controls
+    = f.text_field :capsex
+
+.control-group
+  = f.label :tincome, class: 'control-label'
+  .controls
+    = f.text_field :tincome
+
+.control-group
+  = f.label :purchtype, class: 'control-label'
+  .controls
+    = f.text_field :purchtype
+
+.control-group
+  = f.label :denialr1, class: 'control-label'
+  .controls
+    = f.text_field :denialr1
+
+.control-group
+  = f.label :denialr2, class: 'control-label'
+  .controls
+    = f.text_field :denialr2
+
+.control-group
+  = f.label :denialr3, class: 'control-label'
+  .controls
+    = f.text_field :denialr3
+
+.control-group
+  = f.label :apr, class: 'control-label'
+  .controls
+    = f.text_field :apr
+
+.control-group
+  = f.label :spread, class: 'control-label'
+  .controls
+    = f.text_field :spread
+
+.control-group
+  = f.label :lockdate, class: 'control-label'
+  .controls
+    = f.text_field :lockdate, value: date_formatted(f.object.lockdate), class: 'datepicker'
+
+.control-group
+  = f.label :loan_term, class: 'control-label'
+  .controls
+    = f.text_field :loan_term
+
+.control-group
+  = f.label :hoepa, class: 'control-label'
+  .controls
+    = f.text_field :hoepa
+
+.control-group
+  = f.label :lienstat, class: 'control-label'
+  .controls
+    = f.text_field :lienstat
+
+.control-group
+  = f.label :qltychk, class: 'control-label'
+  .controls
+    = f.text_field :qltychk
+
+.control-group
+  = f.label :createdate, class: 'control-label'
+  .controls
+    = f.text_field :createdate, value: date_formatted(f.object.createdate), class: 'datepicker'
+
+.control-group
+  = f.label :channel, class: 'control-label'
+  .controls
+    = f.text_field :channel
+
+.control-group
+  = f.label :finaldate, class: 'control-label'
+  .controls
+    = f.text_field :finaldate, class: 'datepicker'
+
+.control-group
+  = f.label :initadjmos, class: 'control-label'
+  .controls
+    = f.text_field :initadjmos
+
+.control-group
+  = f.label :apptakenby, class: 'control-label'
+  .controls
+    = f.text_field :apptakenby
+
+.control-group
+  = f.label :occupyurla, class: 'control-label'
+  .controls
+    = f.text_field :occupyurla
+
+.control-group
+  = f.label :branchid, class: 'control-label'
+  .controls
+    = f.text_field :branchid
+
+.control-group
+  = f.label :branchname, class: 'control-label'
+  .controls
+    = f.text_field :branchname
+
+.control-group
+  = f.label :loanrep, class: 'control-label'
+  .controls
+    = f.text_field :loanrep
+
+.control-group
+  = f.label :loanrepname, class: 'control-label'
+  .controls
+    = f.text_field :loanrepname
+
+.control-group
+  = f.label :note_rate, class: 'control-label'
+  .controls
+    = f.text_field :note_rate
+
+.control-group
+  = f.label :pntsfees, class: 'control-label'
+  .controls
+    = f.text_field :pntsfees
+
+.control-group
+  = f.label :broker, class: 'control-label'
+  .controls
+    = f.text_field :broker
+
+.control-group
+  = f.label :brokername, class: 'control-label'
+  .controls
+    = f.text_field :brokername
+
+.control-group
+  = f.label :ltv, class: 'control-label'
+  .controls
+    = f.text_field :ltv
+
+.control-group
+  = f.label :cltv, class: 'control-label'
+  .controls
+    = f.text_field :cltv
+
+.control-group
+  = f.label :debt_ratio, class: 'control-label'
+  .controls
+    = f.text_field :debt_ratio
+
+.control-group
+  = f.label :comb_ratio, class: 'control-label'
+  .controls
+    = f.text_field :comb_ratio
+
+.control-group
+  = f.label :apcrscore, class: 'control-label'
+  .controls
+    = f.text_field :apcrscore
+
+.control-group
+  = f.label :capcrscore, class: 'control-label'
+  .controls
+    = f.text_field :capcrscore
+
+.control-group
+  = f.label :penalty, class: 'control-label'
+  .controls
+    = f.text_field :penalty
+
+.control-group
+  = f.label :loan_prog, class: 'control-label'
+  .controls
+    = f.text_field :loan_prog
+
+.control-group
+  = f.label :marital, class: 'control-label'
+  .controls
+    = f.text_field :marital
+
+.control-group
+  = f.label :maritalc, class: 'control-label'
+  .controls
+    = f.text_field :maritalc
+
+.control-group
+  = f.label :apl_age, class: 'control-label'
+  .controls
+    = f.text_field :apl_age
+
+.control-group
+  = f.label :co_apl_age, class: 'control-label'
+  .controls
+    = f.text_field :co_apl_age
+
+.control-group
+  = f.label :cash_out, class: 'control-label'
+  .controls
+    = f.text_field :cash_out
+
+.control-group
+  = f.label :doc_type, class: 'control-label'
+  .controls
+    = f.text_field :doc_type
+
+.control-group
+  = f.label :amort_term, class: 'control-label'
+  .controls
+    = f.text_field :amort_term
+
+.control-group
+  = f.label :amorttype, class: 'control-label'
+  .controls
+    = f.text_field :amorttype
+
+.control-group
+  = f.label :apprvalue, class: 'control-label'
+  .controls
+    = f.text_field :apprvalue
+
+.control-group
+  = f.label :lender_fee, class: 'control-label'
+  .controls
+    = f.text_field :lender_fee
+
+.control-group
+  = f.label :broker_fee, class: 'control-label'
+  .controls
+    = f.text_field :broker_fee
+
+.control-group
+  = f.label :orig_fee, class: 'control-label'
+  .controls
+    = f.text_field :orig_fee
+
+.control-group
+  = f.label :disc_pnt, class: 'control-label'
+  .controls
+    = f.text_field :disc_pnt
+
+.control-group
+  = f.label :dpts_dl, class: 'control-label'
+  .controls
+    = f.text_field :dpts_dl
+
+.control-group
+  = f.label :houseprp, class: 'control-label'
+  .controls
+    = f.text_field :houseprp
+
+.control-group
+  = f.label :mnthdebt, class: 'control-label'
+  .controls
+    = f.text_field :mnthdebt
+
+.control-group
+  = f.label :employee_loan, class: 'control-label'
+  .controls
+    = f.select :employee_loan, [['', nil], ['Yes', true], ['No', false]]
+
+.control-group
+  = f.label :reportable, class: 'control-label'
+  .controls
+    = f.select :reportable, [['', nil], ['Yes', true], ['No', false]]
+
+.control-group
+  = f.label :comments, class: 'control-label'
+  .controls
+    = f.text_field :comments
+
+.control-group
+  = f.label :aprace, class: 'control-label'
+  .controls
+    = f.text_field :aprace
+
+.control-group
+  = f.label :caprace, class: 'control-label'
+  .controls
+    = f.text_field :caprace
+
+.control-group
+  = f.label :macode, class: 'control-label'
+  .controls
+    = f.text_field :macode
+
+.control-group
+  = f.label :cntycode, class: 'control-label'
+  .controls
+    = f.text_field :cntycode
+
+.control-group
+  = f.label :stcode, class: 'control-label'
+  .controls
+    = f.text_field :stcode
+
+.control-group
+  = f.label :censustrct, class: 'control-label'
+  .controls
+    = f.text_field :censustrct
+
+.form-actions
+  = f.submit 'Save Changes', :class => 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")),
+      compliance_hmda_loan_compliance_events_path, :class => 'btn'

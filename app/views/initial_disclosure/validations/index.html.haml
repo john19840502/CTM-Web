@@ -1,0 +1,45 @@
+.underwriter_validation{:"ng-controller" => 'InitialDisclosureValidationCtrl'}
+  %base{href: root_initial_disclosure_validations_path}
+  .page-header
+    %h2 Initial Disclosure Validations 
+
+  %form.well.form-search
+    %input.search-query{:type => 'text', :placeholder => 'Enter a loan number', :id => 'loan_id', :"ng-model" => 'loan_number'}
+    %input.btn.btn-inverse{:type => 'submit', :value => 'Display Loan', :"ng-click" => 'getLoan()'}
+    %span.loader{"ng-show" => "loading_loan"}
+
+  .alert.alert-block.alert-error{:"ng-if" => "error_loading_loan", style: ""}
+    Failed to load loan.  Reason:  {{error_loading_message}}
+    
+  .loan-container{:"ng-if" => "loan"}
+    =render :partial => 'shared/index_header.html.haml'
+    = render partial: 'shared/manual_fact_types'
+
+  .validations-container{:"ng-if" => "validating"}
+    %h1.lead 
+      Validation Status:
+      %span.result{"ng-class" => "setClass(validation_status)"} 
+        {{ validation_status | uppercase }}
+      %span{"ng-show" => "loading_validation_flag"}
+        %span.orange-spinner
+
+    %validation-results{:errors => 'errors', :warnings => 'warnings', :"loan-number" => 'loan_number', :"validation-type" => "'initial_disclosure'"}
+
+    .flow-results-container
+
+      .left_container
+        %span.header Validations
+        %span.header Conclusions
+
+        = render 'shared/validations/normal_validations'
+              
+      .right_container
+        %span.header Informative Validations
+
+        = render 'shared/validations/info_validations'
+
+
+    .lead Data Comparison
+    = render :partial => 'shared/data_compare'
+
+

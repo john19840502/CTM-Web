@@ -1,0 +1,2 @@
+module Accounting::BranchIncentivesReportsHelper
+end

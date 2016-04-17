@@ -1,0 +1,88 @@
+/* Print CSS 
+*/
+@page {
+  size: landscape;
+}
+
+#main, .container, body {width: 100%; margin: 0; float: none;}
+
+caption {
+  padding-bottom: 20px;
+}
+
+.dataTables_filter label {
+  display: none;
+}
+
+.print-page {
+  display: none;
+}
+
+#navigation, #footer, #debug, #navigation_tabs, .breadcrumb {
+  display: none;
+}
+
+table {
+  font: 11px/24px Verdana, Arial, Helvetica, sans-serif;
+  width: 99.8%;
+}
+
+tbody tr td {
+  border-top: 1px solid;
+}
+
+.button-functions {
+  display: none;
+}
+
+.last-transaction {
+  display: none;
+}
+
+.profiler-results {
+  display: none;
+}
+
+
+#statistic-report-search {
+  display: none;
+}
+
+.action-btns {
+  display: none;
+}
+.chart {
+  width: 575px;
+  border: 1px solid red;
+  float: left;
+  margin-right: 30px;
+  margin-left: 40px;
+  margin-bottom: 275px;
+}
+
+.chart-table {
+  width: 100%;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.report-info-container {
+  float: left;
+  margin-top: -25px;
+}
+.lead {
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: 200;
+  line-height: 5px;
+  float: left;
+  padding-right: 2px;
+}
+
+.report-info {
+  width: 195px;
+}
+
+.param-vals {
+  font-style: italic;
+}

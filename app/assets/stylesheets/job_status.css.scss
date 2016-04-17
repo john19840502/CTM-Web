@@ -1,0 +1,12 @@
+// Place all the styles related to the job_status controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.job-started {
+  margin-bottom: 0px;
+}
+
+.job-failed {
+  color: red;
+  text-decoration: underline;
+}

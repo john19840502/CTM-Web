@@ -1,0 +1,113 @@
+!!!
+%html{xmlns: "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{content: "width=device-width", name: "viewport"}/
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title CTM Email
+    :css
+      * { 
+        margin:0;
+        padding:0;
+      }
+      * { font-family: Verdana, Geneva, sans-serif; }
+      
+      img { 
+        max-width: 100%; 
+      }
+      .collapse {
+        margin:0;
+        padding:0;
+      }
+      body {
+        -webkit-font-smoothing:antialiased; 
+        -webkit-text-size-adjust:none; 
+        width: 100%!important; 
+        height: 100%;
+      }
+      a { color: #2BA6CB;}
+      h1,h2,h3,h4,h5,h6 {
+      font-family: Verdana, Geneva, sans-serif; 
+      /*color:#EF8331;*/
+      color:#FF0000;
+      }
+        h4 {
+          font-weight:lighter;
+        }
+      p, ul { 
+        margin-bottom: 10px; 
+        font-weight: normal; 
+        font-size:13px; 
+        line-height:16px;
+      }
+      .content {
+        padding:15px;
+        max-width:600px;
+        margin:0 auto;
+        display:block; 
+      }
+      .content table { width: 100%; }
+      @media only screen and (max-width: 600px) {
+        
+        a[class="btn"] { display:block!important; margin-bottom:10px!important; background-image:none!important; margin-right:0!important;}
+      
+        div[class="column"] { width: auto!important; float:none!important;}
+        
+        table.social div[class="column"] {
+          width:auto!important;
+        }
+      }
+  %body{bgcolor: "#FFFFFF"}
+  
+    / / HEADER
+    / %table.head-wrap{align: "center", bgcolor: "#F2741A", border: "0", cellpadding: "0", cellspacing: "0", style: "margin:0 auto;", width: "100%"}
+    /   %tr
+    /     %td
+    /     %td.header.container{height: "30", style: "display:block !important; max-width:600px; clear:both !important;height:30px;"}
+    /     %td
+    / / /HEADER
+
+    / BODY
+    %table.body-wrap{align: "center", border: "0", cellpadding: "0", cellspacing: "0", style: "margin:0 auto;", width: "600"}
+      %tr
+        %td
+        %td.container{bgcolor: "#FFFFFF", style: "display:block !important; clear:both !important;"}
+          .content
+            %table
+              %tr
+                %td{style: "font-family: Verdana, Geneva, sans-serif; font-size:13px;line-height:16px;"}
+                  %h3{align: "left", style: ""}
+                    / %img{src: "http://www.coletaylormortgage.com/wp-content/uploads/2012/08/cole_taylor_mortgage_logo.png"}/
+                    - attachments.inline['mbfb_logo.jpg'] = File.read('lib/assets/images/mbfb_logo.jpg')
+                    = image_tag attachments['mbfb_logo.jpg'].url, alt: 'MB Logo'
+
+                  %p
+                  %hr{color: "#FF0000", size: "1", width: "100%"}/
+                  %p
+
+                  = yield
+
+                  %p
+                  %hr{color: "#FF0000", size: "1", width: "100%"}/
+                  %p
+
+                  = render partial: "layouts/emails/signature"
+
+                  %span.clear{style: "display:block;clear:both;"}
+    / /BODY
+              
+    / FOOTER
+    %table.footer-wrap{align: "center", style: "clear:both!important;margin:0 auto;", width: "600"}
+      %tr
+        %td
+        %td.container{style: "clear:both !important;"}
+          / content
+          .content{style: "padding:0 15px; max-width:600px; display:block;"}
+            %table
+              %tr
+                %td
+                  %h5{style: ""}
+                  %p{style: "font-size:10px; color:#6f6f6f;"}
+                    The information provided is solely for use by employees of MB Financial Bank and is not for distribution to consumers. Information is subject to change without notice.
+          / /content
+        %td
+    / /FOOTER

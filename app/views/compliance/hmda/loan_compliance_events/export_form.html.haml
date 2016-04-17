@@ -1,0 +1,16 @@
+
+%h2 Choose date range for export:
+
+=form_tag( { action: :export, format: 'csv' }, method: :get, :class => 'form-inline', id: 'export_form') do
+  %label{for: "from"} From:
+  %input.required.datepicker{id: "from", name: "from"}
+  %label{for: "to"} To:
+  %input.required.datepicker{id: "to", name: "to"}
+  %button.btn.btn-primary Export to CRA Wiz
+
+= link_to "Back to events", compliance_hmda_loan_compliance_events_path
+
+:javascript
+  $(document).ready(function() {
+    $('#export_form').validate();
+  })

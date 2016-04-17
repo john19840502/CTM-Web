@@ -1,0 +1,7 @@
+.page-header
+  %h2= @title
+
+= form_tag [:search, :credit_suisse_funding_exports], method: 'get', class: 'well form-search' do
+  = text_field_tag :id, nil, placeholder: 'Loan ID', class: 'search-query'
+  = submit_tag "Display Loan", class: 'btn btn-inverse'
+

@@ -1,0 +1,94 @@
+/ Development Content
+/ Added scroll to avoid extra wide pages when session cookie value forces it
+#debug{:style => "margin:20px;border:1px solid red;padding:20px;overflow: scroll;"}
+  %table
+    %tr
+      %td
+        %h2 DOMAIN INFORMATION
+        %ul
+          %li= request.domain
+          %li= request.subdomain
+  
+    %tr
+      %td
+        %h2 USER ROLES
+        %ul
+          - user_roles.each do |role|
+            %li= role
+      %td
+        %h2 USER GROUPS
+        %ul
+          - user_groups.each do |group|
+            %li= "#{group['name']} : #{group['distinguished_name']}"
+
+  %h2 USER
+  %ul
+    / %li= "TEMP ORG: #{current_user.temp_org || 'N/A'}"
+    %li= session[:cas_user]
+    %li= CASClient::Frameworks::Rails::Filter.login_url(self)
+    %li= "Logged in? #{logged_in?}"
+
+  %br
+
+  %h2 SESSION
+  %table{width: '100%'}
+    %thead
+      %tr
+        %th.style{align: 'left'} Key
+        %th.style{align: 'left'} Value
+    %tbody
+      - session.to_hash.each_pair do |k,v|
+        %tr{style: 'border-bottom:1px solid lightgray'}
+          %td{width: '50%'}
+            %code= k
+          %td{width: '50%'}
+            = v
+
+      
+  %br
+
+  %h2 HTTP REQUEST
+  %ul
+    %li= request.method
+    %li= request.host
+    %li= request.subdomain
+
+  %table{width: '100%'}
+    %thead
+      %tr
+        %th.style{align: 'left'} HTTP Header
+        %th.style{align: 'left'} Value
+
+      - request.env.each_pair do |k,v|
+        %tr{style: 'border-bottom:1px solid lightgray'}
+          %td{width: '50%'}
+            %code= k
+          %td{width: '50%'}
+            = v
+
+      %tr
+        %td{colspan: 2}
+          %hr
+
+      / - request.headers.each_pair do |k,v|
+      /   %tr{style: 'border-bottom:1px solid lightgray'}
+      /     %td{width: '50%'}
+      /       %code= k
+      /     %td{width: '50%'}
+      /       = v
+
+  %br
+
+  %h2 CAS EXTRA ATTRIBUTES
+  %table{width: '100%'}
+    %thead
+      %tr
+        %th.style{align: 'left'} Key
+        %th.style{align: 'left'} Value
+    %tbody
+      - session[:cas_extra_attributes] && session[:cas_extra_attributes].each_pair do |k,v|
+        %tr{style: 'border-bottom:1px solid lightgray'}
+          %td{width: '50%'}
+            %code= k
+          %td{width: '50%'}
+            = v

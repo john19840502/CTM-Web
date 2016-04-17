@@ -1,0 +1,13 @@
+%tr
+  %td
+    - if report.bundle.exists? || report.job_status.nil? || (report.job_status.present? && %w(failed completed).include?(report.job_status))
+      = link_to accounting_branch_commission_report_path(report), method: :delete,
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-mini btn-danger' do
+        %i.icon-trash
+        Delete
+
+  %td.download-url
+    = link_to_if report.bundle.exists?, report.name, report.bundle.url
+  %td= date_formatted report.created_at, :format => :full_american
+  %td= status_name report.job_status

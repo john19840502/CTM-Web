@@ -1,0 +1,23 @@
+- content_for(:column_data) do
+  - data.record_list.each do |record|
+    %tr
+      %td= record.id
+      %td= record.borrower_last_name
+      %td= record.loan_purpose
+      %td= record.channel[0..1]
+      %td= record.property_state
+      %td= record.branch_listing
+      %td= record.borrower_requested_loan_amount.to_currency unless record.borrower_requested_loan_amount.blank?
+      %td= record.disbursed_at.strftime('%m/%d/%Y') unless record.disbursed_at.blank?
+      %td
+        %div{id: "note-text-for-loan-#{record.id}"}
+          - if record.funding_request_note
+            .dblclick-edit{:edit_title => 'Edit Loan Note', :edit_path => edit_loan_note_path(:id => record.id)}
+              = record.funding_request_note
+          - else
+            .dblclick-edit{:edit_title => 'New Loan Note', :edit_path => new_loan_note_path(loan_note: { :loan_id => record.id }.merge(LoanNote::FUNDING_REQUEST_CONDITIONS)) }
+              &nbsp;
+      %td
+        %div{id: "note-updated-by-for-loan-#{record.id}"}
+          = record.ctm_user.nil? ? "" : record.ctm_user.domain_login
+= render :file => 'shared/base'

@@ -1,0 +1,23 @@
+%form{'name' => "fact_types"}
+  .row{ style: 'margin-bottom: 15px;' }
+    .span3
+      .btn.btn-primary{ "ng-click" => "performValidations()" } Run Validations
+
+  .row
+    .span3{"ng-repeat" => "d in manual_fact_types"}
+      .controlGroup
+        %label.control-label{for: "{{ d.field_name }} "}
+          {{ d.field_label_text }}
+      .controls
+        %select{ 'name' => "{{ d.field_name }}", 'ng-options' => "type as type for type in d.options", 'ng-model' => 'd.value', 'required' => '' }
+          %option{'style' => "display:none", 'value' => ""} --Choose a value --
+  .row
+    .span3{:"ng-show" => "manual_fact_types.length"}
+      .btn.btn-primary{:"ng-click" => "(fact_types.$pristine || fact_types.$invalid) || saveFactTypes()", 'ng-disabled' => "fact_types.$pristine || fact_types.$invalid"} Save Fact Types
+      %span.loader{"ng-show" => "saving_facts"}
+    
+.alert.alert-block.alert-error{:"ng-if" => "error_saving_message", style: ""}
+  Failed to save fact types.  Reason:  {{error_saving_message}}
+.alert.alert-block.alert-success{:"ng-if" => "fact_types_saved", style: ""}
+  Fact types have been saved.
+

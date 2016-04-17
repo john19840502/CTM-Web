@@ -1,0 +1,11 @@
+.row
+  .span12
+    .lead Branch Commissions Reports
+
+    .pull-right{style: 'margin-bottom: 10px;'}
+      = link_to new_accounting_branch_commission_report_path, class: 'btn btn-mini btn-info' do
+        %i.icon-plus
+        Request New Report
+
+    #reports
+      = render 'accounting/branch_commission_reports/index', reports: @reports

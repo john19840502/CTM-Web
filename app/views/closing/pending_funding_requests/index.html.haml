@@ -1,0 +1,9 @@
+- content_for(:column_data) do
+  - data.record_list.each do |record|
+    %tr
+      %td= record.loan_id
+      %td= record.borrower_last_name
+      %td.date-oneline= record.request_received_at.strftime('%m/%d/%Y %r') unless record.request_received_at.blank?
+      %td= record.disbursed_at.strftime('%m/%d/%Y') unless record.disbursed_at.blank?
+      %td= record.loan_type
+= render :file => 'shared/base'

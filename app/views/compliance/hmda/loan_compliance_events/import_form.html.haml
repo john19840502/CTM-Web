@@ -1,0 +1,37 @@
+- if @job_status.present?
+  .well.well-small
+    = render partial: 'shared/job_status/job_status', locals: { job_status: @job_status }
+
+.page-header
+  %h2 Import Compliance File from MortgageBot
+
+= form_tag({ action: :import}, multipart: true) do
+  .row
+    .span5
+      .control-group
+        .controls
+          = file_field_tag 'lar_file', style: 'line-height: 20px;'
+
+      .control-group
+        %label.control-label{ for: "month" } For Period:
+        .controls
+          = select_tag 'month', options_for_select(Date::MONTHNAMES.each_with_index.collect{|m, i| [m, i]}, 1.month.ago.month), multiple: true, style: 'line-height: 20px;'
+          = select_tag 'year', options_for_select((2010..Date.today.year).to_a.unshift(nil), 1.month.ago.year), style: 'line-height: 20px;'
+
+  .row &nbsp;
+
+  .row
+    .span5
+      .control-group
+        .controls
+          %button.btn.btn-primary Upload File
+          = link_to "Back to Reportable Events", compliance_hmda_loan_compliance_events_path, class: 'btn'
+
+
+
+:javascript
+  JobStatus.initializeJobStatus({
+    onComplete: function(job) {
+      location.href = '#{compliance_hmda_loan_compliance_events_path}';
+    }
+  });

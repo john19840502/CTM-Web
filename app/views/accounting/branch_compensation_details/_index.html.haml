@@ -1,0 +1,15 @@
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+      %th Effective Date
+      %th Traditional Split
+      %th Tiered Low
+      %th Tiered High
+      %th Tiered Amount
+      %th Loan Officer Min (per loan)
+      %th Loan Officer Max (per loan)
+  %tbody
+    - details.sort_by(&:effective_date).reverse.each do |det|
+      %tr
+        = render 'accounting/branch_compensation_details/row', det: det

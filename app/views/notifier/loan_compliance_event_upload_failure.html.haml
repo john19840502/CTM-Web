@@ -1,0 +1,5 @@
+%h3 HMDA loan upload has failed!
+
+%ul
+  - @exception.split('~').each do |e|
+    %li= e

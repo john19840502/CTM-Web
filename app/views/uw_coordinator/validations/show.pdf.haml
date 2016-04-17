@@ -1,0 +1,36 @@
+%table{style: 'width: 100%'}
+  %tr
+    %td
+      = render 'uw_coordinator/validations/partials/logo'
+
+  %tr
+    %td{style: 'text-align:right'}
+      = render 'layouts/shared/loan_header'
+
+  %tr
+    %td &nbsp;
+    %td &nbsp;
+
+
+= render 'uw_coordinator/validations/partials/gfe_dates'
+
+#validation_header.lead Validation Messages
+= render 'shared/process_validations', record: @loan
+
+- @loan.errors[:base].clear
+- @loan.errors[:warning].clear
+- @loan.errors[:info].clear
+- @loan.errors[:validation_error].clear
+
+#compliance_header.lead Compliance Messages
+= render 'shared/process_validations', record: @loan
+
+.page-break
+
+.well
+  .lead-footer= "LOAN #: #{@loan.loan_num} / #{@loan.channel} / #{@loan.loan_purpose}"
+  .lead-footer
+    Printed at 
+    = l Time.now, :format => :full_american
+    by
+    = @current_user.display_name

@@ -1,0 +1,13 @@
+%p Loan #{@loan_id}
+- @loan_data[:sections].each do |section|
+  %br
+  %table.table-striped
+    %thead
+      %tr
+        %td= section[:section]
+    %tbody
+      - section[:questions].each do |question|
+      - next unless question[:visible]
+        %tr
+          %td{width:'450px'}= question[:prompt]
+          %td{width:'150px'}= question[:answer]

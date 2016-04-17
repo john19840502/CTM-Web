@@ -1,0 +1,38 @@
+.edit_item
+  %dl
+    %dt Disclosure Date
+    %dd #{loan.disclosure_date.strftime('%m/%d/%Y')}
+    %dt Loan Officer
+    %dd #{loan.loan_officer}
+    %dt Email
+    %dd #{loan.lo_contact_email}
+    %dt Phone
+    %dd #{loan.lo_contact_number}
+    - if Channel.retail_all_ids.include?(loan.channel)
+      %dt Branch
+      %dd #{loan.branch}
+    - else
+      %dt Area Manager
+      %dd #{loan.area_manager}
+      %dt Institution
+      %dd #{loan.institution}
+      %dt State
+      %dd #{loan.state}
+
+- if loan.assigned_to == "#{current_user.last_name}, #{current_user.first_name}"
+  .edit_item
+    %form.user_action{:method => 'post', :action => registration_forced_registration_path(loan)}
+      %input{:type => "hidden", :name => "_method", :value => "put"}     
+      %input{:type => "hidden", :name => "visible", :value => "true"}
+      %label Action
+      #{build_actions_select}
+      %br
+      %label Comment
+      %textarea{:name => "comment"}
+      %br
+      %p.alert.alert-danger{:style => "display:none;"} Please enter a comment above
+      %input{:type => 'Submit', :disabled => 'disabled'}
+      %br
+- else
+  .edit_item
+    %p You may only update this loan if it is assigned to you.

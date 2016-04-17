@@ -1,0 +1,17 @@
+#save_message
+
+.btn.btn-primary{onclick: "App.uwc_validations(#{@loan.loan_num});"} Run Validations
+.btn.btn-inverse{onclick: "App.uwc_compliance(#{@loan.loan_num});"} Run Compliance
+
+.pull-right
+  = hidden_field_tag :loan_num, @loan.loan_num
+  %a.btn.btn-primary.reg_frm_submit{id: 'reg_submit'} Save
+  %a.btn.btn-success.disabled.pdf_submit{'data-format' => "pdf", id: 'reg_pdf', href: uw_coordinator_validation_path(@loan, :format => :pdf)} Download PDF
+
+%p &nbsp;  
+
+#validation_header.lead{style: 'display:none;'} Validation Messages
+#validation_messages
+
+#compliance_header.lead{style: 'display:none;'}  Compliance Messages
+#compliance_messages

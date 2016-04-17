@@ -1,0 +1,1 @@
+json.borrower_completions @borrower_completions, partial: 'esign/borrower_work_queue/borrower_completion', as: :borrower_completion

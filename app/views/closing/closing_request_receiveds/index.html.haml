@@ -1,0 +1,9 @@
+.page-header
+  %h2 Closing Requests Received
+
+= form_tag [:filter_by_date, :closing, :closing_request_receiveds], method: 'get', class: 'well form-search' do
+  = label_tag :start_date, 'From: '
+  = text_field_tag :start_date, l(Time.now), class: 'datepicker', readonly: true
+  = label_tag :end_date, 'To: '
+  = text_field_tag :end_date, l(Time.now), class: 'datepicker', readonly: true
+  = submit_tag "Search by date", class: 'btn btn-inverse'

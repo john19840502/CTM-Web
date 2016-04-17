@@ -1,0 +1,44 @@
+.row
+  .span3
+    .control-group
+      =label_tag :most_recent_imaged_gfe_date, 'Most Recent Imaged Broker GFE Date', class: 'control-label', style: 'width:255px'
+      .controls
+        = text_field_tag :most_recent_imaged_gfe_date, date_formatted(@uw_registration_validation.most_recent_imaged_gfe_date), class: 'datepicker'
+  .span3
+    .control-group
+      =label_tag :signature_1003_date, 'Initial 1003 Signature Date', class: 'control-label', style: 'width:255px'
+      .controls
+        = text_field_tag :signature_1003_date, date_formatted(@uw_registration_validation.signature_1003_date), class: 'datepicker'
+  .span3 &nbsp;
+  .span3
+    .control-group
+      =label_tag :prior_apr, 'Prior APR', class: 'control-label', style: 'width:255px'       
+      .controls
+        = text_field_tag :prior_apr, @uw_registration_validation.prior_apr
+
+.row
+  .span3
+    .control-group
+      =label_tag :initial_imaged_ctm_gfe_date, 'Initial Imaged Broker GFE Date', class: 'control-label', style: 'width:255px'
+      .controls
+        = text_field_tag :initial_imaged_ctm_gfe_date, date_formatted(@uw_registration_validation.initial_imaged_ctm_gfe_date), class: 'datepicker'
+  .span3
+    .control-group
+      = link_to nil, 'data-toggle' => 'tooltip', 'title' => 'When calculating Date the borrower can close after redisclosure of TIL enter the TIL signature Date for the Imaged TIL' do
+        =label_tag :til_signature_date_from_image, 'TIL Signature Date from the Imaged TIL', class: 'control-label', style: 'width:255px'
+      .controls
+        = text_field_tag :til_signature_date_from_image, date_formatted(@uw_registration_validation.til_signature_date_from_image), class: 'datepicker'
+  .span3 &nbsp;
+  .span3
+    .control-group
+      =label_tag :prior_apr, 'Current APR', class: 'control-label', style: 'width:255px'       
+      #current_apr.controls
+        = @loan.loan_general.additional_loan_datum.apr
+
+.row
+  .span9 &nbsp;
+
+  .span3
+    .control-group
+      =label_tag :apr_increase_decrease, 'APR Increase/Decrease', class: 'control-label', style: 'width:255px'       
+      #apr_increase_decrease.controls= apr_delta(@loan, @uw_registration_validation)

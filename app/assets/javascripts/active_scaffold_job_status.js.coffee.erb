@@ -1,0 +1,21 @@
+
+urlTemplate = _.template "<a href='{{url}}'>{{text}}</a>"
+
+jQuery ->
+  ctrs = $('.as-job-status-container')
+  return unless ctrs.length > 0
+  <% url = CtmdbWeb::Application.routes.url_helpers %>
+  JobStatus.initializeJobStatus
+    onComplete: (job) ->
+      target = $(job).closest("tr").find(".bundle-column")
+      id = $(job).data("record-id")
+      $.ajax "<%= url.download_url_accounting_reports_path %>",
+        type: 'get'
+        data: { id: id }
+        success: (data) ->
+          target.html( urlTemplate { url: data.url, text: data.name })
+          target.removeClass('empty')
+
+
+
+

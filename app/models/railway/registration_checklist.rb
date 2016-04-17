@@ -1,0 +1,2 @@
+class RegistrationChecklist < Checklist
+end

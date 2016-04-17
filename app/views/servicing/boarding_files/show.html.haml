@@ -1,0 +1,53 @@
+
+.row
+  .span10
+    .row
+      .span2 File Name: 
+      .span8= @bf.name
+    .row
+      .span2 Created at:
+      .span8= @bf.created_at
+    - if can?(:manage, BoardingFile) 
+      .row
+        .span2 Url: 
+        .span8.download-url
+          - if @bf.bundle.exists?
+            = link_to @bf.bundle.url, @bf.bundle.url
+          - else
+            No contents - this boarding file was not created
+  .span2= link_to 'All LOI files', servicing_boarding_files_path, class: 'btn btn-primary'
+
+.row
+.row
+  .span12
+#prior_results_box
+  #header Loans in this file:
+  #prior_results_body
+    %table#boarding_files.table-bordered.no-margin{style: 'width:100%'}
+      %thead
+        %tr
+          %th Loan Num
+          %th Amount
+          %th UPB
+          %th Previously Sent In
+      %tbody
+      - @loans.each do |loan|
+        %tr{:class => cycle('one', 'two')}
+          %td= loan.loan_num
+          %td= number_to_currency loan.original_balance
+
+          -# for originated loans, the UPB is always the same as the original balance.
+          %td= number_to_currency loan.original_balance
+
+          -#%td= foo
+          %td= other_boarding_files loan, @bf
+    .alert.alert-success{style: 'margin-top:10px;margin-bottom:5px;'}
+      .row
+        .span1
+          %strong Totals:
+        .span3
+          = @loans.size
+          loans for #{number_to_currency @total}
+        .span2= link_to 'Download as CSV', servicing_boarding_file_path(@bf, format: 'csv')
+
+

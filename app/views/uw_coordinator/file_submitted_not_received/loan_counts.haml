@@ -1,0 +1,38 @@
+- content_for(:page_title) do
+  = "Underwriter Submitted / Not Received - Submit Date Counts"
+- content_for(:extras) do
+  = "&nbsp;".html_safe
+- content_for(:functions) do
+  = "&nbsp;".html_safe
+
+
+.container
+  .row
+    .span6
+      %h3 Counts by Submit Date
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Date
+            %th Total Count
+        %tbody
+          - @date_counts.each do |date_count|
+            %tr
+              - date_count.each do |column|
+                %td= column
+    .span6
+      %h3 Counts by Channel / Date
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Date
+            %th #{Channel.retail.abbreviation}
+            %th #{Channel.wholesale.abbreviation}
+            %th #{Channel.reimbursement.abbreviation}
+        %tbody
+          - @counts_by_channel.each do |date, counts|
+            %tr
+              %td= date
+              %td= counts[Channel.retail.abbreviation]
+              %td= counts[Channel.wholesale.abbreviation]
+              %td= counts[Channel.reimbursement.abbreviation]

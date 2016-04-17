@@ -1,0 +1,16 @@
+- dt_cmp_plans.sort_by(&:effective_date).reverse.each_with_index do |dt_cmp_plan, ix|
+  - plan = dt_cmp_plan.branch_compensation
+
+  - if ix == 0
+    - end_date = Date.today
+  - else
+    - end_date = (dt_cmp_plans.sort_by(&:effective_date)[ix - 1].effective_date - 1.day)
+
+  - dt_cmp_plan.branch_compensation.plan_history_between_dates(dt_cmp_plan.effective_date, end_date).each do |comp_det|  
+
+    %tr
+      %td= link_to_if can?(:read, BranchCompensation), plan.name, accounting_branch_compensation_path(plan)
+      
+      = render 'accounting/branch_compensation_details/row_emps', det: dt_cmp_plan, pid: plan.id, details: comp_det
+      
+      %td= plan.termination_date.present? ? date_formatted(plan.termination_date)  : 'None'

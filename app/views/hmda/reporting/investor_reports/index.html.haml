@@ -1,0 +1,45 @@
+.page-header
+  %h1 HMDA Investor Report
+
+.row
+  .span4
+    %h2 Date Select
+    %p Select the date range desired for the HMDA Investor Report.  
+  
+  .span12
+    %fieldset
+      %legend Select Funding Date Range
+      = semantic_form_for :hmda_report, :action => 'index', :method => :get do |form|
+        = form.inputs do
+          -#= form.semantic_errors
+          = form.input :from_date, :input_html => {:class => 'small date', :value => l(@from_date, :format => :yyyy_mm_dd)}, :hint => 'Enter the starting date for the report'
+          = form.input :to_date,   :input_html => {:class => 'small date', :value => l(@to_date, :format => :yyyy_mm_dd)}, :hint => 'Enter the ending date for the report'
+        = form.buttons do
+          = form.commit_button :label => 'Create Report', :button_html => {:class => 'primary'}
+
+.row
+  .span4
+    %h2 Results
+    %p= "#{@records.size} found"
+    = link_to "Download as Excel", hmda_reporting_investor_reports_path(:format => 'xls', :from_date => @from_date.to_s(:yyyy_mm_dd), :to_date => @to_date.to_s(:yyyy_mm_dd)), :class => 'btn success'
+    
+  .span12
+    - if @records.empty?
+      %h5 No records found for indicated period
+    - else
+      %h2= "Funded Unsold Loans (#{l(@from_date, :format => :yyyy_mm_dd)} to #{l(@to_date, :format => :yyyy_mm_dd)})"
+      / #pager.pager
+      %table.zebra-striped.condensed-table.bordered-table{:id => 'hmda_report_table_sorted'}
+        %thead
+          %tr
+            - @columns.each do |column|
+              %th= column.to_s.humanize
+        %tbody
+          - @records.each do |record|
+            %tr
+              - @columns.each do |column|
+                %td
+                  - if column.to_s == 'loan_num'
+                    = render :partial => '/layouts/shared/loan_summary_modal', :locals => {:loan => record}
+                  - else
+                    = record.send(column.to_s)

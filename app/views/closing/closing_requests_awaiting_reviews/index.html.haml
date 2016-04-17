@@ -1,0 +1,36 @@
+- content_for(:extras) do
+  .extra-info
+    %strong Total Count
+    = data.record_list.size
+    = " | "
+    = link_to "Channel Counts", '#', :class => 'btn btn-mini btn-primary', :data => {:toggle => 'modal', :url => channel_counts_closing_closing_requests_awaiting_reviews_path, :title => 'Channel Count', 'modal-options' => {'width' => 100}}
+
+- content_for(:column_data) do
+  - data.record_list.each do |record|
+    %tr
+      %td= record.loan_id
+      %td= record.loan_purpose
+      %td= record.channel
+      %td= record.loan_status
+      %td= record.originator_name
+      %td= record.area_manager
+      %td= record.branch_name
+      %td= record.borrower
+      %td= record.state
+      %td.date-oneline= record.submitted_at.strftime('%m/%d%Y %r') unless record.submitted_at.blank?
+      %td.date-oneline= record.closing_at.strftime('%m/%d%Y %r') unless record.closing_at.blank?
+      %td.date-oneline= record.lock_expire_at.strftime('%m/%d%Y %r') unless record.lock_expire_at.blank?
+      %td
+        %div{id: "note-text-for-loan-#{record.id}"}
+          - if record.closing_request_notes.first
+            .dblclick-edit{:edit_title => 'Edit Loan Note', edit_path: edit_loan_note_path(:id => record.closing_request_notes.first.id)}
+              = record.closing_request_notes.first.text
+          - else
+            .dblclick-edit{:edit_title => 'New Loan Note', edit_path: new_loan_note_path(loan_note: { :loan_id => record.id }.merge(LoanNote::CLOSING_REQUEST_CONDITIONS))}
+              &nbsp;
+      %td
+        %div{id: "note-updated-by-for-loan-#{record.id}"}
+          - if record.note_last_updated_by
+            = record.note_last_updated_by
+
+= render :file => 'shared/base'

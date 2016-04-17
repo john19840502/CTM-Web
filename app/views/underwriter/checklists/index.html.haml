@@ -1,0 +1,7 @@
+.page-header
+  %h2 Underwriter Checklists
+
+= form_tag [:search, :underwriter, :checklists], method: 'get', class: 'well form-search' do
+  = text_field_tag :loan_id, nil, placeholder: 'Loan ID', class: 'search-query'
+  = submit_tag "Display Checklist", class: 'btn btn-inverse'
+  = submit_tag 'Download as PDF', class: 'btn btn-inverse'

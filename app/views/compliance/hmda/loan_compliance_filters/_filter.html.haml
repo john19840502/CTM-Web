@@ -1,0 +1,5 @@
+.row
+  .span12
+    .lead
+    =form_tag( { action: :index}, method: :get, :class => 'form-horizontal', id: 'filter_select') do
+      = select_tag(:filter_number, options_for_select(LoanComplianceFilter::FILTER_NAME_AND_VALUE, @filter_num), :prompt => "Navigate to Filter...", :onchange => 'this.form.submit()',)

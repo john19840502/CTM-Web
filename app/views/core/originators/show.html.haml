@@ -1,0 +1,60 @@
+.row
+  .span12
+    .lead
+      = @originator.name
+      - unless @originator.is_active?
+        %strong :: Inactive since #{ date_formatted @originator.terminated_at }
+
+    - @originator.multi_institutions.each do |mi|
+
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Branch Name
+        %tbody
+          %tr
+            %td= link_to_if can?(:read, Institution), mi.branch.branch_name, core_institution_path(mi.branch)
+
+      - profiles = @originator.profiles_for_branch(mi.institution_id)
+      - profile = profiles.try(:first)
+      = render 'accounting/datamart_user_profiles/show', profiles: profiles, bid: mi.institution_id, uid: @originator.id
+
+      %ul.nav.nav-tabs
+        %li
+          %a{ href: ("#loans_#{mi.institution_id}"), 'data-toggle' => "tab" } Loans
+        - unless profile.try(:title).eql?("Branch Manager / NON Storefront")
+          %li
+            %a{ href: ("#comp_plans_#{mi.institution_id}"), 'data-toggle' => "tab" } Compensation Plans
+        - if ["Branch Sales Manager", "Branch Manager Storefront", "Processor"].include?(profile.try(:title))
+          %li
+            %a{ href: ("#non_plan_comps_#{mi.institution_id}"), 'data-toggle' => "tab" } Non-LO Compensations
+
+      .tab-content
+        .tab-pane{id: ("loans_#{mi.institution_id}")}
+
+          = render 'core/loans/index', loans: @originator.loans_for_branch(mi.institution_id).order(:id).page(1).per(20), parent: "lo", pid: @originator.username, bid: mi.institution_id
+
+        - unless profile.try(:title).eql?("Branch Manager / NON Storefront")
+          .tab-pane{id: ("comp_plans_#{mi.institution_id}")}
+
+            .pull-right{style: 'margin-bottom: 10px;'}
+              - if can?(:manage, DatamartUserCompensationPlan)
+                = link_to new_accounting_datamart_user_compensation_plan_path(eid: @originator.id, bid: mi.branch.id), class: 'btn btn-mini btn-info' do
+                  %i.icon-plus
+                  Assign New Plan
+
+            = render 'accounting/branch_compensations/index_emps', dt_cmp_plans: @originator.compensation_history_for_branch(mi.institution_id), bid: mi.institution_id
+
+        - if ["Branch Sales Manager", "Branch Manager Storefront", "Processor"].include?(profile.try(:title))
+          .tab-pane{id: ("non_plan_comps_#{mi.institution_id}")}
+
+            .pull-right{style: 'margin-bottom: 10px;'}
+              - if can?(:manage, BranchEmployeeOtherCompensation)
+                = link_to new_accounting_branch_employee_other_compensation_path(uid: @originator.id, bid: mi.institution_id), class: 'btn btn-mini btn-info' do
+                  %i.icon-plus
+                  Add New Non-LO Compensation
+
+            = render 'accounting/branch_employee_other_compensations/index', non_plan_comps: @originator.non_plan_comps_for_branch(mi.institution_id), bid: mi.institution_id, uid: @originator.id
+
+      %hr    
+

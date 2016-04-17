@@ -1,0 +1,24 @@
+.tabbable
+  %ul.nav.nav-pills.save-modelers
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#1"} 
+        Dodd-Frank
+    %li
+      %a{"data-toggle" => "tab", :href => "#2"} 
+        Freddie Relief
+    %li
+      %a{"data-toggle" => "tab", :href => "#3"} 
+        Funding
+    %li
+      %a{"data-toggle" => "tab", :href => "#4"} 
+        Broker Comp
+.well-two  
+  .tab-content
+    #1.tab-pane.active
+      = render 'closing/loan_modeler_pre_trids/partials/dodd_frank_modeler'
+    #2.tab-pane
+      = render 'closing/loan_modeler_pre_trids/partials/freddie_relief_modeler'
+    #3.tab-pane
+      = render 'closing/loan_modeler_pre_trids/partials/funding_breakdown_modeler'
+    #4.tab-pane
+      = render 'closing/loan_modeler_pre_trids/partials/broker_compensation_modeler'

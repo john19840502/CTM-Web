@@ -1,0 +1,6 @@
+- content_for(:page_title) do
+  = "Underwriter Submit Date Exceptions"
+- content_for(:functions) do
+  = "&nbsp;".html_safe
+  = "Submit File to UW requests must occur on Instance #1 in order to set the Submission Date. The following loans were submitted using a higher Instance number. Please correct Instance #1. Email MTGSystems@mbmortgage.com providing the Loan Number and required Submission Date."
+= render :file => 'shared/base', :layout => nil

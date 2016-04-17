@@ -1,0 +1,16 @@
+%table.header
+  %tr
+    %td.logo
+    %td.content
+      .lead LOAN #: {{loan.loan_num}} / {{loan.channel}} / {{loan.purpose_type}}
+      .lead.f16 Loan Status: {{loan.loan_status}} / Lock Status: {{loan.lock_status}}
+      .lead.f16{"ng-show" => "loan.lock_details.not_locked"} Not Locked
+      .lead.f16{"ng-hide" => "loan.lock_details.not_locked"}
+        %span{"ng-show" => "loan.lock_details.lock_date"} Lock Date: {{ loan.lock_details.lock_date }}
+        %span{"ng-show" => "loan.lock_details.lock_period"} / Lock Period: {{ loan.lock_details.lock_period }}
+        %span{"ng-show" => "loan.lock_details.lock_expiration"} / Lock Expiration Date: {{ loan.lock_details.lock_expiration }}
+      .lead.f16 Primary Borrower: {{loan.borrowers[0].first_name}} {{loan.borrowers[0].last_name}}
+      %h5 {{loan.underwriter}}
+  %tr
+    %td &nbsp;
+    %td &nbsp;

@@ -1,0 +1,9 @@
+.row
+  .span12
+    .lead 
+      Add Compensation Plan for Branch 
+      = link_to_if can?(:read, BranchCompensation), "#{@plan.branch.branch_name} :: #{@plan.branch.institution_number}", core_institution_path(@plan.branch)
+
+    - if can?(:manage, BranchCompensation)
+      = form_for @plan, url: accounting_branch_compensations_path, method: :post, html: { class: 'form-horizontal' } do |f|
+        = render 'accounting/branch_compensations/form', f: f

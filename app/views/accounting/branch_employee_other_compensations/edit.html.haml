@@ -1,0 +1,18 @@
+.row
+  .span12
+    .lead 
+      Edit Non-LO Compensations for Loan Officer
+      = link_to_if can?(:read, BranchEmployeeOtherCompensation), @branch_employee_other_compensation.branch_employee.name, core_originator_path(@branch_employee_other_compensation.branch_employee) 
+      of Branch 
+      = link_to_if can?(:read, Institution), "#{@branch_employee_other_compensation.branch.branch_name} :: #{@branch_employee_other_compensation.branch.institution_number}", core_institution_path(@branch_employee_other_compensation.branch)
+
+    - if can?(:manage, BranchEmployeeOtherCompensation)
+      = form_for @branch_employee_other_compensation, url: accounting_branch_employee_other_compensation_path(@branch_employee_other_compensation), html: { class: 'form-horizontal' } do |f|
+
+        = render 'accounting/branch_employee_other_compensations/form', f: f, 
+            profile: @branch_employee_other_compensation.branch_employee.current_profile_for_branch( @branch_employee_other_compensation.institution_id)
+
+        .form-actions
+          = f.submit 'Save Changes', :class => 'btn btn-primary'
+          = link_to t('.cancel', :default => t("helpers.links.cancel")),
+              core_originator_path(@branch_employee_other_compensation.datamart_user_id), :class => 'btn'

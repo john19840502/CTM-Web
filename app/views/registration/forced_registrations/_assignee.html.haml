@@ -1,0 +1,17 @@
+%form{:method => 'post', :action => registration_forced_registration_path(loan), :style => "margin:0px;"}
+  %input{:type => "hidden", :name => "_method", :value => "put"}
+  - if can_reassign
+    %select{:name => "assigned_to"}
+      %option{value: "unassigned"}
+      - users.each do |user|
+        - if loan.assigned_to == "#{user.name}"
+          %option{:value => "#{user.name}", :selected => 'selected'} #{user.name}
+        - else 
+          %option{:value => "#{user.name}"} #{user.name}
+  - else
+    - if can_self_assign && loan.assigned_to == "unassigned"
+      %input{:type => "hidden", :name => "assigned_to", :value => "#{current_user.last_name}, #{current_user.first_name}"}  
+      %input{:type => "Submit", :value => "Assign to Me"}
+    - else
+      #{loan.assigned_to}
+

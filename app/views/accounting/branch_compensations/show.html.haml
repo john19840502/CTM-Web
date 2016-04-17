@@ -1,0 +1,38 @@
+.row
+  .span12
+    .lead 
+      Compensation Plan #{@plan.name} for Branch 
+      = link_to_if can?(:read, Institution), "#{@plan.branch.branch_name} :: #{@plan.branch.institution_number}", core_institution_path(@plan.branch)
+    .lead{style: 'font-size: 14px'}= "Termination Date: #{date_formatted(@plan.termination_date)}" if @plan.termination_date.present?
+    .lead
+      - if can?(:manage, BranchCompensation)
+        = link_to edit_accounting_branch_compensation_path(@plan), class: 'btn btn-warning' do
+          %i.icon-pencil
+          Edit Plan
+
+    %ul.nav.nav-tabs
+      %li.active
+        %a{ href: "#details", 'data-toggle' => "tab" } #{@plan.name} Details History
+      %li
+        %a{ href: "#originators", 'data-toggle' => "tab" } Loan Officers assigned to #{@plan.name}
+
+    .tab-content
+      .tab-pane.active#details
+
+        .pull-right{style: 'margin-bottom: 10px;'}
+          - if can?(:read, BranchCompensationDetail)
+            = link_to new_accounting_branch_compensation_detail_path(pid: @plan.id), class: 'btn btn-mini btn-info' do
+              %i.icon-plus
+              Add New Details
+
+        = render 'accounting/branch_compensation_details/index', details: @plan.branch_compensation_details, pid: @plan.id
+
+      .tab-pane#originators
+
+        .pull-right{style: 'margin-bottom: 10px;'}
+          - if can?(:read, DatamartUserCompensationPlan)
+            = link_to new_accounting_datamart_user_compensation_plan_path(pid: @plan.id), class: 'btn btn-mini btn-info' do
+              %i.icon-plus
+              Assign New Loan Officer
+
+        = render 'core/originators/index_plans', originators: @plan.employees.order("is_active desc, last_name asc").page(1).per(20), pid: @plan.id, parent: "compensation"

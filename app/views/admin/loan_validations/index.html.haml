@@ -1,0 +1,10 @@
+.lead Loan Validations
+%p= link_to 'Validate Loans', admin_loan_validations_path, {:method => :post }
+
+%p
+  Last loan validated on 
+  = @loan_validated_time.strftime("%m/%d/%Y %H:%M:%S")
+  (EST)
+%p 
+  Loans validatd today : 
+  = @loans_validated

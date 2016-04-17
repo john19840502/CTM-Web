@@ -1,0 +1,75 @@
+.underwriter_validation{:"ng-controller" => 'ClosingValidationCtrl'}
+  %base{href: closing_validations_path}
+  .page-header
+    %h2 Validations
+
+  %form.well.form-search
+    %input.search-query{:type => 'text', :placeholder => 'Enter a loan number', :id => 'loan_id', :"ng-model" => 'loan_number'}
+    %input.btn.btn-inverse{:type => 'submit', :value => 'Display Loan', :"ng-click" => 'getLoan()'}
+    %span.loader{"ng-show" => "loading_loan"}
+  
+  .alert.alert-block.alert-error{:"ng-if" => "loan_not_found", style: ""}
+    Loan not found or you are not allowed to view it.
+
+  .loan-container{:"ng-if" => "loan"}
+    = render 'shared/index_header'
+
+    %span{:"ng-if" => "loan.trid_loan"}
+      = render 'disclose_via'    
+      = render 'shared/right_to_delay'
+      
+    = render 'shared/texas_only'
+
+    = render 'shared/manual_fact_types'
+
+    %h1.lead 
+      Validation Status:
+      %span.result{"ng-class" => "setClass(validation_status)"} 
+        {{ validation_status | uppercase }}
+      %span{"ng-show" => "loading_validation_flag"}
+        %span.orange-spinner
+
+    %validation-results{:errors => 'errors', :warnings => 'warnings', :"loan-number" => 'loan_number', :"validation-type" => "'closing'" }
+
+    .flow-results-container
+      .left_container
+        %span.header Validations
+        %span.header Conclusions
+
+        = render 'shared/validations/normal_validations'
+        
+      .right_container
+        %span.header Informative Validations
+
+        = render 'shared/validations/info_validations'
+
+    .lead 1. Program Guidelines
+    = render 'shared/index_program_guidelines'
+
+    .lead 2. Borrowers Information
+    = render 'shared/index_borrower_information'
+    
+    .lead 3. Property Information
+    = render 'shared/index_property_information'
+    
+    .lead 4. Loan Information
+    = render 'shared/index_loan_information'
+    
+    .lead 5. Asset Information
+    = render 'shared/index_asset_information'
+
+    .lead 6. Closing Checklist
+    %closing-checklist{"loan-number" => "loan_number"}
+
+    .lead 7. Settlement Agent Audit
+    %settlement-agent-audit{"loan-number" => "loan_number"}
+
+    .lead 8. Data Comparison
+    = render :partial => 'shared/data_compare'
+
+    = render 'shared/index_footer'
+
+    :javascript
+      $('body').on('focus',".datepicker", function(){
+        $(this).datepicker();
+      });

@@ -1,0 +1,16 @@
+development: &base_config
+  base_url: <%= ENV["NO_VALIDATIONS"] ? "http://localhost:3900/api" : "http://ctmdecisionator.dev.ctmtg.com/api" %>
+
+qa: &qa
+  <<: *base_config
+  base_url: "http://ctmdecisionator-qa/api"
+
+test:
+  <<: *base_config
+
+trid_uat:
+  base_url: "http://ctmdecisionator.trid.ctmtg.com/api"
+
+production:
+  <<: *base_config
+  base_url: "http://ctmdecisionator/api"

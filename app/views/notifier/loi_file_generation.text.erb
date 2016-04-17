@@ -1,0 +1,6 @@
+<% if @status %>
+<%= @loan_count %> loans have been added to tonights boarding file.
+<% else %>
+The boarding file failed to generate.
+<%= @msg %>
+<% end %>

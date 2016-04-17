@@ -1,0 +1,54 @@
+.esign_borrower_completions{"ng-controller" => "EsignBorrowerQueueCtrl"}
+  %base{href: esign_borrower_work_queue_index_path}
+  .page-header
+    %h2 Borrower Completions
+
+  %span.loader{"ng-show" => "loading_data"}
+  %table.table.table-striped.table-bordered#work_queue
+    %thead
+      %tr
+        %th Loan Number
+        %th Borrower Name
+        %th Product
+        %th Signing Completion
+        %th Assignee
+        %th Action
+        %th
+          %span.loader{"ng-show" => "loading_pdf"}
+    %tbody
+      %tr{"ng-repeat": "bc in borrower_completions track by $index"}
+        %td {{bc.loan_number}}
+        %td {{bc.full_name}}
+        %td {{bc.product}}
+        %td {{bc.esign_completed_date | date:"MM/dd/yyyy h:mm a"}}
+        %td
+          %form{"ng-submit" => "assignUser($event)", :style => "margin:0px;", :"ng-if" => "#{can_edit?}"}
+            %input{:type => "hidden", :name => "action", :value => "{{bc.update_path}}" }
+            %input{:type => "hidden", :name => "id", :value => "{{bc.id}}"}
+            %span{"ng-if" => "#{is_assigner?}"}
+              %input{type: :hidden, name: "override", value: true}
+              %select{name: "assignee"}
+                %option{value: "", "ng-selected": "'{{bc.assignee}}' == ''"}
+                - assignable_users.each do |user|
+                  %option{value: "#{user}", "ng-selected": "'{{bc.assignee}}' == '#{user}'"} #{user}
+              %input{type: :submit, value: "Assign"}
+            %span{"ng-if" => "#{!is_assigner?}", "ng-hide" => "bc.assignee && !bc.assignment_error"}
+              %input{type: :hidden, name: "assignee", value: current_user_name}
+              %input{type: :hidden, name: "override", value: "{{bc.assignment_error}}"}
+              %input{type: :submit, value: "Assign to Me"}
+              %p{"ng-show" => "bc.assignment_error", :style => "background-color: orange;"}
+                This was already assigned to {{bc.assignee}}. Resubmit to override.
+          %span{"ng-show" => "#{!can_edit?} || (#{!is_assigner?} && ((bc.assignee)) && !((bc.assignment_error)))"}
+            {{bc.assignee}}
+        %td 
+          %form{"ng-submit" => "setStatus($event)", :style => "margin:0px;", :"ng-show" => "#{can_edit?} && (((bc.assignee)) == '#{current_user_name}')"}
+            %input{:type => "hidden", :name => "action", :value => "{{bc.update_path}}" }
+            %select{name: "status", "ng-model": "bc.status"}
+              %option{value: "To be reviewed"} To be reviewed
+              %option{value: "Task completed"} Task completed
+            %input{type: :submit, value: "Save", "ng-disabled": "bc.status != 'Task completed'"}
+          %span{:"ng-show" => "#{!can_edit?} || (((bc.assignee)) != '#{current_user_name}')"}
+            {{bc.status || "To be reviewed"}}
+        %td 
+          %a{:"ng-href" => "#", :"ng-click" => "loadPackageForLoan(((bc.loan_number)))"}
+            View PDF

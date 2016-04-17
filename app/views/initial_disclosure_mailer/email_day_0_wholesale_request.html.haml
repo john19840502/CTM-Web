@@ -1,0 +1,67 @@
+%h4{style: "color:#FF0000; font-size:18px;line-height:20px;"} Thank you for your recently created application in Mortgagebot!
+%p
+%p{style: "font-family: Verdana, Geneva, sans-serif;font-size:14px;line-height:16px;"}
+  Please follow 
+  %u 
+    %strong all of the steps 
+  below within 24 hours to ensure that MB is able to issue the timely Loan Estimate and other lender-required initial disclosures. MB’s 24 hour policy starts when you have taken the application and this is indicated by the 
+  %u 
+    %strong Interview Date 
+  you imported with your loan. Loans that are not submitted promptly impact our ability to disclose timely and may be subject to cancellation.
+
+%br
+%br
+%h4{style: "color:#FF0000; font-size:18px;line-height:20px;"} STEP 1 – Review what you have imported.
+%p
+%ul{style: "font-family: Verdana, Geneva, sans-serif;font-size:14px;line-height:16px;"}
+  %li Review all tabs in the Mortgagebot 1003 to ensure all inputted information is complete and accurate.
+  %li Make sure the applicant(s)’ U.S. Postal mailing address and email address are complete and accurate. 
+  %li For Refinances, make sure that you have marked any liabilities that will be paid at the closing, so that the ‘Cash to Close’ displays accurately on the Loan Estimate. 
+  %li{ style: "font-weight: bold; text-decoration: underline" } NEW: Always leave the Mortgagebot 1003 Signature Date tab blank. 
+
+%br
+%br
+%h4{style: "color:#FF0000; font-size:18px;line-height:20px;"} STEP 2 – Complete the Broker TRID, Compensation and Affiliate Business Relationship Certification (BCAC) form.
+%p
+
+%ul{style: "font-family: Verdana, Geneva, sans-serif;font-size:14px;line-height:16px;"}
+  %li Upload the completed form to Imageflow. This document can be found in the Resource Center.
+
+%br
+%br
+%h4{style: "color:#FF0000; font-size:18px;line-height:20px;"} STEP 3 - Complete the Itemized Fee Worksheet (IFW) in Mortgagebot. 
+%p
+
+%ul{style: "font-family: Verdana, Geneva, sans-serif;font-size:14px;line-height:16px;"}
+  %li You are responsible for completing this worksheet.   
+  %li Survey Fee and Provider Information is required for all properties in TX, FL and NM. 
+  %li Any additional applicable fees such as condo questionnaire fees, subordination fees, additional recording charges, etc. 
+  %li 
+    %u 
+      %b CLICK Submit Fees 
+    in the IFW upon completion. 
+  %li Please note that MB will complete all title related fees using our national title vendor.
+  %li In addition, a $30 courier fee (required to overnight the Closing Disclosure) will default unless MB is notified to remove the fee. 
+
+%br
+%br
+%h4{style: "color:#FF0000; font-size:18px;line-height:20px;"} STEP 4 –  Submit your request by using the ‘Wholesale Initial Disclosure Request’ screen under the ‘Forms & Docs’ Section in Mortgagebot.
+%p
+
+%ul{style: "font-family: Verdana, Geneva, sans-serif;font-size:14px;line-height:16px;"}
+  %li Complete all of the required fields
+  %li Your contact information is important. Please ensure it is completed. 
+  %li Use the Special Instructions section to communicate any other relevant information i.e. Seller or Realtor credits referenced on the Purchase Contract 
+  %li Step 4 starts our process. By completing this step, you are notifying MB that you are requesting disclosures.
+
+%br
+%br
+%p
+  %span{ style: "color:#FF0000;" } NEXT STEPS
+  – The Initial Disclosure Team will notify the contact person listed in the Initial Disclosure Request screen once the disclosures have been sent to the applicant or if additional information is required to complete the initial disclosure process.  
+
+%p
+%p{style: "font-family: Verdana, Geneva, sans-serif;"} If you have any questions, please contact MB Client Services or your Area Manager.
+
+- content_for :signature do
+  = render '/layouts/emails/signature_initial_disclosure'

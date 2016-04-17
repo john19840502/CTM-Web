@@ -1,0 +1,27 @@
+table#boarding_files thead tr th {
+  text-align:left;
+  padding:5px 5px;
+  background-color: #D9EDF7;
+  opacity: 0.9;
+  color: #666;
+}
+table#boarding_files tr td {
+  text-align:left;
+  padding:5px 5px;
+}
+table#boarding_files th, table#boarding_files td {
+    border-top: 1px solid #D9D9D9;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: top;
+}
+table#boarding_files tbody tr.one {
+  background-color: #fcfcfc;
+}
+table#boarding_files tbody tr.two {
+  background-color: #D9D9D9;
+}
+div.container div.row div.span12 div.alert-info {
+  background: transparent;
+  border: 0;
+}

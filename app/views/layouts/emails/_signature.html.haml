@@ -1,0 +1,14 @@
+%table{width: "100%", align: "left"}
+  %tr
+    %td
+      - if content_for?(:signature)
+        = yield(:signature)
+      - else
+        %h5{style: "font-size:18px; color:#FF0000;padding:0;margin:0;"} MB Lock Desk
+        %br/
+        %span
+          Email:
+          = mail_to "MBlockdesk@mbmortgage.com"
+          %br/
+          Phone:
+          %strong 855.926.2400, Option 3

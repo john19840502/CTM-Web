@@ -1,0 +1,132 @@
+
+= form_tag(fund_submit_closing_loan_modeler_pre_trids_path, {remote: true, class: 'form-horizontal calc', id: 'funding'}) do
+  .lead
+    Funding Breakdown Modeler
+  .errors
+    %div
+  .success
+    %div
+  #fields-invalid
+  #fields-valid
+  .pull-right
+    %table 
+      %tr
+        %td
+          %h6 Comments:
+      %tr
+        %td
+          =text_area_tag :user_comments, @loan.user_comments_funding, class: 'span3 user_comments editable', :rows => '7'
+      %tr
+        %td
+          %em.muted.small
+            =@loan.current_modeler_user_funding
+      %tr
+        %td
+          %em.muted.small
+            =@loan.modeler_date_time_funding
+ 
+  .row
+    = hidden_field_tag :loan_id, @loan.loan_num
+    .row
+
+      %table 
+        %tr
+          %td{style: 'width:248px'}
+            %h5.muted LOS Wire Amount:
+          %td{style: 'padding-top:5px; text-align:right'} 
+            = number_to_currency(@loan.los_wire_modeler)
+        %tr
+          %td{style: 'width:248px'}
+            %h5.muted Wire Amount:
+          %td{style: 'padding-top:5px; text-align:right'} 
+            = @loan.wire_amt_modeler
+        %tr
+          %td{style: 'width:248px'}
+            %h5 LOS Wire Amount - Wire Amount:
+          %td{style: 'font-weight:bold; text-align:right'}
+            = @loan.wire_diff_modeler
+
+        %table{style: 'margin-left:40px', cellpadding: 4} 
+          %tr
+            %td{style: "width:200px;"}  Loan Amount:  
+            %td{style:'text-align:right'} 
+              = number_to_currency(@loan.loan_amount_modeler)
+          %tr 
+            %td NY Mortgage Tax:
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.ny_mtg_tax_modeler)
+          %tr 
+            %td Broker Comp Lender Pd:
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.broker_comp_lndr_pd_modeler)
+          %tr 
+            %td MIP Refund:
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.mip_refund_modeler)
+          %tr
+            %td (Origination):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.origination_fee_fund_modeler)
+          %tr
+            %td (Discount Fee):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.discount_fee_modeler)
+          %tr
+            %td (Appraisal Fee):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.appraisal_fee_fund_modeler)
+          %tr
+            %td (Credit Report):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.credit_report_fund_modeler)
+          %tr
+            %td (Flood Cert.):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.flood_cert_modeler)
+          %tr
+            %td (Interim Interest):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.interim_interest_modeler)
+          %tr
+            %td (Mortgage Insurance Premium):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.mortgage_ins_modeler)
+          %tr
+            %td (VA Funding Fee):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.va_fund_fee_modeler)
+          %tr
+            %td (GRMA Fee):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.grma_fee_modeler)
+          %tr
+            %td (Escrows):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.escrow_modeler)
+          %tr
+            %td (Escrow Holdback):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.escrow_holdback_modeler)
+          %tr
+            %td (Principal Reduction):
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.principal_reduction_modeler)
+          %tr 
+            %td Premium Price:
+            %td{style:'text-align:right'}
+              = number_to_currency(@loan.premium_price_modeler)
+
+          / %tr
+          /   %td Fees Paid By Lender:
+          /   %td{style:'text-align:right'}
+          /     = number_to_currency @loan.fees_paid_by_lender_modeler
+          
+          %tr
+            %td Lender Credit:
+            %td{style:'text-align:right'}
+              = number_to_currency @loan.lender_credit_modeler_df
+          
+          / %tr
+          /   %td Cures:
+          /   %td{style:'text-align:right'}
+          /     = number_to_currency @loan.cures_modeler

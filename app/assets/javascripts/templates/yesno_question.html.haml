@@ -1,0 +1,9 @@
+%tr
+  %td.ng-transclude
+    Question goes here
+  %td
+    %select{"ng-model" => "answer", :required => ""}
+      %option{:value => "", disabled: 'disabled'} Please Select
+      %option Yes
+      %option No
+ 

@@ -1,0 +1,21 @@
+- params = {controller: "core/originators", action: "index"}
+- params.merge!({pid: pid, parent: parent}) if defined? parent
+
+= paginate originators, params: params, remote: true, theme: "bootstrap"
+= page_entries_info originators
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Active?
+      %th Username
+      %th UltiPro #
+      %th Name
+      %th Branches
+      %th Loans
+  %tbody
+    - originators.each do |orig|
+      = render 'core/originators/row', orig: orig
+
+= page_entries_info originators
+= paginate originators, params: params, remote: true, theme: "bootstrap"

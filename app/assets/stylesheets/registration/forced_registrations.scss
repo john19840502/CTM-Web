@@ -1,0 +1,44 @@
+.edit_item{
+  width: 48%;
+  margin-right: 1%;
+  float: left;
+  dl{
+    dt,dd{
+      width: 48%;
+      height: 20px;
+      float: left;
+      margin-left: 0px;
+      margin-right: 1%;
+    }
+  }
+  form{
+    label{
+      width: 20%;
+      margin:2%;
+    }
+    input{
+      float: left;
+    }
+  }
+}
+
+.fa-exclamation {
+  &:before{
+    padding-left: 7px;
+  }
+  color: red;
+  width: 20px;
+}
+
+td.fa-plus-circle{
+  color: green;
+}
+
+td.fa-minus-circle{
+  color: red;
+}
+
+.details-control{
+  height: 100%;
+  width: 100%;
+}

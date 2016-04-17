@@ -1,0 +1,43 @@
+.container
+  .row
+    .span6
+      .updated-at
+        %strong Report Completed
+        = Time.now.strftime('%m/%d/%Y %r')
+    .span6
+  .row
+    .span6
+      %h3 Counts By Submitted Date
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Date
+            %th #{Channel.retail.abbreviation}
+            %th #{Channel.wholesale.abbreviation}
+            %th Daily Total
+        %tbody
+          - @submitted_counts.each do |date, counts|
+            %tr
+              %td= date
+              %td= counts[Channel.retail.abbreviation]
+              %td= counts[Channel.wholesale.abbreviation]
+              %td= (counts[Channel.retail.abbreviation].to_i + counts[Channel.wholesale.abbreviation].to_i)
+
+
+            
+    .span6
+      %h3 Counts by Closing Date
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Date
+            %th #{Channel.retail.abbreviation}
+            %th #{Channel.wholesale.abbreviation}
+            %th Daily Total
+        %tbody
+          - @closing_counts.each do |date, counts|
+            %tr
+              %td= date
+              %td= counts[Channel.retail.abbreviation]
+              %td= counts[Channel.wholesale.abbreviation]
+              %td= (counts[Channel.retail.abbreviation].to_i + counts[Channel.wholesale.abbreviation].to_i)

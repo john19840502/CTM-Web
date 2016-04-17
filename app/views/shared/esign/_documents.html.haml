@@ -1,0 +1,37 @@
+.documents{:"ng-controller" => 'DocumentListingCtrl'}
+  %h4 Document Listings
+
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th Description
+        %th Name
+        %th Page Count
+        %th Marks
+    %tbody
+      -@document_listings.each do |dl|
+        %tr
+          %td #{dl.description}
+          %td #{dl.document_name}
+          %td #{dl.total_page_count}
+          %td 
+            - if dl.document_marks.size > 0
+              %a{"ng-click" => "toggleMarks('show_marks_#{dl.document_id}')"}
+                = "#{dl.document_marks.size}"
+            - else
+              = "#{dl.document_marks.size}"
+        %tr{"ng-show" => "show_marks_#{dl.document_id}"}
+          %td{:colspan => 4}
+            .marks
+              %table.table.table-striped.table-bordered
+                %thead
+                  %tr
+                    %th Page
+                    %th Type
+                    %th Signer
+                %tbody
+                  - dl.document_marks.each do |dm|
+                    %tr
+                      %td Page #{dm.page_number_count}
+                      %td #{dm.mark_type}
+                      %td #{signer_name dm.signer_id}

@@ -1,0 +1,29 @@
+
+.row
+  .span12
+    #prior_results_box
+      #header Boarding Files Generated:
+      #prior_results_body
+        %table#boarding_files.table-bordered.no-margin{style: 'width:100%'}
+          %thead
+            %tr
+              %th Name
+              %th Details
+              %th Num Loans
+              %th Status
+              %th Created At
+          %tbody
+          - @boarding_files.each do |bf|
+            %tr.boarding-file-container{:class => cycle('one', 'two'), 'data-id' => bf.id}
+              %td.download-url
+                = link_to_if can?(:manage, BoardingFile) && bf.bundle.exists?, bf.name, bf.bundle.url
+              %td= link_to "Details", servicing_boarding_file_path(bf)
+              %td= bf.loan_boardings.count
+              %td= render partial: 'shared/job_status/job_status', locals: { job_status: bf.job_status }
+              %td= bf.created_at
+.row
+  .span12
+    = paginate @boarding_files
+
+:javascript
+  $(document).ready(function() { App.initializeServicingBoardingFilesPage("#{download_url_servicing_boarding_files_url}"); });

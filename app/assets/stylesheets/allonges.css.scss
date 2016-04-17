@@ -1,0 +1,70 @@
+
+.gap {
+  margin-top: 50px;
+}
+
+.small-gap {
+  margin-top: 10px;
+}
+
+.page {
+  page-break-after: always;
+}
+
+.title {
+  margin-top: 20px;
+  border-bottom: thin black solid;
+  display: inline;
+}
+
+span.underlined {
+  border-bottom: thin black solid;
+}
+
+.nudge-right {
+  margin-left: 30px;
+}
+
+table {
+  border-color: black;
+
+  td {
+    vertical-align: bottom;
+  }
+}
+
+table.loan-info {
+  td.col-name {
+    width: 120px;
+  }
+  td.value {
+    width: 300px;
+    padding-left: 10px;
+    border-bottom: thin black solid;
+  }
+}
+
+table.signature {
+  margin-left: 200px;
+
+  td.col-name {
+    width: 80px;
+  }
+  td.value {
+    width: 200px;
+    padding-left: 10px;
+    border-bottom: thin black solid;
+  }
+}
+
+.ensure-width {
+  min-width: 100px;
+  min-height: 20px;
+  text-indent: 0px;
+  display: inline-block;
+}
+
+p {
+  margin-top: 20px;
+  text-indent: 30px;
+}

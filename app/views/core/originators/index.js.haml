@@ -1,0 +1,2 @@
+- added_id = params[:pid].present? ? "_#{params[:pid]}" : ""
+$("#originators#{added_id}").html('#{j(render "core/originators/index", originators: @originators)}')

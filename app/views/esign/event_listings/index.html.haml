@@ -1,0 +1,67 @@
+.event_listing{:"ng-controller" => 'EsignCtrl'}
+  %base{href: esign_event_listings_path}
+  .page-header
+    %h2 Event Listings
+
+  %form.well.form-search
+    %input.datepicker.search-query{:"ng-model" => 'start_date', :placeholder => "Enter event date"}
+    %span or
+    %input.search-query{:type => 'text', :placeholder => 'Enter a loan number', :id => 'loan_id', :"ng-model" => 'loan_number'}
+    %input.btn.btn-inverse{:type => 'submit', :value => 'Display Event Listings', :"ng-click" => 'getListings()'}
+    %span.loader{"ng-show" => "loading_events"}
+
+  .esign_event_listings{"ng-show" => "event_listings"}
+
+    %h4 Events for {{search_term}}
+
+    .right{"ng-show" => "search_type == 'Date'"}
+      %span
+        Date Navigation &nbsp;
+        %a{"ng-href" => "#", "ng-click" => "getListings('prev_day')"}
+          < Previous
+        |
+        %a{"ng-href" => "#", "ng-click" => "getListings('next_day')", "ng-show" => "next_date != null"}
+          Next >
+        %span.disabled{"ng-show" => "next_date == null"}
+          Next >
+
+    %p{"ng-show" => "event_listings.length == 0"}
+      There are no events listed for {{search_term}}
+
+    %table.table.table-striped.table-bordered{"ng-show" => "event_listings.length > 0"}
+      %thead
+        %tr
+          %th
+            Loan Number
+          %th
+            Status
+          %th
+            RESPA
+          %th
+            Event Date
+          %th
+            Package Version
+          %th
+            Actions
+      %tbody
+        %tr{ 'ng-repeat' => 'listing in event_listings'}
+          %td
+            %span{"ng-show" => "search_type == 'Loan'"}
+              {{listing.loan_number}}
+            %span{"ng-show" => "search_type != 'Loan'"}
+              %a{"ng-href" => "#", "ng-click" => "getListings($event)"}
+                {{listing.loan_number}}
+          %td
+            {{separateWords(listing.package_status_type)}}
+          %td
+            {{separateWords(listing.respa_status_type)}}
+          %td
+            {{listing.create_date | date:"MM/dd/yyyy h:mm a"}}
+          %td
+            {{listing.version_id}}
+          %td
+            %a{:"ng-href" => detail_path}
+              View Details
+            |
+            %a{:"ng-href" => document_path}
+              View PDF

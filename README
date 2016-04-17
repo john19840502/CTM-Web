@@ -1,0 +1,15 @@
+== Welcome to CTM-Web
+
+Developer Notes:
+
+http://datatables.net/ -- our framework for client-side table display that is not rendered from the server
+
+http://js2coffee.org/ -- convert javascript to coffeescript and vice-versa
+
+https://github.com/justinfrench/formtastic -- our form DSL
+
+
+= References
+
+* Format numbers in activescaffold to not include commas
+http://stackoverflow.com/questions/8682561/how-to-format-big-int-values-in-activescaffold-plugin-rails-3

@@ -1,0 +1,88 @@
+
+.button-functions
+  = link_to '#', :class => 'btn btn-info print-page' do
+    %span{:class => 'icon-print icon-white'}
+    = "Print Screen"
+  = link_to params.merge(:format => :xls), :class => 'btn btn-success' do
+    %i{:class => 'icon-arrow-down icon-white'}
+    = " Download Report"
+  / = link_to "Export CSV", export_form_compliance_hmda_loan_compliance_events_path, :class => "btn"
+  / = transform_button
+  / = render 'shared/spreadsheet_button'
+
+.row
+  .span12
+
+    %h2.lead Data Change Report
+
+    = form_tag search_compliance_hmda_data_change_reports_path, method: :get, class: 'well form-search' do
+
+      .row
+        .span2
+          .control-group
+            =label_tag :loan_num, 'Loan #', class: 'control-label'
+            .controls
+              = text_field_tag :loan_num, nil, class: 'span2'
+
+        .span2
+          .control-group
+            =label_tag :from, 'Changes After', class: 'control-label'
+            .controls
+              = text_field_tag :from, nil, class: 'datepicker span2'
+
+        .span2
+          .control-group
+            =label_tag :to, 'Changes Prior To', class: 'control-label'
+            .controls
+              = text_field_tag :to, nil, class: 'datepicker span2'
+
+      .row
+        .span9
+          .control-group
+            &nbsp;
+            .controls
+              = submit_tag "Search Validations", class: 'btn btn-inverse'
+.row
+  .span12
+    = paginate @changes, remote: true, theme: "bootstrap"
+
+    - @changes.each do |d|
+      - changes_grouped = d.loan_compliance_event_changes.group_by(&:changed_column)
+      
+      .lead.loan_row{id: "#{d.loan_num}", style: 'cursor: pointer;'} 
+        = image_tag("icon_sets/famfamfam_silk/icons/folder_magnify.png")
+        Loan: #{d.loan_num}, Total Columns Changed: #{d.loan_compliance_event_changes.group_by(&:changed_column).count}
+      %table.table.table-striped.table-bordered{id: "tbl_#{d.loan_num}", style: 'display: none;'}
+        %thead
+          %tr
+            %th Field
+            %th Original Value
+            %th Current Value
+            %th Changed On
+            %th Changed By
+
+          - changes_grouped.each do |col, changes|
+            %tbody
+              %tr
+                - ch = changes.sort_by(&:changed_at)
+                %td= col
+                %td= ch.first.value_was
+                %td= ch.last.value_is
+                %td= ch.last.changed_at.strftime('%m/%d/%Y %H:%I %p')
+                %td= current_user.display_name
+          - if d.loan_compliance_event_changes.empty?
+            %tbody
+              %td{colspan: 5} No Data Has Changed
+    - if @changes.empty?
+      %h2.lead No data found
+
+    = paginate @changes, remote: true, theme: "bootstrap"
+
+= render '/compliance/hmda/data_change_reports/shared/page_footer'
+
+:javascript
+  $(document).ready(function(){
+    $('.loan_row').bind('click', function(){
+      $('#tbl_' + this.id).toggle('slow');
+    })
+  })

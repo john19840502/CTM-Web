@@ -1,0 +1,206 @@
+%h4{style: "color:#FF0000; font-size:23px; font-weight:500;"} Loans Not Submitted Within 14 days
+%br/
+ 
+= form_tag(registration_forced_registrations_search_path) do
+  = label_tag :loan_num, "Loan Number"
+  = text_field_tag :loan_num 
+  = submit_tag :Search
+
+%table.table.table-striped.table-bordered#work_queue
+  %thead
+    %tr
+      %th
+      %th Loan
+      %th Borrower
+      %th Channel
+      %th Assignee
+      %th Action
+      %th Comment
+      %th MBot Status
+      %th Intent to Proceed Date
+      %th Age
+    %tr
+      %td
+      %td
+        %input.text-filter.input-small{type: 'text'}
+      %td
+        %select.select-filter.input-small.populate-me
+      %td
+        %select.select-filter.input-small.populate-me
+      %td
+        %input.text-filter.input-medium{type: 'text'}
+      %td
+        %select.select-filter.input-small.populate-me
+      %td
+        %select.select-filter.input-small.populate-me
+      %td
+        %select.select-filter.input-small.populate-me
+      %td
+        %input.text-filter.input-small{type: 'text'}
+      %td
+        %input.text-filter.input-small{type: 'text'}
+
+:javascript
+  function format ( d ) {
+    var child_row = d.child_row
+    return child_row + d.comments
+  }
+
+  $(document).ready(function() {
+    var table = $('#work_queue').DataTable({
+      "ajax": "/registration/forced_registrations",
+      "orderCellsTop": true,
+      "columns": [
+        {
+          "className":'details-control fa fa-plus-circle',
+          "orderable":false,
+          "data":null,
+          "defaultContent":''
+        },
+        { "data": {
+            "display": "loan_num_html",
+            "filter": "loan_num",
+            "sort": "loan_num" 
+          }
+        },
+        { "data": "borrower" },
+        { "data": "channel_type" },
+        { "data": {
+            "display": "assignee",
+            "filter": "assigned_to",
+            "sort": "assigned_to"
+          }
+        },
+        { "data": "user_action" },
+        { "data": "comment" },
+        { "data": "loan_status" },
+        { "data": "intent_to_proceed_date"},
+        { "data": "intent_age"}
+      ],
+      "order": [[9, 'desc'],[6,'asc']],
+      "initComplete": function() {
+        return this.api().columns().every(function() {
+          var column, header, i;
+          column = this;
+          i = column.index();
+          header = $(column.context[0].aoHeader[1][i].cell);
+          $(header).find('.select-filter').on('change', function() {
+            var val;
+            val = $.fn.dataTable.util.escapeRegex($(this).val());
+            return column.search(val != null ? val : '^' + val + {
+              '$': ''
+            }, true, false).draw();
+          });
+          $(header).find('.text-filter').attr('placeholder', 'Type to filter').on('keyup', function() {
+            var v;
+            v = $(this).val();
+            return column.search(v, true, false).draw();
+          });
+          return $(header).find('.populate-me').each(function() {
+            var select;
+            select = $(this);
+            select.append('<option value=""></option>');
+            return column.data().unique().sort().each(function(d, j) {
+              return select.append('<option value="' + d + '">' + d + '</option>');
+            });
+          });
+        });
+      } 
+    });
+
+    $('#work_queue tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        $(this).toggleClass("fa-plus-circle");
+        $(this).toggleClass("fa-minus-circle");
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    });
+
+    $('#work_queue tbody').on('change', "select[name='user_action']", function() { 
+      selected_action = $(this).val();
+      our_comment = $("textarea[name='comment']").val();
+
+      if((selected_action == 'Contacted LO' || selected_action == 'Consent Withdrawn') && our_comment == '') {
+        $(this).parent().children("input[type='Submit']").attr('disabled','disabled');
+        $(this).parent().children("p").show();
+      } else if (selected_action == 'Select an Action') {
+        $(this).parent().children("input[type='Submit']").attr('disabled','disabled');
+        $(this).parent().children("p").hide();
+      } else {
+        $(this).parent().children("input[type='Submit']").attr('disabled',false);
+        $(this).parent().children("p").hide();
+      }
+    });
+
+
+    $('#work_queue tbody').on('keyup', "textarea[name='comment']", function() { 
+      selected_action = $("select[name='user_action']").val();
+      our_comment = $(this).val();
+
+      if((selected_action == 'Contacted LO' || selected_action == 'Consent Withdrawn') && our_comment == '' ) {
+        $(this).parent().children("input[type='Submit']").attr('disabled','disabled');
+        $(this).parent().children("p").show();
+      } else if(selected_action == 'Select an Action') {
+        $(this).parent().children("input[type='Submit']").attr('disabled','disabled');
+      } else {
+        $(this).parent().children("input[type='Submit']").attr('disabled',false);
+        $(this).parent().children("p").hide();
+      }
+    });
+
+    $('#work_queue tbody').on('change', "select[name='assigned_to']", function() { 
+      our_form = $(this).parent('form');
+      form_url = our_form.attr('action');
+
+       $.ajax({
+        type: "POST",
+        url: form_url,
+        data: $(this).parent('form').serialize(),
+        success: function(data){
+          $('.update_error').remove();
+          our_form.parent().append(data);
+          if (our_form.parent().children('.alert-success').size() > 0) {
+            table.ajax.reload();
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+          alert("Error: " + errorThrown);
+        }
+      });
+    });
+
+    $('span.fa-exclamation').tooltip();
+
+    $('#work_queue tbody').on('submit', 'form', function(e) {
+      our_form = $(this);
+      form_url = $(this).attr('action');
+
+      $.ajax({
+        type: "POST",
+        url: form_url,
+        data: $(this).serialize(),
+        success: function(data){
+          $('.update_error').remove();
+          our_form.parent().append(data);
+          if (our_form.parent().children('.alert-success').size() > 0) {
+            table.ajax.reload();
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+          alert("Error: " + errorThrown);
+        }
+      });
+
+      e.preventDefault();
+    });
+  });

@@ -1,0 +1,24 @@
+%span{:"ng-show" => "clicked && !checklists.length && !checklist_loading"}
+  There are no checklists for the given date range
+
+%span{:"ng-show" => "checklists.length && !checklist_loading"}  
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th{"ng-repeat" => "prompt in promptsList"}
+          {{ prompt }}
+      %tr
+        %td{"ng-repeat" => "key in objectKeys"}
+          %select{:style => "width:100px;", :"ng-model" => "filter[key]", :"ng-options" => " list[key] as list[key] for list in checklists | unique: key | orderBy: key", :"ng-change" => "get_filtered(key, filter[key])"}
+            %option{:value =>"", disabled: 'disabled'} --select--
+          %span.orange-spinner{:"ng-show" => "loading_filter"}
+
+    %tbody
+      %tr{:"ng-repeat" => "check in filteredChecklists"}
+        %td{"ng-repeat" => "key in objectKeys"}
+          {{ check[key] }}
+
+.alert.alert-block.alert-error{:"ng-show" => "error_panel"}
+  {{errors}}
+
+%div{:"ng-show" => "checklists.length", :style => "float: left; ","data-boundary-links" => "true", "data-current-page" => "currentPage", "data-num-pages" => "numPages()", "data-pagination" => ""}

@@ -1,0 +1,227 @@
+%style{type: 'text/css'}
+  input:disabled, input[readonly="readonly"]{
+  background-color: transparent;
+  border: none;
+  box-shadow: none !important;
+  }
+  label.valid { width: 24px; height: 24px; background: url(/assets/icon_sets/famfamfam_silk/icons/accept.png) center center no-repeat; display: inline-block; text-indent: -9999px;
+  }
+  label.error { font-weight: bold; color: red; padding: 2px 8px; margin-top: 2px;
+  }
+  input.difference { text-align: right; font-weight:bold}
+  input {text-align: right}
+  input.message, input.pass_fail_msg { font-weight:bold; text-align: right}
+  input.difference.red, input.message.red, input.pass_fail_msg.red {color:red}
+  input.difference.green, input.message.green, input.pass_fail_msg.green {color:green}
+  input.max_actual_amount.red, input.modeler_pass_or_fail.red {text-align: right;font-weight:bold;color:red}
+  input.max_actual_amount.green, input.modeler_pass_or_fail.green {text-align: right;font-weight:bold;color:green}
+  input.princ_curt_fail.red, input.actual_amount_princ_fail.red, input.cash_to_borrower_fail.red {text-align: right;font-weight:bold;color:red;}
+  input.princ_curt_fail {width:280px; font-size:x-small; position:absolute;}
+  input.actual_amount_princ_fail {width:225px; font-size:x-small; position:absolute}
+  input.cash_to_borrower_fail {width:141px; font-size:x-small; position:absolute}
+  input.credit_message, input.appr_message, input.orig_message {font-size:x-small; position:absolute; font-weight:bold; color:red; margin-left: 325px;}
+
+= form_tag(submit_closing_loan_modelers_path, {remote: true, class: 'form-horizontal dodd_frank_calc modeler_validate', id: 'dodd_frank'}) do
+  .lead
+    Dodd-Frank Loan Modeler
+  .errors
+    %div
+  .success
+    %div
+  .fields-invalid
+  .fields-valid
+  
+  
+
+  .pull-right
+    %a.modeler_toggle_class{:style => "text-decoration:none"}
+      %span.btn.btn-warning Lock
+      %span.btn.btn-danger{:style => "display:none"} Unlock
+    
+    - fha = @loan.try(:mortgage_term).try(:mortgage_type) == "FHA"
+
+    = hidden_field_tag :fd_lock, @loan.fd_lock_modeler, class: 'modeler_lock'
+    = hidden_field_tag :toggle_lock, false, class: 'modeler_toggle_lock'  
+    %a.sve.btn.btn-primary{id: 'fd_submit', class: 'modeler_frm_submit'} Save
+    %a.btn.btn-success.disabled{'data-format' => "pdf", id: 'fd_pdf', class: 'modeler_pdf_submit', href: closing_loan_modeler_path(:format => :pdf, :btn => 'dodd')} Download PDF
+    
+    .user_comment_label{:style => "padding-top:15px"}
+      = label_tag :user_comments, 'Comments:'
+      .user_comment_text{:style => "padding-top:5px"}
+        = text_area_tag :user_comments, @loan.user_comments_dodd_frank, class: 'span3 user_comments editable', :rows => '3'
+      .modeler_user
+        = label_tag :modeler_user, @loan.current_modeler_user
+      .modeler_time_stamp
+        = label_tag :modeler_time, @loan.modeler_date_time
+  
+  .span8
+    .row
+      .span6 
+        
+        .control-group
+          %h5.muted.control-label Premium Pricing
+          .controls{:style => "padding-top:12px"}
+            = text_field_tag :premium_pricing, @loan.premium_pricing_modeler, class: 'text_field input-medium editable'
+
+        .control-group 
+          = label_tag :loan_discount, 'Loan Discount', class: 'control-label'
+          .controls
+            = text_field_tag :loan_discount, @loan.loan_discount_modeler, class: 'text_field num input-small editable'
+        
+        .control-group 
+          = label_tag :total_ln_amt_modeler, 'Total Loan Amount', class: 'control-label'
+          .controls
+            = text_field_tag :total_ln_amt_modeler, @loan.total_ln_amt_modeler, readonly: "readonly", class: 'total_ln_amt_modeler text_field input-medium'
+        
+        .control-group 
+          = label_tag :net_price_modeler, 'Net Price', class: 'control-label'
+          .controls
+            = text_field_tag :net_price_modeler, @loan.net_price_modeler, readonly: "readonly", class: 'net_price_modeler text_field input-medium'
+        
+        .control-group 
+          = label_tag :final_note_rate_modeler, 'Final Note Rate', class: 'control-label'
+          .controls
+            = text_field_tag :final_note_rate_modeler, @loan.final_note_rate_modeler, readonly: "readonly", class: 'final_note_rate_modeler text_field input-medium'
+        
+        .control-group
+          %h5.muted.control-label Closing Costs
+          .controls{:style => "padding-top:10px"}
+            = text_field_tag :closing_cost, @loan.closing_cost_modeler, readonly: "readonly", class: 'closing_cost text_field input-medium num' 
+
+        .control-group
+          %h5.control-label{:style => "margin-top:-1px"} Premium Pricing - Closing Costs
+          .controls.alert{:style => "padding-top:10px;width:300px"}
+            = text_field_tag :difference, 'difference', readonly: "readonly", class: 'difference text_field input-medium'
+            = text_field_tag :message, 'message', readonly: "readonly", class: 'message text_field input-small'
+
+
+        = hidden_field_tag :loan_id, @loan.loan_num        
+        = hidden_field_tag :loan_type, @loan.try(:account_info).try(:channel), class: 'loan_type'        
+        = text_field_tag :orig_message, 'orig_message', readonly: "readonly", class: 'orig_message text_field row span4'
+
+        .control-group
+          = label_tag :origination_fee, 'Origination', class: 'control-label'
+          .controls
+            -if @loan.try(:account_info).try(:channel) == 'W0-Wholesale Standard' || fha
+              = text_field_tag :origination_fee, @loan.origination_fee_modeler, class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :origination_fee, @loan.origination_fee_modeler, class: 'text_field num input-small', disabled: true
+
+        .control-group 
+          = label_tag :admin_fee, 'Administration Fee', class: 'control-label'
+          .controls
+            = text_field_tag :admin_fee, @loan.admin_fee_modeler, readonly: "readonly", class: 'admin_fee_modeler text_field input-small num'
+        
+        .control-group      
+          = label_tag :third_pt_proc_fee, '3rd Party Proc.', class: 'control-label'
+          .controls
+            = text_field_tag :third_pt_proc_fee, @loan.third_pt_proc_fee_modeler, class: 'text_field num input-small editable' 
+        
+        .control-group
+          = label_tag :appraisal, 'Appraisal', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :appraisal, @loan.appraisal_fee_modeler, class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :appraisal, @loan.appraisal_fee_modeler, class: 'text_field num input-small', disabled: true  
+        
+        .control-group
+          = label_tag :credit_report, 'Credit Report', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :credit_report, @loan.credit_report_modeler, class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :credit_report, @loan.credit_report_modeler, class: 'text_field num input-small', disabled: true 
+        
+        .control-group
+          = label_tag :flood_cert, 'Flood Cert.', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :flood_cert, @loan.flood_cert_modeler, class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :flood_cert, @loan.flood_cert_modeler, class: 'text_field num input-small', disabled: true 
+        
+        .control-group
+          = label_tag :interim_interest, 'Interim Interest', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :interim_interest, @loan.interim_interest_modeler, class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :interim_interest, @loan.interim_interest_modeler, class: 'text_field num input-small', disabled: true 
+
+        .control-group
+          = label_tag :mortgage_insurance_premium, 'Mortgage Insurance Premium', class: 'control-label'
+          .controls
+            = text_field_tag :mortgage_insurance_premium, @loan.mortgage_insurance_premium_modeler, class: 'text_field num input-small editable' 
+        
+        .control-group
+          = label_tag :hoi_premium, 'HOI Premium', class: 'control-label'
+          .controls
+            = text_field_tag :hoi_premium, @loan.hoi_premium_modeler, class: 'text_field num input-small editable' 
+
+        .control-group
+          = label_tag :principal_reduction_fee, 'Principal Reduction', class: 'control-label'
+          .controls
+            = text_field_tag :principal_reduction_fee, @loan.principal_reduction_fee_modeler, class: 'text_field num input-small editable'
+                
+        .control-group
+          = label_tag :escrows, 'Escrows', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :escrows, number_with_precision(@loan.escrow_modeler, precision: 2), class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :escrows, number_with_precision(@loan.escrow_modeler, precision: 2), class: 'text_field num input-small', disabled: true 
+        
+        .control-group
+          = label_tag :taxes_due, 'Taxes Due at Close', class: 'control-label'
+          .controls
+            = text_field_tag :taxes_due, @loan.taxes_due_modeler, class: 'text_field num input-small editable' 
+        
+        .control-group
+          = label_tag :title_fees, 'Title Fees', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :title_fees, number_with_precision(@loan.title_fees_modeler, precision: 2), class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :title_fees, number_with_precision(@loan.title_fees_modeler, precision: 2), class: 'text_field num input-small', disabled: true  
+        
+        .control-group
+          = label_tag :owner_policy, 'Owners Policy', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :owner_policy, @loan.owner_policy_modeler, class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :owner_policy, @loan.owner_policy_modeler, class: 'text_field num input-small', disabled: true 
+        
+        .control-group
+          = label_tag :recording_fees, 'Recording Fees', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :recording_fees, @loan.recording_fees_modeler, class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :recording_fees, @loan.recording_fees_modeler, class: 'text_field num input-small', disabled: true 
+        
+        .control-group
+          = label_tag :transfer_taxes, 'Transfer Taxes', class: 'control-label'
+          .controls
+            -if fha
+              = text_field_tag :transfer_taxes, @loan.transfer_taxes_modeler, class: 'text_field num input-small editable'
+            -else
+              = text_field_tag :transfer_taxes, @loan.transfer_taxes_modeler, class: 'text_field num input-small', disabled: true 
+
+        .misc_fees
+          - misc_fees = @loan.dodd_frank_modeler.try(:dodd_frank_modeler_misc_other_fees) || []
+          - if misc_fees.empty?
+            = render partial: 'dodd_frank_modeler_misc_other_fees'
+          - else
+            = render partial: 'dodd_frank_modeler_misc_other_fees', collection: misc_fees
+
+        .control-group
+          .controls
+            %a.btn.btn-mini.btn-info.add_misc_fee Add Misc Other Fee
+
+        .control-group
+          = label_tag :prorated_taxes, 'Prorated Taxes', class: 'control-label'
+          .controls
+            = text_field_tag :prorated_taxes, @loan.prorated_taxes_modeler, class: 'text_field num input-small editable'
+

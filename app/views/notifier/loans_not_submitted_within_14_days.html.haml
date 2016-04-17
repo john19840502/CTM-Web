@@ -1,0 +1,26 @@
+%h4{style: "color:#FF0000; font-size:23px; font-weight:500;"} Loans Not Submitted Within 14 days
+%br/
+
+- if @loans.nil? || @loans.empty?
+  No loans meet the criteria for this notification
+- else
+  %table{ width: '100%' }
+    %tr
+      %th{ style: 'text-align: left' } Loan Number
+      %th Borrower
+      %th Loan Officer
+      %th Disclosure Date
+      %th Loan Status
+      %th Intent to Proceed Date
+
+    - @loans.each do |loan|
+      %tr{ bgcolor: "#{cycle('#ECF8FF', '#FFFFFF')}" }
+        %td= loan.loan_num
+        %td= loan.primary_borrower.full_name
+        %td= "#{loan.broker_first_name} #{loan.broker_last_name}"
+        %td= loan.initial_gfe_disclosure_on.strftime('%m/%d/%Y') if loan.initial_gfe_disclosure_on
+        %td= loan.pipeline_loan_status_description
+        %td= loan.custom_fields.intent_to_proceed_date_string
+
+- content_for :signature do
+  %span

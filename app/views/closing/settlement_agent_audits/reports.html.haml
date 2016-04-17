@@ -1,0 +1,38 @@
+.underwriter_validation{:"ng-controller" => "SettlementAgentReportsCtrl"}
+  %h4= "Settlement Agent Monthly Defect Report : {{month}} {{year}}" 
+  .alert.alert-block.alert-error{:"ng-show" => "!monthly_audits.length && !loading_audits", style: ""}
+    There are no audits for this month 
+  %form.well.form-search{:style => "height: 140px"}
+    %h5 Filter Options
+    %select{"ng-model" => "filter_params.settlement_agent", "ng-options" => "item.name as item.name for item in settlement_agents | unique:'name'"}
+      %option{:value => "", :"ng-selected" => "selected"} --- Select Settlement Agent ---
+    %select{"ng-model" => "filter_params.escrow_agent", "ng-options" => "item.id as item.name for item in escrow_agents | unique:'name' | orderBy: 'name' "}
+      %option{:value => "", :"ng-selected" => "selected"} --- Select Escrow Agent ---
+    %select{"ng-model" => "filter_params.area_manager", "ng-options" => "item.name as item.name for item in area_managers | unique:'name' | orderBy: 'name' "}
+      %option{:value => "", :"ng-selected" => "selected"} --- Select Area Manager ---
+    %select{"ng-model" => "filter_params.loan_officer", "ng-options" => "item.id as item.name for item in loan_officers | unique:'name' | orderBy: 'name' "}
+      %option{:value => "", :"ng-selected" => "selected"} --- Select Loan Officer ---
+    %select{"ng-model" => "filter_params.branch_manager", "ng-options" => "item.id as item.name for item in branch_managers | unique:'name' | orderBy: 'name' "}
+      %option{:value => "", :"ng-selected" => "selected"} --- Select Branch Manager ---
+
+    %div{:style => "float:left; margin-top: 5px; width: 100%"}
+      Funded Between 
+      %input.datepicker{:"ng-model" => "start_date", "format" => 'mm/dd/yyyy', :placeholder => 'Start Date', :type => "text"}
+      %input.datepicker{:"ng-model" => "end_date", "format" => 'mm/dd/yyyy', :placeholder => 'End Date', :type => "text"} 
+      %select{"ng-model" => "report_type", "ng-change" => "get_filtered_monthly_report()"}
+        %option{:value => "", :"ng-selected" => "selected"} PRE TRID
+        %option{:value => "trid"} TRID
+      %input.btn.btn-success{:type => 'submit', :value => 'Get Audits', :"ng-click" => 'get_filtered_monthly_report()'}
+      %input.btn{ :type => 'submit', :value => 'Clear Filters', :"ng-click" => 'resetValues(); get_filtered_monthly_report()'}
+      %span.loader{"ng-show" => "loading_audits"} 
+    %input.div.btn.btn-inverse{:style => "float: right;",:type => 'submit', :value => 'Download as CSV', :filename => "{{month}} {{year}} Settlement Agent Defect Report.csv", :"ng-csv" => "monthly_audits",:"csv-header" => "headers"}
+  
+  %table.table.table-bordered
+    %thead
+      %tr 
+        %th{:"ng-repeat" => "title in headers"}
+          {{title}}
+    %tbody
+      %tr{:"ng-repeat" => "audit in monthly_audits | orderBy: 'escrow_agent_name' "}
+        %td{:"ng-repeat" => "key in audit_keys"}
+          {{audit[key]}}

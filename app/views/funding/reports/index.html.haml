@@ -1,0 +1,13 @@
+.underwriter_validation{:"ng-controller" => "FundingReportsCtrl"}
+  %h4 Funding Checklist Report
+  %form.well.form-search{:style => "background-color: white"}
+    From: 
+    %input.datepicker{:"ng-model" => "start_date", :format => 'mm/dd/yyyy', :placeholder => 'Start Date', :type => "text"}
+    To: 
+    %input.datepicker{:"ng-model" => "end_date", :format => "mm/dd/yyyy", :placeholder => "End Date", :type => "text"}
+    %input.btn.btn-success{:type => 'submit', :value => 'Get Checklist Report',  :"ng-click" => "get_checklist(); clicked = true"}
+    %input.div.btn.btn-inverse{:type => 'submit', :value => "Download as CSV", :filename => "Funding Checklist Report.csv", :"ng-csv" => "checklists", :"csv-header" => "promptsList"}
+
+    %span.loader{:"ng-show" => "checklist_loading"}
+
+  = render 'reports'

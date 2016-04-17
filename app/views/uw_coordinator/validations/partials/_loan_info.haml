@@ -1,0 +1,42 @@
+.lead 1. Loan Summary
+
+.row
+  .span4
+    %table.table.table-bordered
+      %tr
+        %th Loan Officer's Name
+        %td= @loan.try(:account_info).try(:originator).try(:name)
+
+.row
+  .span3
+    %table.table.table-bordered
+      %tr
+        %th Product Code
+        %td= @loan.product_code
+      %tr
+        %th Product Description
+        %td= @loan.try(:lock_price).try(:product_description)
+
+  .span3
+    %table.table.table-bordered
+      %tr
+        %th Property State
+        %td= @loan.property_state
+      %tr
+        %th Mortgage Type
+        %td= @loan.loan_general.mortgage_term.mortgage_type
+
+  .span3
+    %table.table.table-bordered
+      %tr
+        %th Loan Amount
+        %td= number_to_currency @loan.amount
+      %tr
+        %th LTV
+        %td= number_with_precision @loan.ltv, precision: 3
+
+  .span3
+    %table.table.table-bordered
+      %tr
+        %th Occupancy Type
+        %td= @loan.occupancy

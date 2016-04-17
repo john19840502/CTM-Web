@@ -1,0 +1,43 @@
+%h4{style: "color:#FF0000; font-size:23px;line-height:28px;"} Dear #{@loan.originator.first_name},
+%p
+%p{style: "font-size:14px;line-height:16px;"}
+  MB Lock Desk would like to remind you of the upcoming lock expiration on your loan
+  %b #{@loan.primary_borrower.last_name} #{@loan_num}
+  expiring on
+  %b #{@lock}.
+%p{style: "font-size:14px;line-height:16px;"} Our current rate lock policy requires that you extend the rate lock no later than at 11:59 pm, on the day of the lock expiration date.
+
+/ Callout Panel
+%table{bgcolor: "#ECF8FF", border: "0", bordercolor: "#FFCC00", cellpadding: "0", cellspacing: "0", style: "background-color:#ECF8FF", width: "600"}
+  %tr{height: "10"}
+    %td
+    %td
+    %td
+  %tr
+    %td  
+    %td{style: "font-size:13px;line-height:16px; font-family: Verdana, Geneva, sans-serif;padding: 0 10px 10px 10px"}
+      %div
+        Please email
+        = mail_to "MBlockdesk@mbmortgage.com?subject=#{@subj}", 'MBlockdesk@mbmortgage.com', style: "font-weight:bold;color:#2BA6CB;"
+        to request an extension. Your request must be received prior to 
+        %b 11:59 PM EST #{@lock}
+        to be considered a valid request.
+      %div{ style: 'margin-top: 15px;'}
+        Any requests received after 11:59 PM EST on the date of expiration will be considered late, and the lock will be subject to worse case pricing minus a .375 relock cost
+    %td  
+  %tr
+    %td  
+/ /Callout Panel
+
+%p
+%p{style: "font-family: Verdana, Geneva, sans-serif;"} If you have any questions, please contact the Lock Desk or your Area Manager.
+
+- content_for :signature do
+  %h5{style: "font-size:18px; color:#FF0000;padding:0;margin:0;"} MB Lock Desk
+  %br
+  %span
+    Email:
+    = mail_to "MBlockdesk@mbmortgage.com?subject=#{@subj}", 'MBlockdesk@mbmortgage.com'
+    %br
+    Phone:
+    %strong 855.926.2400, Option 3

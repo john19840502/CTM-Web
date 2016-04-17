@@ -1,0 +1,27 @@
+.control-group
+  = f.label :effective_date, class: 'control-label'
+  .controls
+    = f.text_field :effective_date, value: date_formatted(f.object.effective_date), class: 'datepicker'
+
+- if profile.try(:title).eql? "Branch Sales Manager"
+  .control-group
+    = f.label :bsm_override, class: 'control-label'
+    .controls
+      = f.text_field :bsm_override, value: number_with_precision(f.object.bsm_override, precision: 3)
+
+- if profile.try(:title).eql? "Branch Manager Storefront"
+  .control-group
+    = f.label :bmsf_override, class: 'control-label'
+    .controls
+      = f.text_field :bmsf_override, value: number_with_precision(f.object.bmsf_override, precision: 3)
+
+- if profile.try(:title).eql? "Processor"
+  .control-group
+    = f.label :per_loan_processed, class: 'control-label'
+    .controls
+      = f.text_field :per_loan_processed, value: number_with_precision(f.object.per_loan_processed, precision: 2)
+
+  .control-group
+    = f.label :per_loan_branch_processed, class: 'control-label'
+    .controls
+      = f.text_field :per_loan_branch_processed, value: number_with_precision(f.object.per_loan_branch_processed, precision: 2)

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sales">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Underwriter</Data></Cell>
+        <Cell><Data ss:Type="String">Loan</Data></Cell>
+        <Cell><Data ss:Type="String">Validator</Data></Cell>
+        <Cell><Data ss:Type="String">Validation Type</Data></Cell>
+        <Cell><Data ss:Type="String">Total Validations</Data></Cell>
+        <Cell><Data ss:Type="String">Pipeline Status</Data></Cell>
+        <Cell><Data ss:Type="String">Loan Status</Data></Cell>
+        <Cell><Data ss:Type="String">Dates</Data></Cell>
+        <Cell><Data ss:Type="String">Error Messages</Data></Cell>
+        <Cell><Data ss:Type="String">Warning Messages</Data></Cell>
+      </Row>
+
+<% Mdb::LoanValidation.all.collection.aggregate({'$unwind' => '$loan_validation_events'}).each do |l| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= l['loan_num'] %></Data></Cell>
+      </Row>
+<% end %>
+
+
+<% @loans.group_by(&:underwriter).each do |u,loans| %>
+  <% cnt = -1 %>
+  <% loans.each do |l| %>
+    <% l.loan_validation_events.each do |le| %>
+      <% le.loan_validation_event_details.each do |lde| %>
+      <% cnt += 1 %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= u if cnt == 0 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= l.loan_num if cnt == 0 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= le.username if cnt == 0 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= lde.validation_type.titleize %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= lde.total_attempts %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= lde.pipeline_status %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= lde.status %></Data></Cell>          
+
+        <Cell><Data ss:Type="String">
+        <% lde.dates.each do |d| %>
+          <%= l d, format: :full_american %>
+        <% end %>
+        </Data></Cell>
+
+        <Cell><Data ss:Type="String">
+        <% lde.error_base_messages.each do |em| %>
+          <%= em.class.eql?(Array) ? (em.count > 2 ? em.join('\n') : em[1]) : em %>
+        <% end %>
+        </Data></Cell>
+
+        <Cell><Data ss:Type="String">
+        <% lde.error_warning_messages.each do |wm| %>
+          <%= raw wm.class.eql?(Array) ? (wm.count > 2 ? wm.join('\n') : wm[1]) : wm %>
+        <% end %>
+        </Data></Cell>
+
+      </Row>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+
+

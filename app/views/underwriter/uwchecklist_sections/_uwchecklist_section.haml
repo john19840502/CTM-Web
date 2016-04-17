@@ -1,0 +1,13 @@
+-if uwchecklist_section.display_for_loan?(@loan)
+  - items = uwchecklist_section.uwchecklist_items.active
+  %table.table.checklist-section.table-condensed.table-bordered.table-striped
+
+    %tr
+      %th{:colspan => 2}= uwchecklist_section.name
+
+    - if !!uwchecklist_section.body
+      %tr
+        %td.checklist-body{:colspan => 2}!= RedCloth.new(uwchecklist_section.body).to_html
+
+    - if !!items
+      = render items

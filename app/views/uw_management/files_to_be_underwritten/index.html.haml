@@ -1,0 +1,28 @@
+- content_for(:extras) do
+  .extra-info
+    %strong Total Count:
+    = data.record_list.size
+    = " | "
+    %strong Purchase Count:
+    = "#{data.record_list.select {|f| f.purpose == 'Purchase'}.count}"
+    = " | "
+    %strong Refinance Count:
+    = "#{data.record_list.select {|f| f.purpose == 'Refinance'}.count}"
+    = " | "
+    = render 'missing_uw_submission_date_count'
+
+- content_for(:column_data) do
+  - data.record_list.each do |record|
+    %tr
+      %td= record.purpose
+      %td= record.channel[0..1]
+      %td= Date.parse(record.submitted_at).strftime('%m/%d/%Y') unless record.submitted_at.blank?
+      %td= record.age
+      %td= Date.parse(record.received_at).strftime('%m/%d/%Y') unless record.received_at.blank?
+      %td= record.loan_num
+      %td= record.borrower
+      %td= record.mortgage_type
+      %td= record.product_code
+      %td= record.underwriter_name
+      %td= record.status
+= render :file => 'shared/base'

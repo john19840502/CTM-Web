@@ -1,0 +1,12 @@
+%table.zebra-striped
+  -if header
+    %thead
+      %tr
+        %th Key
+        %th Value
+  %tbody
+    -for key in hash.keys.sort
+      %tr
+        %td{:width => '25%'}= reformat_labels ? key.humanize : key
+        %td= hash[key]
+      

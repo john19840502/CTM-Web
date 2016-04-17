@@ -1,0 +1,35 @@
+- content_for(:page_title) do
+  = "File Submitted / Not Received"
+
+- content_for(:extras) do
+  .extra-info
+    %strong Total Count:
+    = data.records.size
+    = " | "
+    = render 'missing_uw_submission_date_count'
+    = " | "
+    = link_to 'Loan Counts by Submit Date', [:loan_counts, :uw_coordinator, :file_submitted_not_received, :index]
+    .sort-buttons
+      = link_to 'All', uw_coordinator_file_submitted_not_received_index_path, :class => 'btn btn-mini btn-warning'
+      = link_to 'Amera Only', uw_coordinator_file_submitted_not_received_index_path(:sort => :amera), :class => 'btn btn-mini btn-warning'
+      = link_to 'CTM Only', uw_coordinator_file_submitted_not_received_index_path(:sort => :ctm), :class => 'btn btn-mini btn-warning'
+
+-content_for(:column_data) do
+  - data.records.each do |record|
+    %tr
+      %td= record.institution_id
+      %td= record.branch
+      %td= record.loan_id
+      %td= Date.parse(record.uw_submitted_at).strftime('%m/%d/%Y') unless record.uw_submitted_at.blank?
+      %td= record.age
+      %td= link_to record.coordinator, '#'
+      %td= record.channel[0..1]
+      %td= record.purpose
+      %td= record.borrower_last_name
+      %td= record.pre_approval
+      %td= record.is_mi_required
+      %td= record.mortgage_type
+      %td= record.product_code
+      %td= record.is_jumbo_candidate ? "Yes" : "No"
+      %td= record.property_state
+= render :file => 'shared/base'

@@ -1,0 +1,11 @@
+.row
+  .span12
+    =h raw(header @header)
+
+    = form_tag [:search, :core, :originators], method: 'get', class: 'well form-search' do
+      = label_tag "Employee's Last Name: "
+      = text_field_tag :emp_name, nil, class: 'input-medium search-query'
+      %button.btn{ type: "submit" } Search
+
+    %div{id: "originators#{@added_id}"}
+      = render 'core/originators/index', originators: @originators

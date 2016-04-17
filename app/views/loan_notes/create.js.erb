@@ -1,0 +1,11 @@
+//close the dialog box
+$dialog = $(".ui-dialog").filter(":first")
+$dialog.remove()
+
+//update note text div
+$note_text_div = $("#note-text-for-loan-<%= @loan_note.loan_id %>")
+$note_text_div.html("<%= escape_javascript(render(partial: "note_text", locals: {loan_note: @loan_note})) %>")
+
+//update note last updated by div
+$note_updated_by_div = $("#note-updated-by-for-loan-<%= @loan_note.loan_id %>")
+$note_updated_by_div.html("<%= escape_javascript(render(partial: "note_last_updated_by", locals: {loan_note: @loan_note})) %>")

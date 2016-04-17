@@ -1,0 +1,17 @@
+#main
+  .container
+    .row
+      .span12.columns
+        - if flash.count > 0
+          - flash.each do |name, msg|
+            #flash{:class => "alert alert-#{name}"}
+              - if msg.class.eql?(Array)
+                %span.alert-heading{style: 'font-weight: bold; font-size: 14px;line-height: 18px;'} Please correct the following errors:
+                %a.close{'data-dismiss' => 'alert', href: '#'} &times;
+                %ul{class: "alert-message fade in errors"}
+                  - msg.each do |m|
+                    %li.message=  m
+              - else
+                %button.close{'data-dismiss' => 'alert'} &times;
+                .message= msg
+

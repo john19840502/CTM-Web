@@ -1,0 +1,10 @@
+- content_for(:page_title) do
+  = "Investor Pricing Imports"
+
+- content_for(:functions) do
+  .button-functions
+    = link_to new_investor_pricing_import_path, :class => 'btn btn-info' do
+      %span{:class => 'icon-upload icon-white'}
+      = "Import Investor Pricing"
+
+= render :file => 'shared/base'
